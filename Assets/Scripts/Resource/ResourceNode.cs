@@ -13,11 +13,15 @@ public class ResourceNode : MonoBehaviour
     [SerializeField][Range(30f, 120f)] private float respawnTime = 30f;
     [SerializeField] private Collider hitCollider;
 
+
+    [SerializeField] private GoldSink goldSink;
+    //private IGoldSink _goldSink;
+    
+
     //런타임 상태
     private int currentHP;
     private bool active = true;
     private Coroutine respawnCo;
-
     void Awake()
     {
         if(hitCollider == null)
@@ -81,7 +85,7 @@ public class ResourceNode : MonoBehaviour
     private void Deplated()
     {
         // 골드 지급
-        //ResourceManager.Instance.Earn(goldOnDeplete); // 매니저 이름은 임시 작성
+        goldSink.Gain(goldOnDeplete); 
 
         Deactivate();
 
