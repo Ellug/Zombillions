@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class PlayerBase : MonoBehaviour
 {
-    [SerializeField] protected int _maxHP = 100;
-    [SerializeField] protected int _curHP = 100;
+    [SerializeField] protected int _maxHp = 100;
+    [SerializeField] protected int _curHp = 100;
     [SerializeField] protected float _moveSpeed = 20;
     [SerializeField] protected float _rotSpeed = 100;
     [SerializeField] protected float _atkDelay = 100;
@@ -99,12 +99,12 @@ public abstract class PlayerBase : MonoBehaviour
         int finalDmg = dmg - _def;
 
         if (finalDmg > 0)
-            _curHP -= finalDmg;
+            _curHp -= finalDmg;
         else
-            _curHP--;
+            _curHp--;
 
         // 데미지 계산 후 _curHP 0 이하면 사망처리
-        if (_curHP <= 0 && _isPlayerAlive)
+        if (_curHp <= 0 && _isPlayerAlive)
             Die();
     }
 
