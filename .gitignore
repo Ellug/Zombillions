@@ -50,6 +50,7 @@ ExportedObj/
 *.VC.db
 .vsconfig
 .vscode/
+ProjectSettings/Packages/com.unity.testtools.*
 
 # Unity3D generated meta files
 *.pidb.meta
