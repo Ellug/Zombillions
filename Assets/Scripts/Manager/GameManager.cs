@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GlobalTime GameTime { get; private set; }
+    public GlobalTime Timer { get; private set; }
     public GlobalScore Score { get; private set; }
     public SceneChanger Scene { get; private set; }
     public static GameManager Instance { get; private set; }
@@ -18,15 +18,14 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            Timer = GetComponent<GlobalTime>();
+            Score = GetComponent<GlobalScore>();
+            Scene = GetComponent<SceneChanger>();
         }
         else
         {
             Destroy(gameObject);
         }
-
-        GameTime = GetComponent<GlobalTime>();
     }
-
-    
-
 }

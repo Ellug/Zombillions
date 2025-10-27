@@ -4,29 +4,15 @@ using UnityEngine;
 
 public class GlobalTime : MonoBehaviour
 {
-    enum Day
-    {
-        Noon,Night
-    }
-
-    private int gameTime = 0;
-    private int gameWave = 1;
-
-
-    public int GameTime
-    {
-        get { return gameTime; }
-        private set { gameTime = value; }
-    }
-    public int GameWave
-    {
-        get { return gameWave; }
-        private set { gameWave = value; }
-    }
+    public int GameTime {  get; private set; }
+    public int GameWave {  get; private set; }
+    
 
     private void Awake()
     {
-        gameTime = 0;
-        gameWave = 1;
+        GameTime = 0;
+        GameWave = 1;
     }
 }
+
+public enum Day { Noon, Night }

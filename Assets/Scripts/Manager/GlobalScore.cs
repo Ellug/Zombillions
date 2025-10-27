@@ -4,23 +4,32 @@ using UnityEngine;
 
 public class GlobalScore : MonoBehaviour
 {
-    //private int score;
+    public int GameScore { get; private set; }
 
-    public int Score { get; set; }
-    
+    private List<IObserver> _observer = new List<IObserver>();
 
-    public void SumScore()
+    public void AddObserver(IObserver observer) => _observer.Add (observer);
+    public void RemoveObserver(IObserver observer) => _observer.Remove (observer);
+
+    void Start()
     {
-
-        if (GameManager.Instance.GetComponent<GlobalTime>() != null)
-        {
-            GlobalTime wave = GameManager.Instance.GetComponent<GlobalTime>();
-        }
-        
+        Notify();
     }
 
-    private void Start()
+    private void Notify()
     {
-        SumScore();
+        foreach (IObserver score in _observer)
+        {
+            score.OnNotify();
+        }
+    }
+
+
+    public int SumScore()
+    {
+        int finalTime = GameManager.Instance.Timer.GameTime;
+        int finalWave = GameManager.Instance.Timer.GameWave;
+
+        return GameScore += finalTime + finalWave;
     }
 }
