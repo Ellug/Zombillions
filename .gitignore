@@ -51,6 +51,7 @@ ExportedObj/
 .vsconfig
 .vscode/
 ProjectSettings/Packages/com.unity.testtools.*
+ProjectSettings/Packages/com.unity.testtools.codecoverage/
 
 # Unity3D generated meta files
 *.pidb.meta
