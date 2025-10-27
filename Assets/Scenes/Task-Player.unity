@@ -693,9 +693,9 @@ MonoBehaviour:
   _distance: 20
   _minDis: 10
   _maxDis: 40
-  _moveSpeed: 20
+  _moveSpeed: 40
   _edgeSize: 20
-  _zoomSpeed: 5
+  _zoomSpeed: 20
 --- !u!1 &2081726555
 GameObject:
   m_ObjectHideFlags: 0
