@@ -2,27 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private GameObject bulletPrefab;   //bullet프리펩에 Rigidbody 추가 해야 함
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float destroyTime;
+    [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _damage;
+    [SerializeField] private float _deactiveTime;
+    [SerializeField] private float _shotForce;
 
-    private GameObject bullet;
+    private Rigidbody _rigidbody;
+    private float _deactCount;
 
-    //bullet 생성 후 AddForce를 통해 총알 이동 구현
-    public void Spawn()
+    void Awake()
     {
-        bullet = Instantiate(bulletPrefab);
-        bullet.transform.position = gameObject.transform.position;
+        Init();        
+    }
+
+    void OnEnable()
+    {
         Move();
-        Destroy(bullet, destroyTime);       //destroyTime 후에 파괴
+    }
+
+    void Update()
+    {
+        TimeCount();   
+    }
+
+    private void Init()
+    {
+        _rigidbody = GetComponent<Rigidbody>();
+    }
+
+    private void TimeCount()
+    {
+        _deactCount -= Time.deltaTime;
+        if (_deactCount < 0)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public void Move()
     {
-        Rigidbody rd = bullet.GetComponent<Rigidbody>();
-        rd.AddForce(100 * moveSpeed * Vector3.forward);
+        _deactCount = _deactiveTime;
+        _rigidbody.AddForce(transform.forward * _shotForce, ForceMode.Impulse);
     }
+
+   
 }
