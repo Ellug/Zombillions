@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 //타워 동작 처리
 public class Tower : MonoBehaviour
 {
-    [SerializeField] private TowerData towerData; 
+    [SerializeField] private TowerData _towerData;
+    [SerializeField] private Bullet _bullet;
+    [SerializeField] private TowerTrigger _towerTracer;
 
+    private float _timer;
     private float _towerCurrentHp;
     public float TowerCurrentHp => _towerCurrentHp;
 
@@ -14,23 +18,38 @@ public class Tower : MonoBehaviour
     {
         Init();
     }
+    
     private void Init()
     {
-        if(towerData == null)
+        if (_towerData == null)
         {
             return;
         }
 
+        _towerCurrentHp = _towerData.maxHp;
+
         //해당 오브젝트 태그 설정
-        string tagName = towerData.towerTag.ToString();
+        string tagName = _towerData.towerTag.ToString();
         gameObject.tag = tagName;
 
-        _towerCurrentHp = towerData.maxHp;
+        //해당 타워 자식(타워 타입)에 공격범위 설정
+        SphereCollider childCollider = GetComponentInChildren<SphereCollider>();
+        if (childCollider != null)
+        {
+            childCollider.radius = _towerData.attackRange;
+        }
     }
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        TakeDamage(2f); //데이터 확인용 코드
+        if (_towerTracer.GetCurrentEnemy() != null)
+        {
+            _timer += Time.deltaTime;
+            if (_timer > 16 / _towerData.attackSpeed)
+            {
+                _timer = 0f;
+                _bullet.Spawn();
+            }
+        }
     }
 
     public void TakeDamage(float damage)
