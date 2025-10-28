@@ -8,6 +8,9 @@ TagManager:
   - AttackTower
   - DefenceTower
   - TriggerTower
+  - Tower
+  - HQ
+  - Enemy
   layers:
   - Default
   - TransparentFX
