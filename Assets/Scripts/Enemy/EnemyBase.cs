@@ -6,21 +6,21 @@ using static UnityEngine.GraphicsBuffer;
 
 public class EnemyBase : MonoBehaviour
 {
-    [SerializeField] float _EnemyHP = 10f;
-    [SerializeField] float _EnemyMoveSpeed = 10f;
-    [SerializeField] float _EnemayDMG = 5f;
-    [SerializeField] float _ViewRange = 5f;
-    private Transform _targetTransform;
-    private SphereCollider _sphereCollider;
+    //[SerializeField] float _EnemyHP = 10f;
+    [SerializeField] public float _EnemyMoveSpeed = 10f;
+    //[SerializeField] float _EnemayDMG = 5f;
+    [SerializeField] public float _ViewRange = 5f;
+    public Transform _targetTransform;
+    public SphereCollider _sphereCollider;
     public string poolTag = "Enemy";
-    private bool _Chase = false;
-    void Start()
+    public bool _Chase = false;
+    protected virtual void Start()
     {
         _sphereCollider = GetComponent<SphereCollider>();
         _sphereCollider.radius = _ViewRange;
     }
 
-    void Update()
+    protected virtual void Update()
     {
         if (_Chase == true)
         {
@@ -30,7 +30,7 @@ public class EnemyBase : MonoBehaviour
             }
         }
     }
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Tower"))
         {
