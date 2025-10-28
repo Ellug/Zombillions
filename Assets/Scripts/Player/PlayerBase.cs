@@ -4,57 +4,69 @@ using UnityEngine;
 
 public abstract class PlayerBase : MonoBehaviour
 {
-    [SerializeField] protected int _maxHp = 100;
-    [SerializeField] protected int _curHp = 100;
+    [Header("Status")]
+    [SerializeField] protected float _maxHp = 100;
+    [SerializeField] protected float _curHp = 100;
     [SerializeField] protected float _moveSpeed = 20;
     [SerializeField] protected float _rotSpeed = 100;
-    [SerializeField] protected float _atkDelay = 100;
-    [SerializeField] protected int _def = 100;
-    [SerializeField] protected int _atk = 100;
+    [SerializeField] protected float _atkDelay = 1;
+    [SerializeField] protected float _def = 0;
+    [SerializeField] protected float _atk = 10;
 
+    [Header("System")]
     [SerializeField] private bool _isPlayerAlive = true;
-    // [SerializeField] private float _reviveTime = 20;
-    // [SerializeField] private float _reviveTimer = 20;
+    [SerializeField] private float _reviveTime = 20;
+    [SerializeField] private float _reviveTimer = 20;
 
     [SerializeField] private GameObject _player;
-    [SerializeField] private LayerMask _groundMask;
 
-    private Camera _mainCam;
-    private bool _hasTarget;
+    // property
+    public float CurHp { get { return _curHp; } }
+    public float MaxHp { get { return _maxHp; } }
+    
+    // Skill Getter
+    public SkillBase GetSkill(int index)
+    {
+        if (index < 0 || index >= _skills.Length) return null;
+        return _skills[index];
+    }
+
+    private Rigidbody _rb;
     private Vector3 _targetPos;
+    private Vector2 _moveInput;
 
-    protected virtual void Awake()
+    private float _atkTimer = 0f;
+
+    public void MoveInput(Vector2 input) => _moveInput = input;
+    public void SetTargetPosition(Vector3 pos) => _targetPos = pos;
+    protected SkillBase[] _skills = new SkillBase[4];
+
+    void Start()
     {
-        if (_mainCam == null)
-            _mainCam = Camera.main;
+        if (_rb == null) _rb = GetComponent<Rigidbody>();
+        FindObjectOfType<PlayerUI>().SetPlayer(this);
+        FindObjectOfType<SkillUI>().SetPlayer(this);
     }
 
-    protected virtual void Update()
+    void Update()
     {
-        if (!_isPlayerAlive) return;
+        UpdateCoolTime();
 
-        HandleMouseInput();
-        MoveToTarget();
-        MoveToKey();
-    }
-
-    private void HandleMouseInput()
-    {
-        if (Input.GetMouseButton(1))
+        if (_isPlayerAlive)
         {
-            Ray ray = _mainCam.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out RaycastHit hit, 100f, _groundMask))
-            {
-                _targetPos = hit.point;
-                _hasTarget = true;
-            }
+            MoveToTarget();
+            MoveByInput();
+        }
+        else
+        {
+            UpdateRevive();
         }
     }
 
+    // 해당 지점으로 이동
     private void MoveToTarget()
     {
-        if (!_hasTarget) return;
+        if (_targetPos == Vector3.zero) return;
 
         Vector3 dir = _targetPos - transform.position;
         dir.y = 0;
@@ -72,31 +84,25 @@ public abstract class PlayerBase : MonoBehaviour
         }
         else
         {
-            _hasTarget = false;
+            _targetPos = Vector3.zero;
+            return;
         }
     }
 
-    protected virtual void MoveToKey()
+    // 키 인풋을 통한 이동
+    private void MoveByInput()
     {
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
+        if (_moveInput == Vector2.zero) return;
 
-        if (h == 0 && v == 0) return;
-
-        Vector3 forward = _mainCam.transform.forward;
-        Vector3 right = _mainCam.transform.right;
-        forward.y = 0f;
-        right.y = 0f;
-
-        Vector3 moveDir = (forward * v + right * h).normalized;
+        Vector3 moveDir = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
         transform.position += moveDir * _moveSpeed * Time.deltaTime;
-
         transform.rotation = Quaternion.LookRotation(moveDir);
     }
 
-    protected virtual void TakeDamage(int dmg)
+    // 대미지 처리
+    public void TakeDamage(float dmg)
     {
-        int finalDmg = dmg - _def;
+        float finalDmg = dmg - _def;
 
         if (finalDmg > 0)
             _curHp -= finalDmg;
@@ -108,12 +114,86 @@ public abstract class PlayerBase : MonoBehaviour
             Die();
     }
 
-    protected virtual void Die()
+    // 사망 처리
+    private void Die()
     {
         if (!_isPlayerAlive) return;
         _isPlayerAlive = false;
-        // 이후 카운트 관련 로직 등 예정
+
+        _moveInput = Vector2.zero;
+        _targetPos = Vector3.zero;
+
+        // 파괴 및 비활성화 X, 물리 시각 처리만 off
+        _rb.isKinematic = true;
+        _rb.useGravity = false;
+
+        foreach (var ren in GetComponentsInChildren<Renderer>())
+            ren.enabled = false;
+        foreach (var col in GetComponentsInChildren<Collider>())
+            col.enabled = false;
+
+        Debug.Log("사망");
+    }
+
+    // 사망 카운터 작동. 카운터 0되면 부활
+    private void UpdateRevive()
+    {
+        _reviveTimer -= Time.deltaTime;
+
+        // 부활
+        if (_reviveTimer <= 0)
+        {
+            _isPlayerAlive = true;
+            _reviveTimer = _reviveTime;
+
+            _moveInput = Vector2.zero;
+            _targetPos = Vector3.zero;
+
+            // 부활 위치 추가
+            // HQ 옆 특정 좌표? 혹은 스폰 위치를 오브젝트로 배치?
+
+            // 물리, 시각 처리 on
+            _rb.isKinematic = false;
+            _rb.useGravity = true;
+
+            foreach (var ren in GetComponentsInChildren<Renderer>())
+                ren.enabled = true;
+            foreach (var col in GetComponentsInChildren<Collider>())
+                col.enabled = true;
+        }
+    }
+
+    // 공격, 스킬 쿨타임 업데이트
+    private void UpdateCoolTime()
+    {
+        // 어택 쿨타임
+        if (_atkTimer > 0f)
+            _atkTimer -= Time.deltaTime;
+
+        // 전체 스킬 쿨타임 감소
+        foreach (var skill in _skills)
+        {
+            if (skill != null)
+                skill.UpdateSkillCool(Time.deltaTime);
+        }
+    }
+
+    // 공격
+    public void TryAttack()
+    {
+        if (_atkTimer <= 0f && _isPlayerAlive)
+        {
+            Attack();
+            _atkTimer = _atkDelay;
+        }
     }
 
     protected abstract void Attack();
+
+    // 스킬 사용
+    public void UseSkill(int index)
+    {
+        if (index < 0 || index >= _skills.Length || !_isPlayerAlive) return;
+        _skills[index]?.TryUse();
+    }
 }
