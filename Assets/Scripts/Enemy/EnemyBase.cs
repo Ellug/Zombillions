@@ -6,9 +6,9 @@ using static UnityEngine.GraphicsBuffer;
 
 public class EnemyBase : MonoBehaviour
 {
-    [SerializeField] float _EnemyHP = 10f;
+    // [SerializeField] float _EnemyHP = 10f;
     [SerializeField] float _EnemyMoveSpeed = 10f;
-    [SerializeField] float _EnemayDMG = 5f;
+    // [SerializeField] float _EnemayDMG = 5f;
     [SerializeField] float _ViewRange = 5f;
     private Transform _targetTransform;
     private SphereCollider _sphereCollider;
