@@ -4,6 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - HQTower
+  - AttackTower
+  - DefenceTower
+  - TriggerTower
   - Tower
   - HQ
   - Enemy
