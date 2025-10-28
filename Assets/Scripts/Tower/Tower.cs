@@ -47,7 +47,7 @@ public class Tower : MonoBehaviour
             if (_timer > 16 / _towerData.attackSpeed)
             {
                 _timer = 0f;
-                _bullet.Spawn();
+                // _bullet.Spawn();
             }
         }
     }
