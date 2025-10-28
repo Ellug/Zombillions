@@ -48,7 +48,6 @@ public class TowerManager : MonoBehaviour
                 if (tower != null)
                 {
                     SelectedTower(tower);
-                    Debug.Log($"현재 체력 : {tower.TowerCurrentHp}"); //데이터 확인용 코드
                 }
                 else
                 {

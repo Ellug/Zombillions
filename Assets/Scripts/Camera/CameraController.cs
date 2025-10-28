@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -50,7 +47,7 @@ public class CameraController : MonoBehaviour
     // 카메라 고정 토글
     private void HandleLockToggle()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Y))
         {
             _isCameraLock = !_isCameraLock;
             Cursor.lockState = _isCameraLock ? CursorLockMode.None : CursorLockMode.Confined;
@@ -91,6 +88,7 @@ public class CameraController : MonoBehaviour
         Vector3 targetPos = _target.position + offset;
 
         transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 10f);
+        // transform.position = targetPos;
     }
 
     // 카메라 이동
