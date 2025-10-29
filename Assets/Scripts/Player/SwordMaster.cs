@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class SwordMaster : PlayerBase
 {
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        
         _skills[0] = gameObject.AddComponent<SwordQ>();
         _skills[1] = gameObject.AddComponent<SwordW>();
         _skills[2] = gameObject.AddComponent<SwordE>();
