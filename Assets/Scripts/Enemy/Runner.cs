@@ -6,6 +6,7 @@ public class Runner : EnemyBase
 {
     protected override void Start()
     {
+        _poolTag = "Runner";
         base.Start();
     }
 

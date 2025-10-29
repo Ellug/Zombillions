@@ -6,13 +6,14 @@ using static UnityEngine.GraphicsBuffer;
 
 public class EnemyBase : MonoBehaviour
 {
-    //[SerializeField] float _EnemyHP = 10f;
+    [SerializeField] public float _EnemyHP = 10f;
     [SerializeField] public float _EnemyMoveSpeed = 10f;
-    //[SerializeField] float _EnemayDMG = 5f;
+    [SerializeField] public float _EnemyDMG = 5f;
     [SerializeField] public float _ViewRange = 5f;
     public Transform _targetTransform;
     public SphereCollider _sphereCollider;
-    public string poolTag = "Enemy";
+    [SerializeField] public float _AttackDelay;
+    [SerializeField] public string _poolTag = "Enemy";
     public bool _Chase = false;
     protected virtual void Start()
     {
@@ -50,5 +51,11 @@ public class EnemyBase : MonoBehaviour
             _targetTransform = other.transform;
             _Chase = true;
         }
+    }
+
+    public virtual void ResetForPooling()
+    {
+        _Chase = false;
+        _targetTransform = null;
     }
 }

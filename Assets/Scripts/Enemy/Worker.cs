@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class worker : EnemyBase
+public class Worker : EnemyBase
 {
     protected override void Start()
     {
+        _poolTag = "Worker";
         base.Start();
     }
 

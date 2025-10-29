@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bommer : EnemyBase
 {
+    [SerializeField] public string pooltag = "Bommer";
     protected override void Start()
     {
         base.Start();
