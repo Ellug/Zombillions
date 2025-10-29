@@ -6,6 +6,7 @@ public class EnemyWave : MonoBehaviour
 {
     [SerializeField] public float _WaveRange = 30f;
     [SerializeField] GameObject targetObject;
+    [SerializeField] public bool WaveTest = false;
     private void StartWave()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, _WaveRange);
@@ -18,6 +19,7 @@ public class EnemyWave : MonoBehaviour
                 if (NearEnemy != null && !NearEnemy._Chase)
                 {
                     NearEnemy._targetTransform = targetObject.transform;
+                    NearEnemy._Chase = true;
                 }
             }
         }
@@ -26,9 +28,19 @@ public class EnemyWave : MonoBehaviour
     {
         StartCoroutine(RepeatFunctionEveryTenMinutes());
     }
+
+    void Update()
+    {
+        if (WaveTest)
+        {
+            StartWave();
+        }
+    }
     IEnumerator RepeatFunctionEveryTenMinutes()
     {
         float tenMinutes = 600.0f;
+        yield return new WaitForSeconds(tenMinutes);
+
         while (true)
         {
             StartWave();

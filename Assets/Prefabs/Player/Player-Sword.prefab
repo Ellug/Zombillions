@@ -84,7 +84,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &3031770749100259491
 MonoBehaviour:
@@ -124,6 +124,7 @@ MonoBehaviour:
   _reviveTime: 20
   _reviveTimer: 20
   _player: {fileID: 2897609422604169835}
+  _bulletSpawner: {fileID: 0}
 --- !u!1 &4973857267643957361
 GameObject:
   m_ObjectHideFlags: 0

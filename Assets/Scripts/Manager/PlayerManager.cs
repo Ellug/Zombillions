@@ -16,12 +16,15 @@ public class PlayerManager : MonoBehaviour
 
         if (prefab == null)
         {
-            Debug.LogError("프리팹 어디갔니?");
+            Debug.LogError("Where is Your Prefab??");
             return;
         }
 
         // 생성
         _player = Instantiate(prefab, _spawnPoint.position, Quaternion.identity).GetComponent<PlayerBase>();
+
+        // 플레이어 스폰 포인트 세팅
+        _player.SetSpawnPoint(_spawnPoint);
 
         // 카메라 연결
         if (_mainCamera != null)

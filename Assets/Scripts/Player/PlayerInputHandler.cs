@@ -16,8 +16,10 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void Update()
     {
+        HandleMouseRotate();
         HandleMovementInput();
         HandleMouseMove();
+        HandleMouseLeftInput();
         HandleAttackInput();
         HandleSkillInput();
     }
@@ -41,10 +43,39 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
 
+    private void HandleMouseRotate()
+    {
+        // 커서 위치에서 레이캐스트
+        Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f, _groundMask))
+        {
+            Vector3 lookPos = hit.point;
+            lookPos.y = transform.position.y;
+
+            Vector3 dir = (lookPos - transform.position).normalized;
+            if (dir.sqrMagnitude > 0.01f)
+            {
+                Quaternion targetRot = Quaternion.LookRotation(dir);
+                transform.rotation = Quaternion.Slerp(
+                    transform.rotation,
+                    targetRot,
+                    Time.deltaTime * 25f // 회전 속도 조정
+                );
+            }
+        }
+    }
+
     // 어택 (스페이스) 입력
     private void HandleAttackInput()
     {
         if (Input.GetKey(KeyCode.Space))
+            _player.TryAttack();
+    }
+
+    // 어택 (좌클릭) 입력
+    private void HandleMouseLeftInput()
+    {
+        if (Input.GetMouseButton(0))
             _player.TryAttack();
     }
     
