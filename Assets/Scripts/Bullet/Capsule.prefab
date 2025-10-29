@@ -48,11 +48,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f97999e15e902e647b43fdc1d75e8efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 10
+  _moveSpeed: 5
   _damage: 0
-  _deactiveTime: 10
+  _range: 20
   _shotForce: 10
-  _target: {fileID: 2766897404063057650, guid: daf9de04e5a8e1e48825ee24b90001bd, type: 3}
 --- !u!33 &5955490138643170950
 MeshFilter:
   m_ObjectHideFlags: 0

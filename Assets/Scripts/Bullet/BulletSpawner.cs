@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class BulletController : MonoBehaviour
+public class BulletSpawner : MonoBehaviour
 {
     [SerializeField] private Transform _muzzle;
     [SerializeField] private GameObject _bulletPrefab;   //bullet프리펩에 Rigidbody 추가 해야 함
+    [SerializeField] private int _BulletPoolSize = 30;
 
 
     private List<GameObject> _bulletPool;
@@ -14,8 +15,8 @@ public class BulletController : MonoBehaviour
 
     void Start()
     {
-        _bulletPool = new List<GameObject>();
-        for (int i = 0; i < _bulletPool.Count; i++)
+        _bulletPool = new();
+        for (int i = 0; i < _BulletPoolSize; i++)
         {
             GameObject bullet = Instantiate(_bulletPrefab);
             bullet.transform.position = _muzzle.transform.position;
@@ -41,6 +42,7 @@ public class BulletController : MonoBehaviour
         {
             if (!bullet.activeSelf)
             {
+                bullet.transform.rotation = _muzzle.rotation;
                 bullet.transform.position = _muzzle.transform.position;
                 bullet.SetActive(true);
                 break;
