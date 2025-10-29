@@ -59,7 +59,7 @@ public class Gold : MonoBehaviour
 
     private void OnDisable()
     {
-        
+        Die();
     }
 
     public void TakeDamage(float damage)

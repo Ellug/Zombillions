@@ -37,7 +37,7 @@ public class FloatingText : MonoBehaviour
             _text.color = color;
         }
 
-        _rect.anchoredPosition = startScreenPos;
+        _rect.position = startScreenPos;
     }
 
     void Update()

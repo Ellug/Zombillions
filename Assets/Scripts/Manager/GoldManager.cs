@@ -102,10 +102,11 @@ public class GoldManager : MonoBehaviour
 
         if(_floatingTextPrefab != null && _uiCanvas != null)
         {
-            Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+            //Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
 
             FloatingText newText = Instantiate(_floatingTextPrefab, _uiCanvas.transform);
-            newText.Setup($"+{amount}", Color.yellow, screenPos);
+            newText.Setup($"+{amount}", Color.red, screenPos);
         }
 
         NotifyGoldChanged();
