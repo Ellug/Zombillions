@@ -10,6 +10,7 @@ public class Tower : MonoBehaviour
     [SerializeField] private Bullet _bullet;
     [SerializeField] private TowerTrigger _towerTracer;
 
+    private TowerSpawner _mySpawner;
     private float _timer;
     private float _towerCurrentHp;
     public float TowerCurrentHp => _towerCurrentHp;
@@ -41,6 +42,11 @@ public class Tower : MonoBehaviour
     }
     private void Update()
     {
+        Attack();
+    }
+
+    private void Attack()
+    {
         if (_towerTracer.GetCurrentEnemy() != null)
         {
             _timer += Time.deltaTime;
@@ -60,7 +66,18 @@ public class Tower : MonoBehaviour
 
         if (_towerCurrentHp <= 0)
         {
+            _mySpawner?.ResetBuilt();
             Destroy(gameObject);
         }
+    }
+
+    //스포너 연결시키기
+    public void SetSpawner(TowerSpawner spawner)
+    {
+        _mySpawner = spawner;
+    }
+    public TowerSpawner GetSpawner()
+    {
+        return _mySpawner;
     }
 }
