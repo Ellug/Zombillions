@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class SwordMaster : PlayerBase
 {
-    void Awake()
+    protected override void Awake()
     {
-        _skills[0] = gameObject.AddComponent<SwordQ>();
-        _skills[1] = gameObject.AddComponent<SwordW>();
-        _skills[2] = gameObject.AddComponent<SwordE>();
-        _skills[3] = gameObject.AddComponent<SwordR>();
+        base.Awake();
+        
+        _skills[0] = new SwordQ();
+        _skills[1] = new SwordQ();
+        _skills[2] = new SwordQ();
+        _skills[3] = new SwordQ();
 
         foreach (var skill in _skills)
             skill.Init(this);

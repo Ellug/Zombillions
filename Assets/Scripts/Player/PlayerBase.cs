@@ -3,25 +3,39 @@ using UnityEngine;
 public abstract class PlayerBase : MonoBehaviour
 {
     [Header("Status")]
-    [SerializeField] protected float _maxHp = 100;
-    [SerializeField] protected float _curHp = 100;
-    [SerializeField] protected float _moveSpeed = 20;
-    [SerializeField] protected float _rotSpeed = 100;
-    [SerializeField] protected float _atkDelay = 1;
-    [SerializeField] protected float _def = 0;
-    [SerializeField] protected float _atk = 10;
+    [SerializeField] protected float _maxHp = 100f;
+    [SerializeField] protected float _curHp = 100f;
+    [SerializeField] protected float _moveSpeed = 20f;
+    [SerializeField] protected float _rotSpeed = 100f;
+    [SerializeField] protected float _atkDelay = 0.4f;
+    [SerializeField] protected float _def = 0f;
+    [SerializeField] protected float _atk = 10f;
 
     [Header("System")]
     [SerializeField] private bool _isPlayerAlive = true;
-    [SerializeField] private float _reviveTime = 20;
-    [SerializeField] private float _reviveTimer = 20;
+    [SerializeField] private float _reviveTime = 20f;
+    [SerializeField] private float _reviveTimer = 20f;
 
     [SerializeField] private GameObject _player;
 
     // property
     public float CurHp { get { return _curHp; } }
     public float MaxHp { get { return _maxHp; } }
+    public float Atk { get { return _atk; } }
     
+    private float _atkTimer = 0f;
+
+    private Rigidbody _rb;
+    private Vector3 _targetPos;
+    private Vector2 _moveInput;
+    public BulletSpawner _bulletSpawner;
+    private Transform _spawnPoint;
+
+    
+    public void MoveInput(Vector2 input) => _moveInput = input;
+    public void SetTargetPosition(Vector3 pos) => _targetPos = pos;
+    protected SkillBase[] _skills = new SkillBase[4];
+
     // Skill Getter
     public SkillBase GetSkill(int index)
     {
@@ -29,16 +43,18 @@ public abstract class PlayerBase : MonoBehaviour
         return _skills[index];
     }
 
-    private Rigidbody _rb;
-    private Vector3 _targetPos;
-    private Vector2 _moveInput;
+    // Spawn Point Setter
+    public void SetSpawnPoint(Transform spawn)
+    {
+        _spawnPoint = spawn;
+    }
 
-    private float _atkTimer = 0f;
-
-    public void MoveInput(Vector2 input) => _moveInput = input;
-    public void SetTargetPosition(Vector3 pos) => _targetPos = pos;
-    protected SkillBase[] _skills = new SkillBase[4];
-
+    protected virtual void Awake()
+    {
+        _bulletSpawner = FindObjectOfType<BulletSpawner>();
+        if (_bulletSpawner == null) Debug.LogError("[PlayerBase] No BulletSpawner in scene.");
+    }
+    
     void Start()
     {
         if (_rb == null) _rb = GetComponent<Rigidbody>();
@@ -70,8 +86,8 @@ public abstract class PlayerBase : MonoBehaviour
 
         if (distance > 0.05f)
         {
-            Quaternion targetRot = Quaternion.LookRotation(dir);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, _rotSpeed * Time.deltaTime);
+            // Quaternion targetRot = Quaternion.LookRotation(dir);
+            // transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, _rotSpeed * Time.deltaTime);
 
             Vector3 move = dir.normalized * _moveSpeed * Time.deltaTime;
             if (move.sqrMagnitude > distance) move = dir.normalized * distance;
@@ -93,7 +109,7 @@ public abstract class PlayerBase : MonoBehaviour
         _targetPos = Vector3.zero;
         Vector3 moveDir = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
         transform.position += moveDir * _moveSpeed * Time.deltaTime;
-        transform.rotation = Quaternion.LookRotation(moveDir);
+        // transform.rotation = Quaternion.LookRotation(moveDir);
     }
 
     // 대미지 처리
@@ -146,8 +162,8 @@ public abstract class PlayerBase : MonoBehaviour
             _moveInput = Vector2.zero;
             _targetPos = Vector3.zero;
 
-            // 부활 위치 추가
-            // HQ 옆 특정 좌표? 혹은 스폰 위치를 오브젝트로 배치?
+            // 부활 위치로 이동
+            transform.position = _spawnPoint.position;
 
             // 물리, 시각 처리 on
             _rb.isKinematic = false;
