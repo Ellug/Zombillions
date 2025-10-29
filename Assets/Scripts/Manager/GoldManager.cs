@@ -61,8 +61,9 @@ public class GoldManager : MonoBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI _goldText;
     //[SerializeField] private UnityEngine.UI.Text _legacyText;
 
-    //[Header("Floating Text")]
-    //[SerializeField] private Floating
+    [Header("Floating Text")]
+    [SerializeField] private FloatingText _floatingTextPrefab;
+    [SerializeField] private Canvas _uiCanvas;
 
 
     void Start()
@@ -90,11 +91,21 @@ public class GoldManager : MonoBehaviour
     /// <summary>
     /// °ñµå È¹µæ ( ±Ý±¤ ÆÄ±« , ¸ó½ºÅÍ Ã³Ä¡ º¸»ó µî )
     /// </summary>
-    public void AddGold(int amount)
+    public void AddGold(int amount, Vector3 worldPos)
     {
         if (amount <= 0)
         {
             return;
+        }
+
+        CurrentGold += amount;
+
+        if(_floatingTextPrefab != null && _uiCanvas != null)
+        {
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+
+            FloatingText newText = Instantiate(_floatingTextPrefab, _uiCanvas.transform);
+            newText.Setup($"+{amount}", Color.yellow, screenPos);
         }
 
         NotifyGoldChanged();

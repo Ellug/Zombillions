@@ -14,7 +14,10 @@ public class Gold : MonoBehaviour
     [SerializeField] private float _maxHP = 20f;
 
     [Tooltip("금광 파괴시 지급할 보상")]
-    [SerializeField] private int _rewardGold = 10;
+    [SerializeField, Range(1,100)] private int _minReward = 5;
+    [SerializeField, Range(1, 100)] private int _maxReward = 15;
+
+    private int _rewardGold;
 
     [Header("충돌 / 피격 판정")]
     [Tooltip("맞는 판정을 받을 콜라이더")]
@@ -24,6 +27,11 @@ public class Gold : MonoBehaviour
     private bool _isActive;
 
     private GoldSpawner _ownerSpawner;
+
+    [Tooltip("테스트 시 true")]
+    [SerializeField] private bool _enableTestKeys = false;
+    [SerializeField] private KeyCode _testKey = KeyCode.X;
+    [SerializeField] private float _testDamage = 5f;
 
     public void SetOwner(GoldSpawner owner) // 오브젝트를 누가 만들었는지 기억
     {
@@ -88,9 +96,11 @@ public class Gold : MonoBehaviour
             _hitCollider.enabled = false;
         }
 
+        _rewardGold = Random.Range(_minReward, _maxReward + 1);
+
         if(GoldManager.HasInstance)
         {
-            GoldManager.Instance.AddGold(_rewardGold);
+            GoldManager.Instance.AddGold(_rewardGold, transform.position);
         }
         else
         {
@@ -105,6 +115,39 @@ public class Gold : MonoBehaviour
         else
         {
             gameObject.SetActive(false);
+        }
+    }
+
+    public void Test_AddGold()
+    {
+        int reward = Random.Range(_minReward, _maxReward + 1);
+
+        if(GoldManager.HasInstance)
+        {
+            GoldManager.Instance.AddGold(reward, transform.position);
+            Debug.Log($"테스트 보상 지급 +{reward}");
+        }
+        else
+        {
+            Debug.LogWarning("GoldManager 인스턴스 없음");
+        }
+    }
+
+    public void Test_ForceDie()
+    {
+        if(_isActive)
+        {
+            Debug.Log("테스트 강제 파괴");
+            Die();
+        }
+    }
+
+    void Update()
+    {
+        if(_enableTestKeys && Input.GetKeyDown(_testKey))
+        {
+            Debug.Log($"테스트 {_testDamage} 피해");
+            TakeDamage(_testDamage);
         }
     }
 }
