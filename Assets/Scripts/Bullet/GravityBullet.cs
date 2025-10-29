@@ -4,8 +4,6 @@ public class GravityBullet : MonoBehaviour
 {
     [SerializeField] private float _speed = 60f;
     [SerializeField] private float _maxDistance = 100f;
-    [SerializeField] private float _explosionRadius = 10f;
-    [SerializeField] private float _dmg = 20f;
     [SerializeField] private GameObject _explosionPrefab;
 
     private Vector3 _dir;
@@ -15,7 +13,6 @@ public class GravityBullet : MonoBehaviour
     public void Init(Vector3 dir, float dmg, float range)
     {
         _dir = dir.normalized;
-        _dmg = dmg;
         _maxDistance = range;
         _startPos = transform.position;
         _isActive = true;

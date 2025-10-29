@@ -61,5 +61,16 @@ public class EnemyAttack : MonoBehaviour
             targetHealth.TakeDamage(damage);
         }
         */
+
+        // 플레이어 공격 - 작동 확인
+        if (target.CompareTag("Player"))
+        {
+            PlayerBase player = target.GetComponent<PlayerBase>();
+            if (player != null)
+            {
+                player.TakeDamage(damage);
+                return;
+            }
+        }
     }
 }

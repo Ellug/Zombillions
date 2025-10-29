@@ -46,9 +46,7 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             EnemyBase enemy = other.GetComponent<EnemyBase>();
-
-            // 대미지 처리
-            // enemy.TakeDamage(_dmg);
+            enemy.TakeDamage(_dmg);
             // 총알과 에네미 중심 사이 벡터 방향으로 넉백 부여. 넉백 메서드는 에네미에서 구현 필요
             // enemy.Knockback((enemy.transform.position - transform.position).normalized * _knockback);
 
