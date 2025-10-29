@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 679296a52de271940888e3aae1b7b564, type: 3}
   m_Name: AttackTower
   m_EditorClassIdentifier: 
+  _towerPrefab: {fileID: 1430577679983278425, guid: 69c9ee1b733d4ff4c948ec3dc3e08baa, type: 3}
   towerTag: 1
   maxHp: 50
   size: {x: 1, y: 1, z: 1}
   attackPower: 2
   attackRange: 10
   attackSpeed: 10
-  defencePower: 0
   cost: 100

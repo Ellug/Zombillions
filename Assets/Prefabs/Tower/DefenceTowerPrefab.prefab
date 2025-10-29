@@ -431,9 +431,9 @@ GameObject:
   - component: {fileID: 3913445259776883916}
   - component: {fileID: 8972218831057767429}
   - component: {fileID: 4326491662311246831}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DefenceTowerPrefab
-  m_TagString: Untagged
+  m_TagString: DefenceTower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -8,9 +8,9 @@ public class TowerData : ScriptableObject
 {
     public enum TowerTag
     {
-        HQTower, AttackTower, DefanceTower, TriggerTower
+        HQTower, AttackTower, DefenceTower, TriggerTower
     }
-
+    [SerializeField] public GameObject _towerPrefab;
     public TowerTag towerTag;
     public float maxHp;
     public Vector3 size;
