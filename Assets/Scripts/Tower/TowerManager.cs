@@ -10,10 +10,12 @@ public class TowerManager : MonoBehaviour
 {
     public static TowerManager Instance { get; private set; }
 
+    [SerializeField] private LayerMask _towerLayer;
     [SerializeField] private Camera _mainCamera;
-    [SerializeField] private GameObject _towerPrefab;
     
-    private Tower selectedTower;
+    private TowerSpawner _towerSpawner;
+    private Tower _selectedTower;
+    private bool _isMenuOpen = false;
     
     private void Awake()
     {
@@ -30,11 +32,36 @@ public class TowerManager : MonoBehaviour
         {
             _mainCamera = Camera.main;
         }
+        //int excludeMask = LayerMask.GetMask("TowerScaner");
     }
 
     private void Update()
     {
         HandleSelection();
+        if(_isMenuOpen == true)
+        {
+            BuildMenu();
+        }
+
+    }
+
+    private void BuildMenu()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Debug.Log("Q누름");
+            _towerSpawner.BuildTower(TowerData.TowerTag.AttackTower);
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            Debug.Log("W누름");
+            _towerSpawner.BuildTower(TowerData.TowerTag.DefenceTower);
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("E누름");
+            _towerSpawner.BuildTower(TowerData.TowerTag.TriggerTower);
+        }
     }
 
     private void HandleSelection()
@@ -42,12 +69,20 @@ public class TowerManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+            //if (Physics.Raycast(ray, out RaycastHit hit, 50f, _towerLayer))
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 Tower tower = hit.collider.GetComponent<Tower>();
+                _towerSpawner = hit.collider.GetComponent<TowerSpawner>();
+                
                 if (tower != null)
                 {
                     SelectedTower(tower);
+                }
+            
+                else if(_towerSpawner != null)
+                {
+                    _isMenuOpen = true;
                 }
                 else
                 {
@@ -59,20 +94,20 @@ public class TowerManager : MonoBehaviour
 
     private void SelectedTower(Tower tower)
     {
-        if (selectedTower == tower)
+        if (_selectedTower == tower)
         {
             return;
         }
 
         DeselectTower();
-        selectedTower = tower;
+        _selectedTower = tower;
     }
 
     private void DeselectTower()
     {
-        if(selectedTower != null)
+        if(_selectedTower != null)
         {
-            selectedTower = null;
+            _selectedTower = null;
         }
     }
 }

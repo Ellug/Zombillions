@@ -648,7 +648,7 @@ GameObject:
   - component: {fileID: 3160580827695725539}
   - component: {fileID: 4725039165466127013}
   - component: {fileID: -8961178135256423867}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HQTowerPrefab
   m_TagString: HQTower
   m_Icon: {fileID: 0}
@@ -684,7 +684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _towerData: {fileID: 11400000, guid: efb0826eb86ee514ea11fa93de4eb053, type: 2}
-  _bullet: {fileID: -4748263633577311814, guid: 6028b7e1d05e53d4f8713c0cba1daa74, type: 3}
+  _bullet: {fileID: 0}
   _towerTracer: {fileID: 3245037003583218656}
 --- !u!65 &-8961178135256423867
 BoxCollider:
@@ -718,6 +718,10 @@ PrefabInstance:
     - target: {fileID: 4716173209266674710, guid: 6028b7e1d05e53d4f8713c0cba1daa74, type: 3}
       propertyPath: m_Name
       value: BulletSpawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 4716173209266674710, guid: 6028b7e1d05e53d4f8713c0cba1daa74, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6917524994140310058, guid: 6028b7e1d05e53d4f8713c0cba1daa74, type: 3}
       propertyPath: m_LocalScale.x
