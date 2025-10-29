@@ -6,6 +6,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class EnemyBase : MonoBehaviour
 {
+    [SerializeField] public float _EnemyMAXHP = 10f;
     [SerializeField] public float _EnemyHP = 10f;
     [SerializeField] public float _EnemyMoveSpeed = 10f;
     [SerializeField] public float _EnemyDMG = 5f;
@@ -27,6 +28,7 @@ public class EnemyBase : MonoBehaviour
         {
             if (_targetTransform != null)
             {
+                transform.LookAt(_targetTransform.position);
                 transform.position = Vector3.MoveTowards(transform.position, _targetTransform.position, _EnemyMoveSpeed * Time.deltaTime);
             }
         }
@@ -57,5 +59,30 @@ public class EnemyBase : MonoBehaviour
     {
         _Chase = false;
         _targetTransform = null;
+        _EnemyHP = _EnemyMAXHP;
+        _targetTransform = null;
+    }
+
+    public virtual void TakeDamage(float dmg) 
+    {
+        if (dmg > 0)
+            _EnemyHP -= dmg;
+        else
+            _EnemyHP--;
+
+        if (_EnemyHP <= 0)
+            Die();
+    }
+
+    public virtual void Die() 
+    {
+        if (ObjectManager.Instance != null && !string.IsNullOrEmpty(_poolTag))
+        {
+            ObjectManager.Instance.ReturnToPool(_poolTag, gameObject);
+        }
+        else
+        {
+            Debug.Log("몬스터 사망처리 에러");
+        }
     }
 }

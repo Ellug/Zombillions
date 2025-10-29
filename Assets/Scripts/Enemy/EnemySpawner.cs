@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [SerializeField][Range(0, 30)] private float _PositionScope;
     [System.Serializable]
     public class WaveEnemyInfo
     {
@@ -19,6 +20,16 @@ public class EnemySpawner : MonoBehaviour
         public List<WaveEnemyInfo> waveEnemies;
     }
 
+    private Vector3 RandPos() 
+    {
+        Vector3 pos = new Vector3
+            (
+            Random.Range(-_PositionScope, _PositionScope),
+            0f,
+            Random.Range(-_PositionScope, _PositionScope)
+            );
+        return pos;
+    }
     public List<Wave> waves;
 
     public Transform spawnPoint;
@@ -35,34 +46,6 @@ public class EnemySpawner : MonoBehaviour
             return;
         }
         StartCoroutine(WaveManagerRoutine());
-    }
-
-    [ContextMenu("Test Spawn Enemies")]
-    public void TestSpawnCurrentWaveEnemies()
-    {
-        if (waves.Count == 0 || _currentWaveIndex >= waves.Count)
-        {
-            Debug.LogWarning("Test Spawn: 웨이브 정보가 없거나 웨이브가 끝났습니다.");
-            return;
-        }
-
-        Wave currentWave = waves[_currentWaveIndex];
-        StartCoroutine(SpawnWaveEnemies(currentWave));
-
-        Debug.Log($"[TEST] 웨이브 {_currentWaveIndex + 1}의 모든 몬스터 스폰을 즉시 시작합니다.");
-    }
-
-    [ContextMenu("Test Spawn Single Enemy (Worker)")]
-    public void TestSpawnSingleWorker()
-    {
-        string testTag = "WorkerPool";
-        ObjectManager.Instance.SpawnFromPool(
-            testTag,
-            spawnPoint.position,
-            spawnPoint.rotation
-        );
-
-        Debug.Log($"[TEST] 단일 몬스터 ({testTag})를 즉시 스폰했습니다.");
     }
     IEnumerator WaveManagerRoutine()
     {
@@ -89,8 +72,8 @@ public class EnemySpawner : MonoBehaviour
         {
             ObjectManager.Instance.SpawnFromPool(
                 enemyInfo.enemyPoolTag,
-                spawnPoint.position,
-                spawnPoint.rotation
+                RandPos(),
+                transform.rotation
             );
             yield return new WaitForSeconds(enemyInfo.spawnInterval);
         }
