@@ -46,9 +46,9 @@ public class GravityField : MonoBehaviour
                 Vector3 move = pullForce * _forceInterval * dir;
                 enemyTr.position += move;
 
-                // var enemy = hit.GetComponent<EnemyBase>();
-                // if (enemy != null)
-                //     enemy.TakeDamage(_dmg * 0.5f);
+                var enemy = hit.GetComponent<EnemyBase>();
+                if (enemy != null)
+                    enemy.TakeDamage(0.1f);
             }
 
             yield return _wait;

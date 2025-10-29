@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7729635214484725259}
   - component: {fileID: 7702551765875607134}
   - component: {fileID: 3415948039332931397}
+  - component: {fileID: -1261636312598193473}
   m_Layer: 0
   m_Name: Runner
   m_TagString: Enemy
@@ -143,12 +144,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b358a39908408b43b3cfb1974070f05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _EnemyMAXHP: 10
+  _EnemyHP: 10
   _EnemyMoveSpeed: 10
+  _EnemyDMG: 5
   _ViewRange: 5
   _targetTransform: {fileID: 0}
   _sphereCollider: {fileID: 0}
+  _AttackDelay: 0
   _poolTag: Runner
   _Chase: 0
+--- !u!54 &-1261636312598193473
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4488770537272071640}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0
 --- !u!1 &7113497639775318613
 GameObject:
   m_ObjectHideFlags: 0

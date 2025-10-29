@@ -164,6 +164,7 @@ public abstract class PlayerBase : MonoBehaviour
 
             // 부활 위치로 이동
             transform.position = _spawnPoint.position;
+            _curHp = _maxHp;
 
             // 물리, 시각 처리 on
             _rb.isKinematic = false;
