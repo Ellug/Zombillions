@@ -15,10 +15,10 @@ public class Gunslinger : PlayerBase
     {
         base.Awake();
 
-        _skills[0] = gameObject.AddComponent<GunQ>();
-        _skills[1] = gameObject.AddComponent<GunW>();
-        _skills[2] = gameObject.AddComponent<GunE>();
-        _skills[3] = gameObject.AddComponent<GunR>();
+        _skills[0] = new GunQ();
+        _skills[1] = new GunW();
+        _skills[2] = new GunE();
+        _skills[3] = new GunR();
 
         foreach (var skill in _skills)
             skill.Init(this);

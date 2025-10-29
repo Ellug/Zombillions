@@ -7,7 +7,6 @@ public class GravityBullet : MonoBehaviour
     [SerializeField] private float _explosionRadius = 10f;
     [SerializeField] private float _dmg = 20f;
     [SerializeField] private GameObject _explosionPrefab;
-    [SerializeField] private LayerMask _hitMask;
 
     private Vector3 _dir;
     private Vector3 _startPos;
@@ -42,15 +41,6 @@ public class GravityBullet : MonoBehaviour
     private void Explode()
     {
         _isActive = false;
-
-        // 폭발 피해
-        Collider[] hits = Physics.OverlapSphere(transform.position, _explosionRadius, _hitMask);
-        foreach (var hit in hits)
-        {
-            var enemy = hit.GetComponent<EnemyBase>();
-            // if (enemy != null)
-            //     enemy.TakeDamage(_dmg * 0.5f);
-        }
 
         // 중력장 생성
         Instantiate(_explosionPrefab, transform.position, Quaternion.identity);

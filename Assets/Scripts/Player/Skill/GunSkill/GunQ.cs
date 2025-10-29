@@ -8,7 +8,7 @@ public class GunQ : SkillBase
     private float _skillRange = 70f;
     private float _knockback = 10f;
 
-    void Awake()
+    public GunQ()
     {
         _skillName = "Shot Gun";
         _coolTime = 4f;

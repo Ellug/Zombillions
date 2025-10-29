@@ -6,7 +6,8 @@ public class GunW : SkillBase
     private float _skillRange = 200f;
     private float _knockback = 10f;
     private int _penetration = 20;
-    void Awake()
+    
+    public GunW()
     {
         _skillName = "Sniper Rifle";
         _coolTime = 6f;
