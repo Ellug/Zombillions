@@ -6,6 +6,7 @@ public class GlobalTime : MonoBehaviour
 {
     [SerializeField] private int _noonTime;
     [SerializeField] private int _nightTime;
+    [SerializeField] private float _timerSpeed = 1;
 
     public Day CurrentTimeZone { get; private set; }
     public int GameTime { get; private set; }
@@ -19,6 +20,7 @@ public class GlobalTime : MonoBehaviour
 
     private void Notify()
     {
+        Debug.Log("옵저버 실행");
         foreach (ITimeObserver observer in _observer)
         {
             observer.OnNotify();
@@ -29,6 +31,7 @@ public class GlobalTime : MonoBehaviour
 
     void Awake()
     {
+        CurrentTimeZone = 0;
         GameTime = 0;
         GameWave = 1;
     }
@@ -36,7 +39,6 @@ public class GlobalTime : MonoBehaviour
     void Start()
     {
         StartCoroutine(TimeCounting());
-        Notify();
     }
 
 
@@ -45,9 +47,10 @@ public class GlobalTime : MonoBehaviour
         while (true)
         {
             GameTime++;
-            Debug.Log($"게임시간: {GameTime}");
+            
             TimeZoneChange();
-            yield return new WaitForSeconds(1f);
+
+            yield return new WaitForSeconds(_timerSpeed);
         }
     }
 
@@ -58,20 +61,24 @@ public class GlobalTime : MonoBehaviour
         switch (CurrentTimeZone)
         {
             case Day.Noon:
-                if (GameTime >= _noonTime)
+                if (GameTime > _noonTime)
+                {
                     CurrentTimeZone = Day.Night;
+                    GameTime = 0;                               //시간대 변경 후에는 GameTime을 초기화
+                    Notify();
+                }
                 break;
 
             case Day.Night:
-                if (GameTime >= _nightTime)
+                if (GameTime > _nightTime)
+                {
                     CurrentTimeZone = Day.Noon;
+                    GameTime = 0;                               //시간대 변경 후에는 GameTime을 초기화
+                    Notify();
+                }
                 break;
         }
-        GameTime = 0;                               //시간대 변경 후에는 GameTime을 초기화
-        Debug.Log($"시간대: {CurrentTimeZone}");
-
     }
-
 }
 
 public enum Day { Noon, Night }
