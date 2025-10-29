@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using static Bullet;
 
 //타워 동작 처리
 public class Tower : MonoBehaviour
 {
     [SerializeField] private TowerData _towerData;
-    [SerializeField] private Bullet _bullet;
     [SerializeField] private TowerTrigger _towerTracer;
+    [SerializeField] private Bullet.BulletColor _bulletColor;
+    [SerializeField] private Bullet.BulletSize _bulletSize;
 
+    private BulletSpawner _bulletSpawner;
     private TowerSpawner _mySpawner;
     private float _timer;
     private float _towerCurrentHp;
@@ -18,8 +21,9 @@ public class Tower : MonoBehaviour
     private void Awake()
     {
         Init();
+        _bulletSpawner = FindObjectOfType<BulletSpawner>();
     }
-    
+
     private void Init()
     {
         if (_towerData == null)
@@ -39,21 +43,45 @@ public class Tower : MonoBehaviour
         {
             childCollider.radius = _towerData.attackRange;
         }
+
+        _bulletSpawner = FindObjectOfType<BulletSpawner>();
+        if (_bulletSpawner == null)
+        {
+            Debug.LogError("BulletSpawner못찾음.");
+        }
     }
     private void Update()
     {
-        Attack();
+        if (_towerTracer.GetCurrentEnemy() != null)
+        {
+            Attack();
+        }
+
     }
 
     private void Attack()
     {
+        Vector3 spawnPoint = transform.position + transform.forward * 0.3f;
+        Vector3 targetPoint = _towerTracer.GetCurrentEnemy().transform.position;
+        Vector3 dir = targetPoint - spawnPoint;
+        
         if (_towerTracer.GetCurrentEnemy() != null)
         {
             _timer += Time.deltaTime;
             if (_timer > 16 / _towerData.attackSpeed)
             {
                 _timer = 0f;
-                // _bullet.Spawn();
+                _bulletSpawner.Spawn(
+                    spawnPos: spawnPoint,
+                    dir: dir,
+                    speed: 50,
+                    dmg: _towerData.attackPower,
+                    pierce: 0,
+                    knockback: 0,
+                    range: _towerData.attackRange,
+                    color: _bulletColor,
+                    size: _bulletSize
+                );
             }
         }
     }

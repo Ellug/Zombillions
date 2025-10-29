@@ -6,7 +6,7 @@ using UnityEngine;
 public class TowerSpawner : MonoBehaviour
 {
     [SerializeField] private List<TowerData> _towerList;
-    
+
     private bool _isBuilt = false;
     public bool IsBuilt => _isBuilt;
 
