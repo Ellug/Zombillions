@@ -4,6 +4,7 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] private Camera _mainCam;
     [SerializeField] private Transform _target;
+    [SerializeField] private Transform _playArea;
 
     [Header("Distance")]
     [SerializeField] private float _distance = 20f;
@@ -21,6 +22,10 @@ public class CameraController : MonoBehaviour
     private float _camPitch = 50f;
     private Quaternion _fixedRot;
 
+    private Vector3 _minBounds;
+    private Vector3 _maxBounds;
+    private Renderer render;
+
     void Start()
     {
         if (_mainCam == null)
@@ -28,6 +33,17 @@ public class CameraController : MonoBehaviour
 
         if (_target != null)
             _fixedRot = Quaternion.Euler(_camPitch, 0, 0);
+
+        if (_playArea != null)
+        {
+            render = _playArea.GetComponent<Renderer>();
+            if (render != null)
+            {
+                Bounds b = render.bounds;
+                _minBounds = b.min;
+                _maxBounds = b.max;
+            }
+        }
     }
 
     void Update()
@@ -89,6 +105,8 @@ public class CameraController : MonoBehaviour
 
         transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 10f);
         // transform.position = targetPos;
+
+        ClampPosition();
     }
 
     // 카메라 이동
@@ -117,5 +135,34 @@ public class CameraController : MonoBehaviour
 
         if (dir != Vector3.zero)
             transform.position += dir.normalized * _moveSpeed * Time.deltaTime;
+
+        ClampPosition();
+    }
+
+    // 카메라 영역 제한 -> fix 필요
+    private void ClampPosition()
+    {
+        if (_playArea == null) return;
+
+        Vector3 pos = transform.position;
+
+        // Camera 시야 폭/높이 계산
+        float pitchRad = _camPitch * Mathf.Deg2Rad;
+        float forwardOffset = _distance * Mathf.Cos(pitchRad);
+        float halfFov = _mainCam.fieldOfView * 0.5f * Mathf.Deg2Rad;
+        float aspect = _mainCam.aspect;
+
+        float halfViewHeight = Mathf.Tan(halfFov) * forwardOffset;
+        float halfViewWidth = Mathf.Tan(halfViewHeight * aspect);
+
+        pos.x = Mathf.Clamp(pos.x, _minBounds.x + halfViewWidth, _maxBounds.x - halfViewWidth);
+        pos.z = Mathf.Clamp(pos.z, _minBounds.z + halfViewHeight, _maxBounds.z - halfViewHeight);
+
+        transform.position = pos;
+    }
+
+    public void SetTarget(Transform target)
+    {
+        _target = target;
     }
 }

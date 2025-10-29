@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class PlayerBase : MonoBehaviour
@@ -44,8 +42,6 @@ public abstract class PlayerBase : MonoBehaviour
     void Start()
     {
         if (_rb == null) _rb = GetComponent<Rigidbody>();
-        FindObjectOfType<PlayerUI>().SetPlayer(this);
-        FindObjectOfType<SkillUI>().SetPlayer(this);
     }
 
     void Update()
@@ -94,6 +90,7 @@ public abstract class PlayerBase : MonoBehaviour
     {
         if (_moveInput == Vector2.zero) return;
 
+        _targetPos = Vector3.zero;
         Vector3 moveDir = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
         transform.position += moveDir * _moveSpeed * Time.deltaTime;
         transform.rotation = Quaternion.LookRotation(moveDir);
