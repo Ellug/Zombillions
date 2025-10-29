@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 4326491662311246831}
   m_Layer: 0
   m_Name: TriggerTowerPrefab
-  m_TagString: TriggerTower
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -187,8 +187,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _towerData: {fileID: 11400000, guid: 48af017ed54caad4595c6b6485dd561c, type: 2}
-  _bullet: {fileID: -4748263633577311814, guid: 6028b7e1d05e53d4f8713c0cba1daa74, type: 3}
   _towerTracer: {fileID: 1586779748985980162}
+  _bulletColor: 0
+  _bulletSize: 0
 --- !u!65 &4326491662311246831
 BoxCollider:
   m_ObjectHideFlags: 0

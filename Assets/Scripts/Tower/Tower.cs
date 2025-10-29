@@ -34,8 +34,8 @@ public class Tower : MonoBehaviour
         _towerCurrentHp = _towerData.maxHp;
 
         //해당 오브젝트 태그 설정
-        string tagName = _towerData.towerTag.ToString();
-        gameObject.tag = tagName;
+        //string tagName = _towerData.towerTag.ToString();
+        //gameObject.tag = tagName;
 
         //해당 타워 자식(타워 타입)에 공격범위 설정
         SphereCollider childCollider = GetComponentInChildren<SphereCollider>();
@@ -56,7 +56,6 @@ public class Tower : MonoBehaviour
         {
             Attack();
         }
-
     }
 
     private void Attack()
