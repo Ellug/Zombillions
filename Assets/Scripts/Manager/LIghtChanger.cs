@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LIghtChanger : MonoBehaviour , ITimeObserver 
@@ -9,14 +7,23 @@ public class LIghtChanger : MonoBehaviour , ITimeObserver
 
     private GlobalTime _globalTime;
 
-    private void Awake()
+    private void Start()
     {
+        _globalTime = GameManager.Instance.Timer;
         _globalTime?.AddObserver(this);
+
     }
 
 
     public void OnNotify()
     {
+        if (_gameLight == null)
+        {
+            Debug.LogError("Light 오브젝트 참조하세요");
+            return;
+        }
+
+        
         if (GameManager.Instance.Timer.CurrentTimeZone == Day.Noon)
         {
             _gameLight.intensity = 1f;

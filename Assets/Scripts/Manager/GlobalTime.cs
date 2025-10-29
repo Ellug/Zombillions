@@ -20,7 +20,6 @@ public class GlobalTime : MonoBehaviour
 
     private void Notify()
     {
-        Debug.Log("옵저버 실행");
         foreach (ITimeObserver observer in _observer)
         {
             observer.OnNotify();
@@ -80,5 +79,4 @@ public class GlobalTime : MonoBehaviour
         }
     }
 }
-
 public enum Day { Noon, Night }

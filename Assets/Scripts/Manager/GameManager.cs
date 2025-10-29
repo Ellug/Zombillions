@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -9,6 +7,8 @@ public class GameManager : MonoBehaviour
     public GlobalTime Timer { get; private set; }
     public GlobalScore Score { get; private set; }
     public SceneChanger Scene { get; private set; }
+
+    public GameState State { get; private set; }
 
     public GameObject SelectedPlayerPrefab { get; private set; }
 
@@ -37,4 +37,19 @@ public class GameManager : MonoBehaviour
     {
         SelectedPlayerPrefab = prefab;
     }
+
+    public void GameStateChange()
+    {
+        if (State == GameState.Playing)
+        {
+
+        }
+        
+        if (State == GameState.GameOver)
+        {
+            GameOverUI gameOver = GetComponent<GameOverUI>();
+        }
+    }
+
+    public enum GameState { Playing , GameOver}
 }
