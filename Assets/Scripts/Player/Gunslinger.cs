@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Gunslinger : PlayerBase
 {    
-    [SerializeField] private float _bulletSpeed = 50f;
-    [SerializeField] private float _atkRange = 40f;
+    [SerializeField] private float _bulletSpeed = 160f;
+    [SerializeField] private float _atkRange = 60f;
     [SerializeField] private float _knockback = 0f;
     [SerializeField] private int _pierce = 1;
 
@@ -11,20 +11,14 @@ public class Gunslinger : PlayerBase
     [SerializeField] private Bullet.BulletSize _bulletSize = Bullet.BulletSize.Small;
     [SerializeField] private Bullet.BulletColor _bulletColor = Bullet.BulletColor.Red;
 
-    private BulletSpawner _bulletSpawner;
-
-    void Awake()
+    protected override void Awake()
     {
-        _bulletSpawner = FindObjectOfType<BulletSpawner>();
-        if (_bulletSpawner == null)
-        {
-            Debug.LogError("[Player: Gunslinger] BulletSpawner not found in scene.");
-        }
+        base.Awake();
 
-        _skills[0] = gameObject.AddComponent<GunQ>();
-        _skills[1] = gameObject.AddComponent<GunW>();
-        _skills[2] = gameObject.AddComponent<GunE>();
-        _skills[3] = gameObject.AddComponent<GunR>();
+        _skills[0] = new GunQ();
+        _skills[1] = new GunW();
+        _skills[2] = new GunE();
+        _skills[3] = new GunR();
 
         foreach (var skill in _skills)
             skill.Init(this);
