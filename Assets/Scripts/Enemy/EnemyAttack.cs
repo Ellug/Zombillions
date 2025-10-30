@@ -55,13 +55,6 @@ public class EnemyAttack : MonoBehaviour
 
         Debug.Log($"{_enemyBase.gameObject.name}이(가) {targetTag} ({target.name})에게 {damage} 데미지를 입혔습니다!");
 
-        /*HealthComponent targetHealth = target.GetComponent<HealthComponent>();
-        if (targetHealth != null)
-        {
-            targetHealth.TakeDamage(damage);
-        }
-        */
-
         // 플레이어 공격 - 작동 확인
         if (target.CompareTag("Player"))
         {
