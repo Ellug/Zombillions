@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1283266374227327769}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TowerHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 8606946840645585236}
   - component: {fileID: 1888786458900217735}
   - component: {fileID: 1504645400604306340}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,9 +151,9 @@ GameObject:
   - component: {fileID: 3913445259776883916}
   - component: {fileID: 8972218831057767429}
   - component: {fileID: 4326491662311246831}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: TriggerTowerPrefab
-  m_TagString: TriggerTower
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -187,8 +187,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _towerData: {fileID: 11400000, guid: 48af017ed54caad4595c6b6485dd561c, type: 2}
-  _bullet: {fileID: -4748263633577311814, guid: 6028b7e1d05e53d4f8713c0cba1daa74, type: 3}
   _towerTracer: {fileID: 1586779748985980162}
+  _bulletColor: 0
+  _bulletSize: 0
 --- !u!65 &4326491662311246831
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -223,7 +224,7 @@ GameObject:
   - component: {fileID: 3032113962263338819}
   - component: {fileID: 6503805664711018344}
   - component: {fileID: 1586779748985980162}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TriggerTower
   m_TagString: TriggerTower
   m_Icon: {fileID: 0}
@@ -343,7 +344,7 @@ GameObject:
   - component: {fileID: 4559159765420606554}
   - component: {fileID: 1821832741279006149}
   - component: {fileID: 6687967715108369447}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
