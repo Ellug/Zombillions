@@ -7,7 +7,7 @@ public class GoldSpawnTest : MonoBehaviour
     [SerializeField] private GoldSpawner _spawner;
 
     [Tooltip("시작 시 미리 생성")]
-    [SerializeField] private int _initalSpawnCount = 5;
+    [SerializeField][Range(0,5)] private int _initalSpawnCount = 0;
     [SerializeField] private KeyCode _spawnKey = KeyCode.G;
     [SerializeField] private bool _autoSpawn = true;
     [SerializeField, Min(0.1f)] private float _spawnTime = 3f;

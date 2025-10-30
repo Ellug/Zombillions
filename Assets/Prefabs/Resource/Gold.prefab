@@ -119,5 +119,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHP: 20
-  _rewardGold: 10
+  _minReward: 5
+  _maxReward: 15
   _hitCollider: {fileID: 6058192723326564848}
+  _enableTestKeys: 1
+  _testKey: 120
+  _testDamage: 5
