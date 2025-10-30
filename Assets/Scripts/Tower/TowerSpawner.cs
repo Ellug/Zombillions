@@ -42,6 +42,15 @@ public class TowerSpawner : MonoBehaviour
             }
         }
     }
+    public void DestroyTower(Tower tower)
+    {
+        if(tower != null)
+        {
+            Destroy(tower.gameObject);
+            tower = null;
+        }
+        ResetBuilt();
+    }
     public void ResetBuilt()
     {
         _isBuilt = false;

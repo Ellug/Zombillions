@@ -13,15 +13,17 @@ public class TowerManager : MonoBehaviour
     [SerializeField] private LayerMask _towerLayer;
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private GameObject _spawnTowerMenuPanel;
+    [SerializeField] private GameObject _towerMenuPanel;
     [SerializeField] private Button _attackTowerButton;
     [SerializeField] private Button _defenceTowerButton;
     [SerializeField] private Button _triggerTowerButton;
+    [SerializeField] private Button _deleteTowerButton;
     
 
     private TowerSpawner _selectTowerSpawner;
     private Tower _selectedTower;
 
-    private bool _isMenuOpen = false;
+    private bool _isTowerSpawnerSelected = false;
     private bool _isTowerSelected = false;
 
     private void Awake()
@@ -45,23 +47,26 @@ public class TowerManager : MonoBehaviour
     {
         int excludeMask = LayerMask.GetMask("TowerScaner");
         _towerLayer = ~excludeMask;
+
         _attackTowerButton.onClick.AddListener(Instance.BuildAttackTower);
         _defenceTowerButton.onClick.AddListener(Instance.BuildDefenceTower);
         _triggerTowerButton.onClick.AddListener(Instance.BuildTriggerTower);
+        _deleteTowerButton.onClick.AddListener(Instance.DeleteTower);
         _spawnTowerMenuPanel.SetActive(false);
+        _towerMenuPanel.SetActive(false);
     }
 
     private void Update()
     {
         HandleSelection();
 
-        if (_isMenuOpen == true)
+        if (_isTowerSpawnerSelected == true)
         {
-            BuildMenu();
+            SelectBuildMenu();
         }
         if(_isTowerSelected == true)
         {
-            SelectedTowerMenu();
+            SelectTowerMenu();
         }
     }
 
@@ -88,34 +93,47 @@ public class TowerManager : MonoBehaviour
                 //TowerSpawner 선택만
                 else if (_selectTowerSpawner != null)
                 {
-                    _isMenuOpen = true;
+                    _isTowerSpawnerSelected = true;
                 }
                 else
                 {
-                    _isMenuOpen = false;
+                    _isTowerSpawnerSelected = false;
                     _isTowerSelected = false;
                     _spawnTowerMenuPanel.SetActive(false);
+                    _towerMenuPanel.SetActive(false);
                 }
             }
         }
     }
  
     //선택한 타워 메뉴
-    private void SelectedTowerMenu()
+    private void SelectTowerMenu()
     {
         if (_selectedTower != true)
         {
             return;
         }
+        _towerMenuPanel.SetActive(true);
+
         if (Input.GetKeyDown(KeyCode.K))
         {
-            DestroyTower(_selectedTower);
-            _isTowerSelected = false;
+            DeleteTower();
         }
     }
 
+    private void DeleteTower()
+    {
+        //내가 현재 선택한건 타워임 = Instance는 타워값만 가지고있는 상태
+        //해당 타워가 가지고있는 스포너의 DestroyTower()호출해야함. 여기서 인자값으로 타워?주면 될듯?
+        //그리고 나서 다 오프시키기.
+        TowerSpawner spawner = _selectedTower.GetSpawner();
+        spawner.DestroyTower(_selectedTower);
+        _isTowerSelected = false;
+        _towerMenuPanel.SetActive(false);
+    }
+
     //스포너 메뉴
-    private void BuildMenu()
+    private void SelectBuildMenu()
     {
         if (_selectTowerSpawner != true)
         {
@@ -139,35 +157,23 @@ public class TowerManager : MonoBehaviour
             BuildTriggerTower();
         }
     }
-    
-    //타워 제거
-    private void DestroyTower(Tower tower)
-    {
-        TowerSpawner spawner = tower.GetSpawner();
-        if (spawner != null)
-        {
-            spawner.ResetBuilt();
-            Destroy(tower.gameObject);
-        }
-    }
-
 
     private void BuildAttackTower()
     {
         _selectTowerSpawner.BuildTower(TowerData.TowerTag.AttackTower);
-        _isMenuOpen = false;
+        _isTowerSpawnerSelected = false;
         _spawnTowerMenuPanel.SetActive(false);
     }
     private void BuildDefenceTower()
     {
         _selectTowerSpawner.BuildTower(TowerData.TowerTag.DefenceTower);
-        _isMenuOpen = false;
+        _isTowerSpawnerSelected = false;
         _spawnTowerMenuPanel.SetActive(false);
     }
     private void BuildTriggerTower()
     {
         _selectTowerSpawner.BuildTower(TowerData.TowerTag.TriggerTower);
-        _isMenuOpen = false;
+        _isTowerSpawnerSelected = false;
         _spawnTowerMenuPanel.SetActive(false);
     }
 
