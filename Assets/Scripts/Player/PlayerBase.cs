@@ -79,6 +79,12 @@ public abstract class PlayerBase : MonoBehaviour
     private void MoveToTarget()
     {
         if (_targetPos == Vector3.zero) return;
+        // 키 입력시 마우스 이동 취소 (합산 방지)
+        if (_moveInput != Vector2.zero)
+        {
+            _targetPos = Vector3.zero;
+            return;
+        }
 
         Vector3 dir = _targetPos - transform.position;
         dir.y = 0;
@@ -86,9 +92,6 @@ public abstract class PlayerBase : MonoBehaviour
 
         if (distance > 0.05f)
         {
-            // Quaternion targetRot = Quaternion.LookRotation(dir);
-            // transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, _rotSpeed * Time.deltaTime);
-
             Vector3 move = dir.normalized * _moveSpeed * Time.deltaTime;
             if (move.sqrMagnitude > distance) move = dir.normalized * distance;
 
@@ -109,7 +112,6 @@ public abstract class PlayerBase : MonoBehaviour
         _targetPos = Vector3.zero;
         Vector3 moveDir = new Vector3(_moveInput.x, 0, _moveInput.y).normalized;
         transform.position += moveDir * _moveSpeed * Time.deltaTime;
-        // transform.rotation = Quaternion.LookRotation(moveDir);
     }
 
     // 대미지 처리
@@ -162,7 +164,7 @@ public abstract class PlayerBase : MonoBehaviour
             _moveInput = Vector2.zero;
             _targetPos = Vector3.zero;
 
-            // 부활 위치로 이동
+            // 부활 위치로 이동 및 Hp 초기화
             transform.position = _spawnPoint.position;
             _curHp = _maxHp;
 

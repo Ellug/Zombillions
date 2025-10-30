@@ -14,11 +14,7 @@ public class PlayerManager : MonoBehaviour
         //프리팹 로드
         var prefab = GameManager.Instance.SelectedPlayerPrefab;
 
-        if (prefab == null)
-        {
-            Debug.LogError("Where is Your Prefab??");
-            return;
-        }
+        if (prefab == null) return;
 
         // 생성
         _player = Instantiate(prefab, _spawnPoint.position, Quaternion.identity).GetComponent<PlayerBase>();

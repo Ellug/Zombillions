@@ -9,14 +9,14 @@ public class CameraController : MonoBehaviour
     [Header("Distance")]
     [SerializeField] private float _distance = 20f;
     [SerializeField] private float _minDis = 10f;
-    [SerializeField] private float _maxDis = 40f;
+    [SerializeField] private float _maxDis = 60f;
 
     [Header("Camera Move")]
-    [SerializeField] private float _moveSpeed = 40f;
+    [SerializeField] private float _moveSpeed = 50f;
     [SerializeField] private float _edgeSize = 20f;
 
     [Header("Zoom")]
-    [SerializeField] private float _zoomSpeed = 20f;
+    [SerializeField] private float _zoomSpeed = 30f;
 
     private bool _isCameraLock = true;
     private float _camPitch = 50f;
@@ -82,15 +82,13 @@ public class CameraController : MonoBehaviour
             // 자유 시점일 때는 실제 카메라 이동
             if (!_isCameraLock)
             {
-                Vector3 camToTarget = (_target != null)
-                    ? (transform.position - _target.position)
-                    : transform.forward * _distance;
+                // y축만 계산                
+                float curYDist = Mathf.Abs(transform.position.y - _target.position.y);
+                float nextYDist = Mathf.Clamp(curYDist - scroll * _zoomSpeed, _minDis, _maxDis);
+                float moveDelta = nextYDist - curYDist;
 
-                float curDistance = camToTarget.magnitude;
-                float nextDistance = Mathf.Clamp(curDistance - scroll * _zoomSpeed, _minDis, _maxDis);
-
-                float moveDelta = nextDistance - curDistance;
-                transform.position += camToTarget.normalized * moveDelta;
+                Vector3 moveDir = Quaternion.Euler(_camPitch, 0, 0) * Vector3.back;
+                transform.position += moveDir.normalized * moveDelta;
             }
         }
     }
@@ -105,8 +103,6 @@ public class CameraController : MonoBehaviour
 
         transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 10f);
         // transform.position = targetPos;
-
-        ClampPosition();
     }
 
     // 카메라 이동
@@ -134,7 +130,14 @@ public class CameraController : MonoBehaviour
             dir += camForward;
 
         if (dir != Vector3.zero)
-            transform.position += dir.normalized * _moveSpeed * Time.deltaTime;
+        {
+            // 줌 비례 속도 보정 (멀리서 더 빨리 이동)
+            // 비율 산출
+            float zoomFactor = Mathf.InverseLerp(_minDis, _maxDis, _distance);
+            // 비율에 따라 계산
+            float finalSpeed = _moveSpeed * Mathf.Lerp(0.6f, 2.0f, zoomFactor);
+            transform.position += dir.normalized * finalSpeed * Time.deltaTime;
+        }
 
         ClampPosition();
     }
