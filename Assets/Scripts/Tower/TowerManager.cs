@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 
 //타워 배치(생성) / 선택 / 제거 관리
@@ -12,6 +12,11 @@ public class TowerManager : MonoBehaviour
 
     [SerializeField] private LayerMask _towerLayer;
     [SerializeField] private Camera _mainCamera;
+    [SerializeField] private GameObject _spawnTowerMenuPanel;
+    [SerializeField] private Button _attackTowerButton;
+    [SerializeField] private Button _defenceTowerButton;
+    [SerializeField] private Button _triggerTowerButton;
+    
 
     private TowerSpawner _selectTowerSpawner;
     private Tower _selectedTower;
@@ -40,6 +45,10 @@ public class TowerManager : MonoBehaviour
     {
         int excludeMask = LayerMask.GetMask("TowerScaner");
         _towerLayer = ~excludeMask;
+        _attackTowerButton.onClick.AddListener(Instance.BuildAttackTower);
+        _defenceTowerButton.onClick.AddListener(Instance.BuildDefenceTower);
+        _triggerTowerButton.onClick.AddListener(Instance.BuildTriggerTower);
+        _spawnTowerMenuPanel.SetActive(false);
     }
 
     private void Update()
@@ -62,6 +71,9 @@ public class TowerManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
+
             Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, 50f, _towerLayer))
             {
@@ -73,16 +85,21 @@ public class TowerManager : MonoBehaviour
                 {
                     _isTowerSelected = true;
                 }
-
                 //TowerSpawner 선택만
                 else if (_selectTowerSpawner != null)
                 {
                     _isMenuOpen = true;
                 }
+                else
+                {
+                    _isMenuOpen = false;
+                    _isTowerSelected = false;
+                    _spawnTowerMenuPanel.SetActive(false);
+                }
             }
         }
     }
-
+ 
     //선택한 타워 메뉴
     private void SelectedTowerMenu()
     {
@@ -93,6 +110,7 @@ public class TowerManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K))
         {
             DestroyTower(_selectedTower);
+            _isTowerSelected = false;
         }
     }
 
@@ -104,25 +122,21 @@ public class TowerManager : MonoBehaviour
             return;
         }
 
+        _spawnTowerMenuPanel.SetActive(true);
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Debug.Log("Q누름");
-            _selectTowerSpawner.BuildTower(TowerData.TowerTag.AttackTower);
-            _isMenuOpen = false;
+            BuildAttackTower();
         }
 
         if (Input.GetKeyDown(KeyCode.W))
         {
-            Debug.Log("W누름");
-            _selectTowerSpawner.BuildTower(TowerData.TowerTag.DefenceTower);
-            _isMenuOpen = false;
+            BuildDefenceTower();
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("E누름");
-            _selectTowerSpawner.BuildTower(TowerData.TowerTag.TriggerTower);
-            _isMenuOpen = false;
+            BuildTriggerTower();
         }
     }
     
@@ -137,4 +151,25 @@ public class TowerManager : MonoBehaviour
         }
     }
 
+
+    private void BuildAttackTower()
+    {
+        _selectTowerSpawner.BuildTower(TowerData.TowerTag.AttackTower);
+        _isMenuOpen = false;
+        _spawnTowerMenuPanel.SetActive(false);
+    }
+    private void BuildDefenceTower()
+    {
+        _selectTowerSpawner.BuildTower(TowerData.TowerTag.DefenceTower);
+        _isMenuOpen = false;
+        _spawnTowerMenuPanel.SetActive(false);
+    }
+    private void BuildTriggerTower()
+    {
+        _selectTowerSpawner.BuildTower(TowerData.TowerTag.TriggerTower);
+        _isMenuOpen = false;
+        _spawnTowerMenuPanel.SetActive(false);
+    }
+
+    
 }
