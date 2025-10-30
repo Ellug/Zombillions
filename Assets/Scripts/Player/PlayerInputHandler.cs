@@ -16,9 +16,12 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void Update()
     {
-        HandleMouseRotate();
+        // 레이 각 메서드에서 직접 소지 말고 어차피 여러곳에서 사용할 거면 업데이트에서 쏘고 ray만 전달
+        Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
+
+        HandleMouseRotate(ray);
+        HandleMouseMove(ray);
         HandleMovementInput();
-        HandleMouseMove();
         HandleMouseLeftInput();
         HandleAttackInput();
         HandleSkillInput();
@@ -33,35 +36,24 @@ public class PlayerInputHandler : MonoBehaviour
     }
 
     // 마우스 입력
-    private void HandleMouseMove()
+    private void HandleMouseMove(Ray ray)
     {
         if (Input.GetMouseButton(1))
-        {
-            Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit, 100f, _groundMask))
+        {            
+            if (Physics.Raycast(ray, out RaycastHit hit, 200f, _groundMask))
                 _player.SetTargetPosition(hit.point);
         }
     }
 
-    private void HandleMouseRotate()
+    private void HandleMouseRotate(Ray ray)
     {
-        // 커서 위치에서 레이캐스트
-        Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit, 100f, _groundMask))
+        if (Physics.Raycast(ray, out RaycastHit hit, 200f, _groundMask))
         {
             Vector3 lookPos = hit.point;
             lookPos.y = transform.position.y;
 
             Vector3 dir = (lookPos - transform.position).normalized;
-            if (dir.sqrMagnitude > 0.01f)
-            {
-                Quaternion targetRot = Quaternion.LookRotation(dir);
-                transform.rotation = Quaternion.Slerp(
-                    transform.rotation,
-                    targetRot,
-                    Time.deltaTime * 25f // 회전 속도 조정
-                );
-            }
+            transform.rotation = Quaternion.LookRotation(dir);
         }
     }
 
