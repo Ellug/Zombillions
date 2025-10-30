@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public GlobalScore Score { get; private set; }
     public SceneChanger Scene { get; private set; }
 
+    public LIghtChanger Light {  get; private set; }
+
     public GameState State { get; private set; }
 
     public GameObject SelectedPlayerPrefab { get; private set; }
@@ -25,6 +27,7 @@ public class GameManager : MonoBehaviour
             Timer = GetComponent<GlobalTime>();
             Score = GetComponent<GlobalScore>();
             Scene = GetComponent<SceneChanger>();
+            Light = GetComponent<LIghtChanger>();
         }
         else
         {
@@ -32,24 +35,45 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    
+
     // 선택 씬에서 캐릭터 선택 정보 저장해서 갖고 넘어가기 위한 용도
     public void SetSelectedCharacter(GameObject prefab)
     {
         SelectedPlayerPrefab = prefab;
     }
 
-    public void GameStateChange()
-    {
-        if (State == GameState.Playing)
-        {
 
-        }
-        
-        if (State == GameState.GameOver)
+    //게임스테이지에서의 상태 변경 메서드
+    public void GetGameStateChange(GameState state)
+    {
+        State = state;
+
+        switch (state)
         {
-            GameOverUI gameOver = GetComponent<GameOverUI>();
+            case GameState.Playing:
+                break;
+
+            case GameState.GameOver:
+                GameOverUI gameOver = GetComponent<GameOverUI>();
+                gameOver.GetGameOver();
+                break;
         }
     }
 
     public enum GameState { Playing , GameOver}
+
+
+
+
+    /// <summary>
+    /// 이거 반드시 지워야 합니다!(테스트용 키)
+    /// </summary>
+    //private void Update()
+    //{
+    //    if (Input.GetKeyUp(KeyCode.Space))
+    //    {
+    //        GetGameStateChange(GameState.GameOver);
+    //    }
+    //}
 }

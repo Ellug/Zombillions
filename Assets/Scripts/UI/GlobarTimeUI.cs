@@ -8,11 +8,14 @@ public class GlobarTimeUI : MonoBehaviour
 
     private GlobalTime _globalTime;
 
-    void Awake()
+    void Start()
     {
-        _globalTime = GetComponent<GlobalTime>();
+        _globalTime = GameManager.Instance.GetComponent<GlobalTime>();
         if (_gameTime == null)
+        {
             Debug.LogError("텍스트UI를 GlobarTimeUI에 넣어주세요");
+            return;
+        }
     }
 
     void Update()

@@ -6,11 +6,12 @@ public class GlobalTime : MonoBehaviour
 {
     [SerializeField] private int _noonTime;
     [SerializeField] private int _nightTime;
-    [SerializeField] private float _timerSpeed = 1;
+    [SerializeField] private float _timeCountSpeed = 1;     //시간올라가는 속도제어
 
     public Day CurrentTimeZone { get; private set; }
+    public int LifeTime { get; private set; }
     public int GameTime { get; private set; }
-    public int GameWave { get; private set; }
+    public int GameWaveCount { get; private set; }
 
     //옵저버 패턴
     private List<ITimeObserver> _observer = new();
@@ -18,11 +19,11 @@ public class GlobalTime : MonoBehaviour
     public void AddObserver(ITimeObserver observer) => _observer.Add(observer);
     public void RemoveObserver(ITimeObserver observer) => _observer.Remove(observer);
 
-    private void Notify()
+    private void HandleNotifyTimeZoneChange()
     {
         foreach (ITimeObserver observer in _observer)
         {
-            observer.OnNotify();
+            observer.OnTimeZoneChange();
         }
     }
 
@@ -30,9 +31,10 @@ public class GlobalTime : MonoBehaviour
 
     void Awake()
     {
-        CurrentTimeZone = 0;
-        GameTime = 0;
-        GameWave = 1;
+        CurrentTimeZone = Day.Noon;
+        GameTime = 1;
+        LifeTime = 1;
+        GameWaveCount = 1;
     }
 
     void Start()
@@ -40,40 +42,42 @@ public class GlobalTime : MonoBehaviour
         StartCoroutine(TimeCounting());
     }
 
-
+    //시간 변동 코루틴
     private IEnumerator TimeCounting()
     {
         while (true)
         {
             GameTime++;
+            LifeTime++;
             
-            TimeZoneChange();
+            GetTimeZoneChange();
 
-            yield return new WaitForSeconds(_timerSpeed);
+            yield return new WaitForSeconds(_timeCountSpeed);
         }
     }
 
 
     //GameTime이 기준 시간을 넘어가면 시간대를 변경하는 메서드
-    public void TimeZoneChange()
+    public void GetTimeZoneChange()
     {
         switch (CurrentTimeZone)
         {
             case Day.Noon:
                 if (GameTime > _noonTime)
                 {
+                    HandleNotifyTimeZoneChange();
                     CurrentTimeZone = Day.Night;
-                    GameTime = 0;                               //시간대 변경 후에는 GameTime을 초기화
-                    Notify();
+                    GameTime = 0;                             //시간대 변경 후에는 GameTime을 초기화
                 }
                 break;
 
             case Day.Night:
                 if (GameTime > _nightTime)
                 {
+                    HandleNotifyTimeZoneChange();
                     CurrentTimeZone = Day.Noon;
                     GameTime = 0;                               //시간대 변경 후에는 GameTime을 초기화
-                    Notify();
+                    GameWaveCount++;
                 }
                 break;
         }
