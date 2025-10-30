@@ -1,30 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GlobalScore : MonoBehaviour
 {
     public int GameScore { get; private set; }
 
-    //옵저버 패턴
-    private List<IObserver> _observer = new();
-
-    public void AddObserver(IObserver observer) => _observer.Add (observer);
-    public void RemoveObserver(IObserver observer) => _observer.Remove (observer);
-
-    void Start()
-    {
-        Notify();
-    }
-
-    private void Notify()
-    {
-        foreach (IObserver score in _observer)
-        {
-            score.OnNotify();
-        }
-    }
-
+    
 
     public int SumScore()
     {
