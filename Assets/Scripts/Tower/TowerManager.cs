@@ -18,7 +18,7 @@ public class TowerManager : MonoBehaviour
     [SerializeField] private Button _defenceTowerButton;
     [SerializeField] private Button _triggerTowerButton;
     [SerializeField] private Button _deleteTowerButton;
-    
+
 
     private TowerSpawner _selectTowerSpawner;
     private Tower _selectedTower;
@@ -48,12 +48,9 @@ public class TowerManager : MonoBehaviour
         int excludeMask = LayerMask.GetMask("TowerScaner");
         _towerLayer = ~excludeMask;
 
-        _attackTowerButton.onClick.AddListener(Instance.BuildAttackTower);
-        _defenceTowerButton.onClick.AddListener(Instance.BuildDefenceTower);
-        _triggerTowerButton.onClick.AddListener(Instance.BuildTriggerTower);
-        _deleteTowerButton.onClick.AddListener(Instance.DeleteTower);
-        _spawnTowerMenuPanel.SetActive(false);
-        _towerMenuPanel.SetActive(false);
+        InitButton();
+        InitPanel();
+
     }
 
     private void Update()
@@ -64,13 +61,28 @@ public class TowerManager : MonoBehaviour
         {
             SelectBuildMenu();
         }
-        if(_isTowerSelected == true)
+        if (_isTowerSelected == true)
         {
             SelectTowerMenu();
         }
     }
+    #region 버튼/패널 초기화
+    private void InitButton()
+    {
+        _attackTowerButton.onClick.AddListener(Instance.BuildAttackTower);
+        _defenceTowerButton.onClick.AddListener(Instance.BuildDefenceTower);
+        _triggerTowerButton.onClick.AddListener(Instance.BuildTriggerTower);
+        _deleteTowerButton.onClick.AddListener(Instance.DeleteTower);
+    }
 
+    private void InitPanel()
+    {
+        _spawnTowerMenuPanel.SetActive(false);
+        _towerMenuPanel.SetActive(false);
+    }
+    #endregion
 
+    #region 핸들러
     //선택 핸들러
     private void HandleSelection()
     {
@@ -80,8 +92,10 @@ public class TowerManager : MonoBehaviour
                 return;
 
             Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit, 50f, _towerLayer))
+            if (Physics.Raycast(ray, out RaycastHit hit, 250f, _towerLayer))
             {
+                CloseMenu();
+
                 _selectedTower = hit.collider.GetComponent<Tower>();
                 _selectTowerSpawner = hit.collider.GetComponent<TowerSpawner>();
 
@@ -95,17 +109,12 @@ public class TowerManager : MonoBehaviour
                 {
                     _isTowerSpawnerSelected = true;
                 }
-                else
-                {
-                    _isTowerSpawnerSelected = false;
-                    _isTowerSelected = false;
-                    _spawnTowerMenuPanel.SetActive(false);
-                    _towerMenuPanel.SetActive(false);
-                }
             }
         }
     }
- 
+    #endregion
+
+    #region 메뉴 호출
     //선택한 타워 메뉴
     private void SelectTowerMenu()
     {
@@ -119,17 +128,6 @@ public class TowerManager : MonoBehaviour
         {
             DeleteTower();
         }
-    }
-
-    private void DeleteTower()
-    {
-        //내가 현재 선택한건 타워임 = Instance는 타워값만 가지고있는 상태
-        //해당 타워가 가지고있는 스포너의 DestroyTower()호출해야함. 여기서 인자값으로 타워?주면 될듯?
-        //그리고 나서 다 오프시키기.
-        TowerSpawner spawner = _selectedTower.GetSpawner();
-        spawner.DestroyTower(_selectedTower);
-        _isTowerSelected = false;
-        _towerMenuPanel.SetActive(false);
     }
 
     //스포너 메뉴
@@ -157,7 +155,9 @@ public class TowerManager : MonoBehaviour
             BuildTriggerTower();
         }
     }
+    #endregion
 
+    #region 스포너 각 메뉴 호출
     private void BuildAttackTower()
     {
         _selectTowerSpawner.BuildTower(TowerData.TowerTag.AttackTower);
@@ -176,6 +176,28 @@ public class TowerManager : MonoBehaviour
         _isTowerSpawnerSelected = false;
         _spawnTowerMenuPanel.SetActive(false);
     }
+    #endregion
 
-    
+    #region 타워 각 메뉴 호출
+    private void DeleteTower()
+    {
+        //내가 현재 선택한건 타워임 = Instance는 타워값만 가지고있는 상태
+        //해당 타워가 가지고있는 스포너의 DestroyTower()호출해야함. 여기서 인자값으로 타워?주면 될듯?
+        //그리고 나서 다 오프시키기.
+        TowerSpawner spawner = _selectedTower.GetSpawner();
+        spawner.DestroyTower(_selectedTower);
+        _isTowerSelected = false;
+        _towerMenuPanel.SetActive(false);
+    }
+    #endregion
+
+    //모든 메뉴 닫기
+    private void CloseMenu()
+    {
+        _isTowerSpawnerSelected = false;
+        _isTowerSelected = false;
+        _spawnTowerMenuPanel.SetActive(false);
+        _towerMenuPanel.SetActive(false);
+    }
+
 }
