@@ -35,13 +35,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            GetGameStateChange(GameState.GameOver);
-        }
-    }
+    
 
     // 선택 씬에서 캐릭터 선택 정보 저장해서 갖고 넘어가기 위한 용도
     public void SetSelectedCharacter(GameObject prefab)
@@ -68,4 +62,18 @@ public class GameManager : MonoBehaviour
     }
 
     public enum GameState { Playing , GameOver}
+
+
+
+
+    /// <summary>
+    /// 이거 반드시 지워야 합니다!(테스트용 키)
+    /// </summary>
+    //private void Update()
+    //{
+    //    if (Input.GetKeyUp(KeyCode.Space))
+    //    {
+    //        GetGameStateChange(GameState.GameOver);
+    //    }
+    //}
 }

@@ -9,8 +9,9 @@ public class GlobalTime : MonoBehaviour
     [SerializeField] private float _timeCountSpeed = 1;     //시간올라가는 속도제어
 
     public Day CurrentTimeZone { get; private set; }
+    public int LifeTime { get; private set; }
     public int GameTime { get; private set; }
-    public int GameWave { get; private set; }
+    public int GameWaveCount { get; private set; }
 
     //옵저버 패턴
     private List<ITimeObserver> _observer = new();
@@ -30,9 +31,10 @@ public class GlobalTime : MonoBehaviour
 
     void Awake()
     {
-        CurrentTimeZone = 0;
-        GameTime = 0;
-        GameWave = 1;
+        CurrentTimeZone = Day.Noon;
+        GameTime = 1;
+        LifeTime = 1;
+        GameWaveCount = 1;
     }
 
     void Start()
@@ -46,6 +48,7 @@ public class GlobalTime : MonoBehaviour
         while (true)
         {
             GameTime++;
+            LifeTime++;
             
             GetTimeZoneChange();
 
@@ -62,18 +65,19 @@ public class GlobalTime : MonoBehaviour
             case Day.Noon:
                 if (GameTime > _noonTime)
                 {
-                    CurrentTimeZone = Day.Night;
-                    GameTime = 0;                               //시간대 변경 후에는 GameTime을 초기화
                     HandleNotifyTimeZoneChange();
+                    CurrentTimeZone = Day.Night;
+                    GameTime = 0;                             //시간대 변경 후에는 GameTime을 초기화
                 }
                 break;
 
             case Day.Night:
                 if (GameTime > _nightTime)
                 {
+                    HandleNotifyTimeZoneChange();
                     CurrentTimeZone = Day.Noon;
                     GameTime = 0;                               //시간대 변경 후에는 GameTime을 초기화
-                    HandleNotifyTimeZoneChange();
+                    GameWaveCount++;
                 }
                 break;
         }
