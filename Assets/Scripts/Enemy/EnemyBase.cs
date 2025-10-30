@@ -28,11 +28,14 @@ public class EnemyBase : MonoBehaviour
         {
             if (_targetTransform != null)
             {
+                Vector3 positionY0 = _targetTransform.position;
+                positionY0.y = transform.position.y;
+                _targetTransform.position = positionY0;
                 transform.LookAt(_targetTransform.position);
                 transform.position = Vector3.MoveTowards(transform.position, _targetTransform.position, _EnemyMoveSpeed * Time.deltaTime);
             }
         }
-    }
+    }  
     protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Tower"))
