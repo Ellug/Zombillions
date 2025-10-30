@@ -34,6 +34,6 @@ public class CharacterSelectUI : MonoBehaviour
     private void SelectCharacter(CharacterCard character)
     {
         GameManager.Instance.SetSelectedCharacter(character.playerPrefab);
-        GameManager.Instance.Scene.Load(1);
+        GameManager.Instance.Scene.Load(2);
     }
 }

@@ -5,7 +5,6 @@ public class Bullet : MonoBehaviour
     public enum BulletColor { Red, Yellow, Metal }
     public enum BulletSize { Small, Medium, Large }
 
-    // 직렬화 X, 스포너에 의해서만 결정되도록 구성
     private Vector3 _dir;
     private float _speed;
     private float _dmg;
@@ -17,7 +16,7 @@ public class Bullet : MonoBehaviour
     private BulletSize _size;
     private BulletSpawner _spawner;
 
-    // 파라미터 받아서 총알에 속성 부여 (방향, 속도, 대미지 등등 받아서 사용. 자체 결정X)
+    // 파라미터 받아서 총알에 속성 부여 (방향, 속도, 대미지 등등 받아서 사용)
     public void Init(Vector3 dir, float speed, float dmg, int pierce, float knockback, float range, BulletColor color, BulletSize size, BulletSpawner spawner)
     {
         _dir = dir.normalized;
@@ -31,7 +30,6 @@ public class Bullet : MonoBehaviour
         _spawner = spawner;
         _startPos = transform.position;
 
-        // 모양 변경 함수 호출
         SetupRender();
     }
 
@@ -58,13 +56,11 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    // 거리 계산 비활성화가 중복처리 돼있어 간결하게 통합.
+    // 총알 이동
     public void Move()
     {
-        // 방향을 외부에서 전달받았는데 로컬 기준 방향을 사용할 이유가 없어 보여 World로 수정
         transform.Translate(_dir * _speed * Time.deltaTime, Space.World);
 
-        // 시작점과 현재 지점 거리가 >= _maxDistance 보다 크면 비활성화로 Magnitude 계산보다 간결히 처리 가능
         if (Vector3.Distance(_startPos, transform.position) >= _maxDistance)
             _spawner.Despawn(this);
     }
