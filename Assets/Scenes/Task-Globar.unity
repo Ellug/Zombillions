@@ -185,7 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _noonTime: 30
   _nightTime: 30
-  _timerSpeed: 0.1
+  _timeCountSpeed: 1
 --- !u!114 &167371086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,7 +234,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 167371081}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6af3357f02327b4bbab4a49d78696ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 706e5320a16eca642bbe57f481ac52ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 7906146074419213301, guid: b592273f79e735045a3b195b350ba310, type: 3}

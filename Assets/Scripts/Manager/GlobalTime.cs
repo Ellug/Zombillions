@@ -6,7 +6,7 @@ public class GlobalTime : MonoBehaviour
 {
     [SerializeField] private int _noonTime;
     [SerializeField] private int _nightTime;
-    [SerializeField] private float _timerSpeed = 1;
+    [SerializeField] private float _timeCountSpeed = 1;     //시간올라가는 속도제어
 
     public Day CurrentTimeZone { get; private set; }
     public int GameTime { get; private set; }
@@ -18,11 +18,11 @@ public class GlobalTime : MonoBehaviour
     public void AddObserver(ITimeObserver observer) => _observer.Add(observer);
     public void RemoveObserver(ITimeObserver observer) => _observer.Remove(observer);
 
-    private void Notify()
+    private void HandleNotifyTimeZoneChange()
     {
         foreach (ITimeObserver observer in _observer)
         {
-            observer.OnNotify();
+            observer.OnTimeZoneChange();
         }
     }
 
@@ -40,22 +40,22 @@ public class GlobalTime : MonoBehaviour
         StartCoroutine(TimeCounting());
     }
 
-
+    //시간 변동 코루틴
     private IEnumerator TimeCounting()
     {
         while (true)
         {
             GameTime++;
             
-            TimeZoneChange();
+            GetTimeZoneChange();
 
-            yield return new WaitForSeconds(_timerSpeed);
+            yield return new WaitForSeconds(_timeCountSpeed);
         }
     }
 
 
     //GameTime이 기준 시간을 넘어가면 시간대를 변경하는 메서드
-    public void TimeZoneChange()
+    public void GetTimeZoneChange()
     {
         switch (CurrentTimeZone)
         {
@@ -64,7 +64,7 @@ public class GlobalTime : MonoBehaviour
                 {
                     CurrentTimeZone = Day.Night;
                     GameTime = 0;                               //시간대 변경 후에는 GameTime을 초기화
-                    Notify();
+                    HandleNotifyTimeZoneChange();
                 }
                 break;
 
@@ -73,7 +73,7 @@ public class GlobalTime : MonoBehaviour
                 {
                     CurrentTimeZone = Day.Noon;
                     GameTime = 0;                               //시간대 변경 후에는 GameTime을 초기화
-                    Notify();
+                    HandleNotifyTimeZoneChange();
                 }
                 break;
         }

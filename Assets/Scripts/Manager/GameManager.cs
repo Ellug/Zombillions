@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public GlobalScore Score { get; private set; }
     public SceneChanger Scene { get; private set; }
 
+    public LIghtChanger Light {  get; private set; }
+
     public GameState State { get; private set; }
 
     public GameObject SelectedPlayerPrefab { get; private set; }
@@ -25,10 +27,19 @@ public class GameManager : MonoBehaviour
             Timer = GetComponent<GlobalTime>();
             Score = GetComponent<GlobalScore>();
             Scene = GetComponent<SceneChanger>();
+            Light = GetComponent<LIghtChanger>();
         }
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            GetGameStateChange(GameState.GameOver);
         }
     }
 
@@ -38,16 +49,21 @@ public class GameManager : MonoBehaviour
         SelectedPlayerPrefab = prefab;
     }
 
-    public void GameStateChange()
-    {
-        if (State == GameState.Playing)
-        {
 
-        }
-        
-        if (State == GameState.GameOver)
+    //게임스테이지에서의 상태 변경 메서드
+    public void GetGameStateChange(GameState state)
+    {
+        State = state;
+
+        switch (state)
         {
-            GameOverUI gameOver = GetComponent<GameOverUI>();
+            case GameState.Playing:
+                break;
+
+            case GameState.GameOver:
+                GameOverUI gameOver = GetComponent<GameOverUI>();
+                gameOver.GetGameOver();
+                break;
         }
     }
 

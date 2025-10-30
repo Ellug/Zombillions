@@ -14,8 +14,8 @@ public class LIghtChanger : MonoBehaviour , ITimeObserver
 
     }
 
-
-    public void OnNotify()
+    //GlobarTime의 낮/밤 변화에 밝기를 조절하는 옵저버 패턴
+    public void OnTimeZoneChange()
     {
         if (_gameLight == null)
         {
@@ -23,17 +23,23 @@ public class LIghtChanger : MonoBehaviour , ITimeObserver
             return;
         }
 
-        
-        if (GameManager.Instance.Timer.CurrentTimeZone == Day.Noon)
+        switch (GameManager.Instance.Timer.CurrentTimeZone)
         {
-            _gameLight.intensity = 1f;
-            Debug.Log("낮으로 밝기 전환");
-        }
-        if (GameManager.Instance.Timer.CurrentTimeZone == Day.Night)
-        {
-            _gameLight.intensity = 0.5f;
-            Debug.Log("밤으로 밝기 전환");
-        }
+            case Day.Noon:
+                GetLightChange(1f);
+                Debug.Log("낮으로 밝기 전환");
+                break;
 
+            case Day.Night:
+                GetLightChange(_gameDark);
+                Debug.Log("밤으로 밝기 전환");
+                break;
+        }
+    }
+
+    //전체 밝기 조절 메서드
+    public void GetLightChange(float intensity)
+    {
+        _gameLight.intensity = intensity;
     }
 }

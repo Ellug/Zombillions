@@ -6,7 +6,7 @@ public class GlobalScore : MonoBehaviour
 
     
 
-    public int SumScore()
+    public int SetSumScore()
     {
         int finalTime = GameManager.Instance.Timer.GameTime;
         int finalWave = GameManager.Instance.Timer.GameWave;
