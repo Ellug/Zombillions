@@ -68,11 +68,14 @@ public class EnemySpawner : MonoBehaviour
     }
     IEnumerator SpawnSpecificEnemy(WaveEnemyInfo enemyInfo)
     {
+        Vector3 SpawnPos = spawnPoint.position;
+        SpawnPos.y = 0;
+        
         for (int i = 0; i < enemyInfo.count; i++)
         {
             ObjectManager.Instance.SpawnFromPool(
                 enemyInfo.enemyPoolTag,
-                spawnPoint.position + RandPos(),
+                SpawnPos + RandPos(),
                 transform.rotation
             );
             yield return new WaitForSeconds(enemyInfo.spawnInterval);

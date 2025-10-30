@@ -35,7 +35,7 @@ public class EnemyBase : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, _targetTransform.position, _EnemyMoveSpeed * Time.deltaTime);
             }
         }
-    }
+    }  
     protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Tower"))

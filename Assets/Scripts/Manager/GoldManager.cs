@@ -79,7 +79,7 @@ public class GoldManager : MonoBehaviour
 
         if(_goldText != null)
         {
-            _goldText.text = $"Gold : {CurrentGold:n0}";
+            _goldText.text = $"{CurrentGold:n0}";
         }
 
         //if(_legacyText != null)
