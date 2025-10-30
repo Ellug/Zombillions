@@ -45,7 +45,7 @@ public class GoldSpawner : MonoBehaviour
 
     private Gold CreateNew()
     {
-        Gold instance = Instantiate(_goldPrefab, transform);
+        Gold instance = Instantiate(_goldPrefab, GetSpawnPosition(), Quaternion.identity);
         instance.gameObject.SetActive(false);
         instance.SetOwner(this);
         return instance;
