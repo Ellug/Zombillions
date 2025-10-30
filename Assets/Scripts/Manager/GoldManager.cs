@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEditor.UI;
 
 /// <summary>
 /// °ÔÀÓ ³» °ñµå¸¦ ÃÑ°ý·Î °ü¸®ÇÏ´Â ¸Å´ÏÀú
@@ -60,6 +61,11 @@ public class GoldManager : MonoBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI _goldText;
     //[SerializeField] private UnityEngine.UI.Text _legacyText;
 
+    [Header("Floating Text")]
+    [SerializeField] private FloatingText _floatingTextPrefab;
+    [SerializeField] private Canvas _uiCanvas;
+
+
     void Start()
     {
         CurrentGold = Mathf.Max(0, _startGold);
@@ -85,11 +91,22 @@ public class GoldManager : MonoBehaviour
     /// <summary>
     /// °ñµå È¹µæ ( ±Ý±¤ ÆÄ±« , ¸ó½ºÅÍ Ã³Ä¡ º¸»ó µî )
     /// </summary>
-    public void AddGold(int amount)
+    public void AddGold(int amount, Vector3 worldPos)
     {
         if (amount <= 0)
         {
             return;
+        }
+
+        CurrentGold += amount;
+
+        if(_floatingTextPrefab != null && _uiCanvas != null)
+        {
+            //Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+
+            FloatingText newText = Instantiate(_floatingTextPrefab, _uiCanvas.transform);
+            newText.Setup($"+{amount}", Color.red, screenPos);
         }
 
         NotifyGoldChanged();
