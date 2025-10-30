@@ -51,17 +51,10 @@ public class Bullet : MonoBehaviour
             // enemy.Knockback((enemy.transform.position - transform.position).normalized * _knockback);
 
             _penetration--;
-<<<<<<< Updated upstream
 
             // 이런 경우 == 로 계산하면 오차로 인해 작동 안할 수 있어 안전하게 <=로 처리 권장
             if (_penetration <= 0)
                 _spawner.Despawn(this);
-=======
-        if (_penetration == 0)
-        {
-            gameObject.SetActive(false);
-            //_penetration
->>>>>>> Stashed changes
         }
     }
 
