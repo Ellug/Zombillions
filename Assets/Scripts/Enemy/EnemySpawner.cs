@@ -72,7 +72,7 @@ public class EnemySpawner : MonoBehaviour
         {
             ObjectManager.Instance.SpawnFromPool(
                 enemyInfo.enemyPoolTag,
-                RandPos(),
+                spawnPoint.position + RandPos(),
                 transform.rotation
             );
             yield return new WaitForSeconds(enemyInfo.spawnInterval);
