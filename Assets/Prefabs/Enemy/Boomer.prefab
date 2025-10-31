@@ -131,9 +131,8 @@ MonoBehaviour:
   _targetTransform: {fileID: 0}
   _sphereCollider: {fileID: 8588178293055341328}
   _AttackDelay: 0
-  _poolTag: Enemy
+  _poolTag: Boomer
   _Chase: 0
-  pooltag: Bommer
 --- !u!54 &1324319291286329391
 Rigidbody:
   m_ObjectHideFlags: 0

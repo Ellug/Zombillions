@@ -385,16 +385,12 @@ MonoBehaviour:
   pools:
   - tag: Runner
     prefab: {fileID: 2057335148}
-    size: 100
   - tag: Worker
     prefab: {fileID: 1088085665}
-    size: 100
   - tag: Boomer
     prefab: {fileID: 1916497204}
-    size: 100
   - tag: HPBar
     prefab: {fileID: 5053647682748603406, guid: 8605767aaf1233e4ba8f30432f7b76e2, type: 3}
-    size: 300
 --- !u!4 &591155043
 Transform:
   m_ObjectHideFlags: 0
@@ -724,7 +720,7 @@ GameObject:
   - component: {fileID: 2138909917}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: EnemyHPBar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

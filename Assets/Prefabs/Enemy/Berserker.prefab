@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8290877222755240233}
   - component: {fileID: 8005180197859059738}
   - component: {fileID: 216979420347724202}
+  - component: {fileID: -5498563801189399275}
   m_Layer: 0
   m_Name: Berserker
   m_TagString: Enemy
@@ -107,3 +108,25 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-5498563801189399275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2532068549585580505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1490d7a267c1a68449b7f2f7e438bb49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _EnemyMAXHP: 10
+  _EnemyHP: 10
+  _EnemyMoveSpeed: 10
+  _EnemyDMG: 5
+  _ViewRange: 5
+  _targetTransform: {fileID: 0}
+  _sphereCollider: {fileID: 0}
+  _AttackDelay: 0
+  _poolTag: Berserker
+  _Chase: 0

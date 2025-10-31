@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bommer : EnemyBase
+public class Boomer : EnemyBase
 {
-    [SerializeField] public string pooltag = "Boomer";
     protected override void Start()
     {
         base.Start();
