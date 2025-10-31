@@ -174,10 +174,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7718145874955055274, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
+      propertyPath: m_Volume
+      value: 0.03
+      objectReference: {fileID: 0}
     - target: {fileID: 7770829631757645365, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
       propertyPath: _gameLight
       value: 
       objectReference: {fileID: 1845873104737737866}
+    - target: {fileID: 7957887219018740604, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
+      propertyPath: _noonTime
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 7957887219018740604, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
+      propertyPath: _nightTime
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 9009128854551650190, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
       propertyPath: _soundClip.Array.size
       value: 2
@@ -277,7 +289,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6078816310979088575, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
         m_MethodName: Load
         m_Mode: 3
