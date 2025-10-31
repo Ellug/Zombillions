@@ -371,6 +371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _towerHead: {fileID: 1283266374227327769}
   _rotationSpeed: 5
+  _targetEnemies: []
 --- !u!1 &2404527623589361676
 GameObject:
   m_ObjectHideFlags: 0
