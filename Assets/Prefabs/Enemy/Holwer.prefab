@@ -251,9 +251,8 @@ MonoBehaviour:
   _targetTransform: {fileID: 0}
   _sphereCollider: {fileID: 7188872285271400797}
   _AttackDelay: 0
-  _poolTag: Enemy
+  _poolTag: Holwer
   _Chase: 0
-  pooltag: Howler
   _HowlingRange: 50
 --- !u!135 &7188872285271400797
 SphereCollider:

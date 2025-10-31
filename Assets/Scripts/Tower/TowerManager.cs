@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
-//타워 배치(생성) / 선택 / 제거 관리
+//Ÿ�� ��ġ(����) / ���� / ���� ����
 public class TowerManager : MonoBehaviour
 {
     public static TowerManager Instance { get; private set; }
@@ -20,7 +20,7 @@ public class TowerManager : MonoBehaviour
     [SerializeField] private Button _deleteTowerButton;
     [SerializeField] private TowerSpawner _SetHQTowerSpawner;
 
-    //Player의 gold 값 받아오기(int형).
+    //Player�� gold �� �޾ƿ���(int��).
     private TowerSpawner _selectTowerSpawner;
     private Tower _selectedTower;
 
@@ -68,7 +68,7 @@ public class TowerManager : MonoBehaviour
             SelectTowerMenu();
         }
     }
-    #region 버튼/패널 초기화
+    #region ��ư/�г� �ʱ�ȭ
     private void InitButton()
     {
         _attackTowerButton.onClick.AddListener(Instance.BuildAttackTower);
@@ -84,8 +84,8 @@ public class TowerManager : MonoBehaviour
     }
     #endregion
 
-    #region 핸들러
-    //선택 핸들러
+    #region �ڵ鷯
+    //���� �ڵ鷯
     private void HandleSelection()
     {
         if (Input.GetMouseButtonDown(0))
@@ -105,7 +105,7 @@ public class TowerManager : MonoBehaviour
                 {
                     _isTowerSelected = true;
                 }
-                //TowerSpawner 선택만
+                //TowerSpawner ���ø�
                 else if (_selectTowerSpawner != null)
                 {
                     _isTowerSpawnerSelected = true;
@@ -115,8 +115,8 @@ public class TowerManager : MonoBehaviour
     }
     #endregion
 
-    #region 메뉴 호출
-    //선택한 타워 메뉴
+    #region �޴� ȣ��
+    //������ Ÿ�� �޴�
     private void SelectTowerMenu()
     {
         if (_selectedTower != true)
@@ -131,7 +131,7 @@ public class TowerManager : MonoBehaviour
         }
     }
 
-    //스포너 메뉴
+    //������ �޴�
     private void SelectBuildMenu()
     {
         if (_selectTowerSpawner != true)
@@ -158,8 +158,8 @@ public class TowerManager : MonoBehaviour
     }
     #endregion
 
-    #region 스포너 각 메뉴 호출
-    //소지하고있는 골드 처리 완료 되어지면 인자값에 int형의 playerGold 추가하기.
+    #region ������ �� �޴� ȣ��
+    //�����ϰ��ִ� ��� ó�� �Ϸ� �Ǿ����� ���ڰ��� int���� playerGold �߰��ϱ�.
     private void BuildAttackTower()
     {
         _selectTowerSpawner.BuildTower(TowerData.TowerTag.AttackTower);
@@ -184,7 +184,7 @@ public class TowerManager : MonoBehaviour
     }
     #endregion
 
-    #region 타워 각 메뉴 호출
+    #region Ÿ�� �� �޴� ȣ��
     private void DeleteTower()
     {
         TowerSpawner spawner = _selectedTower.GetSpawner();
@@ -194,7 +194,7 @@ public class TowerManager : MonoBehaviour
     }
     #endregion
 
-    //모든 메뉴 닫기
+    //��� �޴� �ݱ�
     private void CloseMenu()
     {
         _isTowerSpawnerSelected = false;
