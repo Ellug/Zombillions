@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.UI;
 using static Bullet;
 
 //타워 동작 처리
@@ -11,17 +12,20 @@ public class Tower : MonoBehaviour
     [SerializeField] private TowerTrigger _towerTracer;
     [SerializeField] private Bullet.BulletColor _bulletColor;
     [SerializeField] private Bullet.BulletSize _bulletSize;
+    [SerializeField] private Transform _bulletSpawnPoint;
 
     private BulletSpawner _bulletSpawner;
     private TowerSpawner _mySpawner;
     private float _timer;
+    private float _towerMaxHp;
     private float _towerCurrentHp;
+    public float TowerMaxHp => _towerMaxHp;
     public float TowerCurrentHp => _towerCurrentHp;
 
     private void Awake()
     {
         Init();
-        _bulletSpawner = FindObjectOfType<BulletSpawner>();
+        
     }
 
     private void Init()
@@ -31,11 +35,8 @@ public class Tower : MonoBehaviour
             return;
         }
 
+        _towerMaxHp = _towerData.maxHp;
         _towerCurrentHp = _towerData.maxHp;
-
-        //해당 오브젝트 태그 설정
-        //string tagName = _towerData.towerTag.ToString();
-        //gameObject.tag = tagName;
 
         //해당 타워 자식(타워 타입)에 공격범위 설정
         SphereCollider childCollider = GetComponentInChildren<SphereCollider>();
@@ -56,14 +57,19 @@ public class Tower : MonoBehaviour
         {
             Attack();
         }
+        ////////////////////////////////////////////////////////////테스트용
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            TakeDamage(5);
+        }
     }
 
     private void Attack()
     {
-        Vector3 spawnPoint = transform.position + transform.forward * 0.3f;
+        Vector3 spawnPoint = _bulletSpawnPoint.position + _bulletSpawnPoint.forward;
         Vector3 targetPoint = _towerTracer.GetCurrentEnemy().transform.position;
         Vector3 dir = targetPoint - spawnPoint;
-        
+
         if (_towerTracer.GetCurrentEnemy() != null)
         {
             _timer += Time.deltaTime;
@@ -88,8 +94,6 @@ public class Tower : MonoBehaviour
     public void TakeDamage(float damage)
     {
         _towerCurrentHp -= damage;
-
-        Debug.Log($"타워 체력이 {_towerCurrentHp}이 되었습니다."); //데이터 확인용 코드
 
         if (_towerCurrentHp <= 0)
         {

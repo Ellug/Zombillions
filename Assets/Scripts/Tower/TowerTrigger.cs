@@ -1,33 +1,29 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TowerTrigger : MonoBehaviour
 {
     [SerializeField] private Transform _towerHead;
     [SerializeField] private float _rotationSpeed;
-    //private Transform _targetEnemy;
     private List<Transform> _targetEnemies = new List<Transform>();
+    private Transform currentEnemy;
 
     private void Update()
     {
         RotationUpdate();
-
-        //테스트용
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            Transform currentEnemy = GetCurrentEnemy();
-            RemoveEnemy(currentEnemy);
-        }
     }
-
-    public Transform GetCurrentEnemy()
+    public void CheckEmpty()
     {
-        if (_targetEnemies.Count > 0)
+        foreach(Transform enemyList in _targetEnemies)
         {
-            return _targetEnemies[0];
+            if (enemyList == null)
+            {
+                _targetEnemies.Remove(enemyList);
+            }
         }
-        return null;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -51,14 +47,24 @@ public class TowerTrigger : MonoBehaviour
             }
         }
     }
+
+    public Transform GetCurrentEnemy()
+    {
+        if (_targetEnemies.Count > 0)
+        {
+            CheckEmpty();
+            return _targetEnemies[0];
+        }
+        return null;
+    }
+
     private void RotationUpdate()
     {
         if(_towerHead == null)
         {
             return;
         }
-
-        Transform currentEnemy = GetCurrentEnemy();
+        currentEnemy = GetCurrentEnemy();
         if (currentEnemy != null)
         {
             Vector3 direction = currentEnemy.position - _towerHead.position;
@@ -81,13 +87,6 @@ public class TowerTrigger : MonoBehaviour
                     Quaternion.LookRotation(Vector3.forward),
                     Time.deltaTime * _rotationSpeed
                     );
-        }
-    }
-    public void RemoveEnemy(Transform enemy)
-    {
-        if (_targetEnemies.Contains(enemy))
-        {
-            _targetEnemies.Remove(enemy);
         }
     }
 }
