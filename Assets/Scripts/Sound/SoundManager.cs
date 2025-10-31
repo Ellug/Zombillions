@@ -31,17 +31,17 @@ public class SoundManager : MonoBehaviour
     //하이라키에서 EffectSoundManager를 찾는 메서드
     private void OnSceneLoaded(Scene s, LoadSceneMode m)
     {
-        if (FindObjectOfType<EffectSoundManager>() == null)
-        {
-            Debug.LogWarning("하이라키에서 EffectSoundManager를 찾지 못했습니다");
+        if (FindObjectOfType<EffectSoundManager>() == null) 
             return;
-        }
+
         EffectSound = FindAnyObjectByType<EffectSoundManager>();
     }
 
     //SoundManager의 사운드트랙에서 선택해서 BGM 출력
     public void GetBGMChage(int index)
     {
+        if (_backGroundMugic == null && _backGroundMugic == _soundClip[index]) return;
+
         if (index >= _soundClip.Count)
         {
             Debug.LogError("BGM사운드 트랙의 범위 초과");

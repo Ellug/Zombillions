@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class PlayerBase : MonoBehaviour
@@ -17,6 +18,11 @@ public abstract class PlayerBase : MonoBehaviour
     [SerializeField] private float _reviveTimer = 20f;
 
     [SerializeField] private GameObject _player;
+
+    // UseSkill()에 효과음 출력 메서드 삽입
+    // TryAttack()에 효과음 출력 메서드 삽입 (인덱스는 4번의 음악을 사용)
+    public AudioClip[] _audioClip;
+
 
     // property
     public float CurHp { get { return _curHp; } }
@@ -55,6 +61,7 @@ public abstract class PlayerBase : MonoBehaviour
         if (_bulletSpawner == null) Debug.LogError("[PlayerBase] No BulletSpawner in scene.");
     }
     
+
     void Start()
     {
         if (_rb == null) _rb = GetComponent<Rigidbody>();
@@ -201,6 +208,9 @@ public abstract class PlayerBase : MonoBehaviour
         {
             Attack();
             _atkTimer = _atkDelay;
+
+            if (_audioClip.Length >= 4)
+            GameManager.Instance.Sound.EffectSound.GetSoundEffect(_audioClip[4]);
         }
     }
 
@@ -211,6 +221,9 @@ public abstract class PlayerBase : MonoBehaviour
     {
         if (index < 0 || index >= _skills.Length || !_isPlayerAlive) return;
         _skills[index]?.TryUse();
+
+        if (index >= _audioClip.Length) return;
+        GameManager.Instance.Sound.EffectSound.GetSoundEffect(_audioClip[index]);
     }
 
     void LateUpdate()
