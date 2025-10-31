@@ -19,7 +19,7 @@ public class TowerManager : MonoBehaviour
     [SerializeField] private Button _triggerTowerButton;
     [SerializeField] private Button _deleteTowerButton;
 
-
+    //Player의 gold 값 받아오기(int형).
     private TowerSpawner _selectTowerSpawner;
     private Tower _selectedTower;
 
@@ -158,6 +158,7 @@ public class TowerManager : MonoBehaviour
     #endregion
 
     #region 스포너 각 메뉴 호출
+    //소지하고있는 골드 처리 완료 되어지면 인자값에 int형의 playerGold 추가하기.
     private void BuildAttackTower()
     {
         _selectTowerSpawner.BuildTower(TowerData.TowerTag.AttackTower);
