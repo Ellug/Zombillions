@@ -12,6 +12,7 @@ public class TowerSpawner : MonoBehaviour
     private bool _isBuilt = false;
     public bool IsBuilt => _isBuilt;
 
+    //public void BuildTower(TowerData.TowerTag tag, int playerGold)
     public void BuildTower(TowerData.TowerTag tag)
     {
         if(_isBuilt)
@@ -42,6 +43,7 @@ public class TowerSpawner : MonoBehaviour
                 }
                 GetComponent<BoxCollider>().enabled = false;
                 _isBuilt = true;
+                //플레이어 골드 cost만큼 소모처리.
                 break;
             }
         }

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LIghtChanger : MonoBehaviour , ITimeObserver
 {
@@ -13,23 +14,46 @@ public class LIghtChanger : MonoBehaviour , ITimeObserver
     {
         _globalTime = GameManager.Instance.Timer;
         _globalTime?.AddObserver(this);
+
+        // _gameLight ì—†ìœ¼ë©´ íƒìƒ‰
+        if (_gameLight == null)
+            _gameLight = FindAnyObjectByType<Light>();
     }
 
-    //GlobarTimeÀÇ ³·/¹ã º¯È­¿¡ ¹à±â¸¦ Á¶ÀıÇÏ´Â ¿ÉÀú¹ö ÆĞÅÏ
+    // ì”¬ ë¡œë“œì‹œ í˜„ì¬ ì”¬ì˜ Lightë¡œ êµì²´
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene s, LoadSceneMode m)
+    {
+        _gameLight = FindAnyObjectByType<Light>();
+    }
+
+    //GlobarTimeì˜ ë‚®/ë°¤ ë³€í™”ì— ë°ê¸°ë¥¼ ì¡°ì ˆí•˜ëŠ” ì˜µì €ë²„ íŒ¨í„´
     public void OnTimeZoneChange()
     {
         if (_gameLight == null)
         {
-            Debug.LogError("Light ¿ÀºêÁ§Æ® ÂüÁ¶ÇÏ¼¼¿ä");
+            Debug.LogError("Light ì˜¤ë¸Œì íŠ¸ ì°¸ì¡°í•˜ì„¸ìš”");
             return;
         }
         StartCoroutine(SlowLightChange());
     }
 
 
-    // ³·/¹ãÀÌ ¹Ù²ğ ¶§ ¼­¼­È÷ ¹à±â°¡ º¯ÇÏ´Â ÄÚ·çÆ¾
-    private IEnumerator SlowLightChange()
+    //ì´ê±° ì¬í•´ì„ í•„ìš”í•¨
+    // new WiathForSec ë¶€ë¶„ ë³€ìˆ˜ë¡œ ë¹¼ë©´ ë£¨í”„ì•ˆì—ì„œ ìƒì„± ì•ˆí•˜ë‹ˆ ìµœì í™” ë¨
+    private IEnumerator SlowTimeZoneChange()
     {
+        WaitForSeconds delay = new WaitForSeconds(0.1f);
+
         while (true)
         {
             switch (GameManager.Instance.Timer.CurrentTimeZone)
@@ -44,11 +68,12 @@ public class LIghtChanger : MonoBehaviour , ITimeObserver
                         _gameLight.intensity += _lightChangeSpeed;
                     break;
             }
-            yield return new WaitForSeconds(0.1f);
+
+            yield return delay;
         }
     }
 
-    //ÀüÃ¼ ¹à±â Á¶Àı ¸Ş¼­µå
+    //ì „ì²´ ë°ê¸° ì¡°ì ˆ ë©”ì„œë“œ
     public void GetLightChange(float intensity)
     {
         _gameLight.intensity = intensity;

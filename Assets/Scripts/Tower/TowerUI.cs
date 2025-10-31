@@ -22,7 +22,6 @@ public class TowerUI : MonoBehaviour
     {
         transform.rotation = _mainCamera.transform.rotation;
         TowerHpCalc();
-        Debug.Log($"{currentHp}, {maxHp}");
     }
     private void TowerHpCalc()
     {
