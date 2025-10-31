@@ -90,4 +90,30 @@ public class ObjectManager : MonoBehaviour
         objectToReturn.SetActive(false);
         poolDictionary[tag].Enqueue(objectToReturn);
     }
+
+    public GameObject EnemyHPBarPool (string tag, Transform parent)
+    {
+        if (!poolDictionary.ContainsKey(tag))
+        {
+            Debug.LogError($"[POOL ERROR] 요청된 UI 태그 '{tag}'는 ObjectManager에 등록되어 있지 않습니다.");
+            return null;
+        }
+
+        Queue<GameObject> objectPool = poolDictionary[tag];
+        if (objectPool.Count == 0)
+        {
+            Debug.LogWarning($"UI Pool {tag} is empty. Cannot spawn.");
+            return null;
+        }
+
+        GameObject objectToSpawn = objectPool.Dequeue();
+        objectToSpawn.transform.SetParent(parent, false);
+        objectToSpawn.transform.localPosition = Vector3.zero;
+        objectToSpawn.transform.localRotation = Quaternion.identity;
+        objectToSpawn.transform.localScale = Vector3.one; 
+
+        objectToSpawn.SetActive(true);
+
+        return objectToSpawn;
+    }
 }

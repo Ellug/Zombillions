@@ -65,5 +65,14 @@ public class EnemyAttack : MonoBehaviour
                 return;
             }
         }
+        if (target.CompareTag("Tower"))
+        {
+            Tower tower = target.GetComponent<Tower>();
+            if (tower != null)
+            {
+                tower.TakeDamage(damage);
+                return;
+            }
+        }
     }
 }

@@ -5,34 +5,57 @@ using UnityEngine.UI;
 
 public class EnemyHPBar : MonoBehaviour
 {
-    private Camera _MainCamera;
-    private EnemyBase _enemyBase;
-    private Slider _enemyHpSlider;
-    private float MaxHP;
+    [SerializeField] public Transform TargetTransform;
+    [SerializeField] public EnemyBase TargetEnemyBase;
+    [SerializeField] private Slider EnemyHPSlider;
+    private Camera _mainCamera;
+
+    public Vector3 _offset = new Vector3(0, 1.5f, 0);
 
     void Awake()
     {
-        _enemyBase = GetComponentInParent<EnemyBase>();
-        _enemyHpSlider = GetComponent<Slider>();
-        MaxHP = _enemyBase._EnemyMAXHP;
+        EnemyHPSlider = GetComponent<Slider>();
+        _mainCamera = Camera.main;
     }
 
-    void Start()
+    public void Setup(EnemyBase enemyBase)
     {
-        _MainCamera = Camera.main;
-        _enemyHpSlider.gameObject.SetActive(false);
-        if (_enemyHpSlider != null && _enemyBase != null)
+        TargetEnemyBase = enemyBase;
+        TargetTransform = enemyBase.transform;
+        EnemyHPSlider.maxValue = TargetEnemyBase._EnemyMAXHP;
+        EnemyHPSlider.value = TargetEnemyBase._EnemyHP;
+        gameObject.SetActive(true);
+    }
+
+    void LateUpdate() 
+    {
+        if (TargetTransform == null || !TargetEnemyBase.gameObject.activeInHierarchy)
         {
-            _enemyHpSlider.maxValue = MaxHP;
+            ReturnToPool();
+            return;
+        }
+
+        Vector3 worldPos = TargetTransform.position + _offset;
+        transform.position = _mainCamera.WorldToScreenPoint(worldPos);
+        float currentHP = TargetEnemyBase._EnemyHP;
+        float maxHP = TargetEnemyBase._EnemyMAXHP;
+
+        EnemyHPSlider.value = currentHP;
+
+        if (currentHP >= maxHP)
+        {
+            EnemyHPSlider.gameObject.SetActive(false);
+        }
+        else
+        {
+            EnemyHPSlider.gameObject.SetActive(true);
         }
     }
-    void Update()
+
+    public void ReturnToPool()
     {
-        transform.rotation = _MainCamera.transform.rotation;
-        if (_enemyHpSlider.value < MaxHP)
-            _enemyHpSlider.gameObject.SetActive(true);
-        else
-            _enemyHpSlider.gameObject.SetActive(false);
-        _enemyHpSlider.value = _enemyBase._EnemyHP;
+        TargetTransform = null;
+        TargetEnemyBase = null;
+        gameObject.SetActive(false);
     }
 }
