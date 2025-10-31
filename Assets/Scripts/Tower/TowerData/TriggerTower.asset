@@ -18,7 +18,7 @@ MonoBehaviour:
   size: {x: 1, y: 1, z: 1}
   attackPower: 0
   attackRange: 48
-  attackSpeed: 10
+  attackSpeed: 20
   bulletSpeed: 100
   pierce: 0
   knockback: 5

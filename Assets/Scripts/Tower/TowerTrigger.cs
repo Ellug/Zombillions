@@ -17,13 +17,7 @@ public class TowerTrigger : MonoBehaviour
     }
     public void CheckEmpty()
     {
-        foreach(Transform enemyList in _targetEnemies)
-        {
-            if (enemyList == null)
-            {
-                _targetEnemies.Remove(enemyList);
-            }
-        }
+        _targetEnemies.RemoveAll(emptyEnemy => emptyEnemy == null);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -50,12 +44,16 @@ public class TowerTrigger : MonoBehaviour
 
     public Transform GetCurrentEnemy()
     {
+        CheckEmpty();
+
         if (_targetEnemies.Count > 0)
         {
-            CheckEmpty();
             return _targetEnemies[0];
         }
-        return null;
+        else
+        {
+            return null;
+        }
     }
 
     private void RotationUpdate()
