@@ -9,13 +9,4 @@ public class SceneChanger : MonoBehaviour
     {
         SceneManager.LoadScene(sceneNumber);
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            Load(3);
-            //GameManager.Instance.Sound.GetSoundEffect();
-        }
-    }
 }
