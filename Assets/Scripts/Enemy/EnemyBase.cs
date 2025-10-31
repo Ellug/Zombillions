@@ -64,7 +64,7 @@ public class EnemyBase : MonoBehaviour
     {
         if (_mainCanvasTransform == null)
         {
-            Canvas mainCanvas = FindObjectOfType<Canvas>();
+            GameObject mainCanvas = GameObject.FindWithTag("EnemyHPBar");
             if (mainCanvas != null)
             {
                 _mainCanvasTransform = mainCanvas.transform;
@@ -114,6 +114,10 @@ public class EnemyBase : MonoBehaviour
 
         if (_EnemyHP <= 0)
             Die();
+        if (_myHealthBar != null && !_myHealthBar.gameObject.activeSelf)
+        {
+            _myHealthBar.gameObject.SetActive(true);
+        }
     }
 
     public virtual void Die() 
