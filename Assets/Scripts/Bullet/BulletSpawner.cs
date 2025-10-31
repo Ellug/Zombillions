@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject _bulletPrefab;
-    [SerializeField] private int _bulletPoolSize = 30;
+    [SerializeField] private int _bulletPoolSize = 50;
 
     private Queue<Bullet> _bulletPool;
 
