@@ -58,11 +58,6 @@ public class Tower : MonoBehaviour
         {
             Attack();
         }
-        ////////////////////////////////////////////////////////////테스트용
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            TakeDamage(5);
-        }
     }
 
     private void Attack()

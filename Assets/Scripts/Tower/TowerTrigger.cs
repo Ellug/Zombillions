@@ -8,16 +8,12 @@ public class TowerTrigger : MonoBehaviour
 {
     [SerializeField] private Transform _towerHead;
     [SerializeField] private float _rotationSpeed;
-    [SerializeField] private List<Transform> _targetEnemies = new List<Transform>();
+    private List<Transform> _targetEnemies = new List<Transform>();
     private Transform currentEnemy;
 
     private void Update()
     {
         RotationUpdate();
-    }
-    public void CheckEmpty()
-    {
-        _targetEnemies.RemoveAll(emptyEnemy => emptyEnemy == null);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -40,6 +36,10 @@ public class TowerTrigger : MonoBehaviour
                 _targetEnemies.Remove(other.transform);
             }
         }
+    }
+    public void CheckEmpty()
+    {
+        _targetEnemies.RemoveAll(emptyEnemy => emptyEnemy == null || !emptyEnemy.gameObject.activeSelf);
     }
 
     public Transform GetCurrentEnemy()
