@@ -1077,6 +1077,7 @@ Transform:
   m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8401966073188542669}
   - {fileID: 63040117784430411}
   - {fileID: 8401966073188542669}
   m_Father: {fileID: 0}

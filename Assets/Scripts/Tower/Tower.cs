@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static Bullet;
 
-//Å¸¿ö µ¿ÀÛ Ã³¸®
+//íƒ€ì›Œ ë™ì‘ ì²˜ë¦¬
 public class Tower : MonoBehaviour
 {
     [SerializeField] private TowerData _towerData;
@@ -25,7 +25,7 @@ public class Tower : MonoBehaviour
     private void Awake()
     {
         Init();
-
+        
     }
 
     private void Init()
@@ -38,7 +38,7 @@ public class Tower : MonoBehaviour
         _towerMaxHp = _towerData.maxHp;
         _towerCurrentHp = _towerData.maxHp;
 
-        //ÇØ´ç Å¸¿ö ÀÚ½Ä(Å¸¿ö Å¸ÀÔ)¿¡ °ø°İ¹üÀ§ ¼³Á¤
+        //í•´ë‹¹ íƒ€ì›Œ ìì‹(íƒ€ì›Œ íƒ€ì…)ì— ê³µê²©ë²”ìœ„ ì„¤ì •
         SphereCollider childCollider = GetComponentInChildren<SphereCollider>();
         if (childCollider != null)
         {
@@ -48,7 +48,7 @@ public class Tower : MonoBehaviour
         _bulletSpawner = FindObjectOfType<BulletSpawner>();
         if (_bulletSpawner == null)
         {
-            Debug.LogError("BulletSpawner¸øÃ£À½.");
+            Debug.LogError("BulletSpawnerëª»ì°¾ìŒ.");
         }
     }
     private void Update()
@@ -56,6 +56,11 @@ public class Tower : MonoBehaviour
         if (_towerTracer.GetCurrentEnemy() != null)
         {
             Attack();
+        }
+        ////////////////////////////////////////////////////////////í…ŒìŠ¤íŠ¸ìš©
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            TakeDamage(5);
         }
     }
 
@@ -97,7 +102,7 @@ public class Tower : MonoBehaviour
         }
     }
 
-    //½ºÆ÷³Ê ¿¬°á½ÃÅ°±â
+    //ìŠ¤í¬ë„ˆ ì—°ê²°ì‹œí‚¤ê¸°
     public void SetSpawner(TowerSpawner spawner)
     {
         _mySpawner = spawner;
