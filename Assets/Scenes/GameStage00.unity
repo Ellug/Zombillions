@@ -3122,9 +3122,11 @@ MonoBehaviour:
     m_Bits: 0
   _mainCamera: {fileID: 0}
   _spawnTowerMenuPanel: {fileID: 329163793}
+  _towerMenuPanel: {fileID: 0}
   _attackTowerButton: {fileID: 770910193}
   _defenceTowerButton: {fileID: 75570390}
   _triggerTowerButton: {fileID: 796905294}
+  _deleteTowerButton: {fileID: 0}
 --- !u!4 &1462096482
 Transform:
   m_ObjectHideFlags: 0
@@ -3405,10 +3407,13 @@ MonoBehaviour:
   pools:
   - tag: Walker
     prefab: {fileID: 8712343191371020518, guid: 569791bafbcfcc8469e284c27fb67971, type: 3}
-    size: 50
+    size: 100
   - tag: Runner
     prefab: {fileID: 4488770537272071640, guid: 6649e5ea87e0ba241a30ed9a3563115d, type: 3}
-    size: 50
+    size: 100
+  - tag: HPBar
+    prefab: {fileID: 5053647682748603406, guid: 8605767aaf1233e4ba8f30432f7b76e2, type: 3}
+    size: 100
 --- !u!4 &1634434318
 Transform:
   m_ObjectHideFlags: 0
