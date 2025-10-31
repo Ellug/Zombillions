@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static Bullet;
 
-//Å¸¿ö µ¿ÀÛ Ã³¸®
+//íƒ€ì›Œ ë™ì‘ ì²˜ë¦¬
 public class Tower : MonoBehaviour
 {
     [SerializeField] private TowerData _towerData;
@@ -21,6 +21,7 @@ public class Tower : MonoBehaviour
     private float _towerCurrentHp;
     public float TowerMaxHp => _towerMaxHp;
     public float TowerCurrentHp => _towerCurrentHp;
+    public TowerData TowerData => _towerData;
 
     private void Awake()
     {
@@ -38,17 +39,17 @@ public class Tower : MonoBehaviour
         _towerMaxHp = _towerData.maxHp;
         _towerCurrentHp = _towerData.maxHp;
 
-        //ÇØ´ç Å¸¿ö ÀÚ½Ä(Å¸¿ö Å¸ÀÔ)¿¡ °ø°İ¹üÀ§ ¼³Á¤
+        //í•´ë‹¹ íƒ€ì›Œ ìì‹(íƒ€ì›Œ íƒ€ì…)ì— ê³µê²©ë²”ìœ„ ì„¤ì •
         SphereCollider childCollider = GetComponentInChildren<SphereCollider>();
         if (childCollider != null)
         {
-            childCollider.radius = _towerData.attackRange;
+            childCollider.radius = _towerData.attackRange / _towerData.sizeZ;
         }
 
         _bulletSpawner = FindObjectOfType<BulletSpawner>();
         if (_bulletSpawner == null)
         {
-            Debug.LogError("BulletSpawner¸øÃ£À½.");
+            Debug.LogError("BulletSpawnerëª»ì°¾ìŒ.");
         }
     }
     private void Update()
@@ -57,7 +58,7 @@ public class Tower : MonoBehaviour
         {
             Attack();
         }
-        ////////////////////////////////////////////////////////////Å×½ºÆ®¿ë
+        ////////////////////////////////////////////////////////////í…ŒìŠ¤íŠ¸ìš©
         if (Input.GetKeyDown(KeyCode.X))
         {
             TakeDamage(5);
@@ -77,16 +78,16 @@ public class Tower : MonoBehaviour
             {
                 _timer = 0f;
                 _bulletSpawner.Spawn(
-                    spawnPos: spawnPoint,
-                    dir: dir,
-                    speed: 50,
-                    dmg: _towerData.attackPower,
-                    pierce: 0,
-                    knockback: 0,
-                    range: _towerData.attackRange,
-                    color: _bulletColor,
-                    size: _bulletSize
-                );
+                        spawnPos: spawnPoint,
+                        dir: dir,
+                        speed: _towerData.bulletSpeed,
+                        dmg: _towerData.attackPower,
+                        pierce: _towerData.pierce,
+                        knockback: _towerData.knockback,
+                        range: _towerData.attackRange + 5f,
+                        color: _bulletColor,
+                        size: _bulletSize
+                    );
             }
         }
     }
@@ -102,7 +103,7 @@ public class Tower : MonoBehaviour
         }
     }
 
-    //½ºÆ÷³Ê ¿¬°á½ÃÅ°±â
+    //ìŠ¤í¬ë„ˆ ì—°ê²°ì‹œí‚¤ê¸°
     public void SetSpawner(TowerSpawner spawner)
     {
         _mySpawner = spawner;

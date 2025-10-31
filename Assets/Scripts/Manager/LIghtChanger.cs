@@ -1,11 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LIghtChanger : MonoBehaviour , ITimeObserver
 {
     [SerializeField] private Light _gameLight;
-    [SerializeField][Range(0 , 1)] private float _gameDark;
-    [SerializeField][Range(0, 0.5f)] private float _lightChangeSpeed;
+    [SerializeField][Range(0 , 1)] private float _darkScale;
+    [SerializeField][Range(0, 0.1f)] private float _lightChangeSpeed;
 
     private GlobalTime _globalTime;
 
@@ -13,42 +14,66 @@ public class LIghtChanger : MonoBehaviour , ITimeObserver
     {
         _globalTime = GameManager.Instance.Timer;
         _globalTime?.AddObserver(this);
+
+        // _gameLight ì—†ìœ¼ë©´ íƒìƒ‰
+        if (_gameLight == null)
+            _gameLight = FindAnyObjectByType<Light>();
     }
 
-    //GlobarTimeÀÇ ³·/¹ã º¯È­¿¡ ¹à±â¸¦ Á¶ÀıÇÏ´Â ¿ÉÀú¹ö ÆĞÅÏ
+    // ì”¬ ë¡œë“œì‹œ í˜„ì¬ ì”¬ì˜ Lightë¡œ êµì²´
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene s, LoadSceneMode m)
+    {
+        _gameLight = FindAnyObjectByType<Light>();
+    }
+
+    //GlobarTimeì˜ ë‚®/ë°¤ ë³€í™”ì— ë°ê¸°ë¥¼ ì¡°ì ˆí•˜ëŠ” ì˜µì €ë²„ íŒ¨í„´
     public void OnTimeZoneChange()
     {
-        StartCoroutine(SlowTimeZoneChange());
+        if (_gameLight == null)
+        {
+            Debug.LogError("Light ì˜¤ë¸Œì íŠ¸ ì°¸ì¡°í•˜ì„¸ìš”");
+            return;
+        }
+        StartCoroutine(SlowLightChange());
     }
 
 
-    //ÀÌ°Å ÀçÇØ¼® ÇÊ¿äÇÔ
-    private IEnumerator SlowTimeZoneChange()
+    //ì´ê±° ì¬í•´ì„ í•„ìš”í•¨
+    // new WiathForSec ë¶€ë¶„ ë³€ìˆ˜ë¡œ ë¹¼ë©´ ë£¨í”„ì•ˆì—ì„œ ìƒì„± ì•ˆí•˜ë‹ˆ ìµœì í™” ë¨
+    private IEnumerator SlowLightChange()
     {
+        WaitForSeconds delay = new WaitForSeconds(0.1f);
+
         while (true)
         {
-            if (_gameLight == null)
+            switch (GameManager.Instance.Timer.CurrentTimeZone)
             {
-                Debug.LogError("Light ¿ÀºêÁ§Æ® ÂüÁ¶ÇÏ¼¼¿ä");
-                break;
+                case Day.Night:
+                    if (_gameLight.intensity >= _darkScale)
+                        _gameLight.intensity -= _lightChangeSpeed;
+                    break;
+
+                case Day.Noon:
+                    if (_gameLight.intensity <= 1f)
+                        _gameLight.intensity += _lightChangeSpeed;
+                    break;
             }
 
-            if (GameManager.Instance.Timer.CurrentTimeZone != Day.Noon && _gameLight.intensity > _gameDark)
-            {
-                _gameLight.intensity -= _lightChangeSpeed;
-                Debug.Log("¹ãÀ¸·Î ¹à±â ÀüÈ¯");
-            }
-            if (GameManager.Instance.Timer.CurrentTimeZone != Day.Night && _gameLight.intensity < 1f)
-            {
-                _gameLight.intensity += _lightChangeSpeed;
-                Debug.Log("³·À¸·Î ¹à±â ÀüÈ¯");
-            }
-
-            yield return new WaitForSeconds(0.1f);
+            yield return delay;
         }
     }
 
-    //ÀüÃ¼ ¹à±â Á¶Àı ¸Ş¼­µå
+    //ì „ì²´ ë°ê¸° ì¡°ì ˆ ë©”ì„œë“œ
     public void GetLightChange(float intensity)
     {
         _gameLight.intensity = intensity;

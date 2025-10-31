@@ -32,8 +32,8 @@ public class GlobalTime : MonoBehaviour
     void Awake()
     {
         CurrentTimeZone = Day.Noon;
-        GameTime = 1;
-        LifeTime = 1;
+        GameTime = 0;
+        LifeTime = 0;
         GameWaveCount = 1;
     }
 
@@ -63,19 +63,24 @@ public class GlobalTime : MonoBehaviour
         switch (CurrentTimeZone)
         {
             case Day.Noon:
+
+                if (GameTime <= _noonTime)
+                    break;
                 if (GameTime > _noonTime)
                 {
-                    HandleNotifyTimeZoneChange();
                     CurrentTimeZone = Day.Night;
+                    HandleNotifyTimeZoneChange();
                     GameTime = 0;                             //시간대 변경 후에는 GameTime을 초기화
                 }
                 break;
 
             case Day.Night:
+                if (GameTime <= _nightTime)
+                    break;
                 if (GameTime > _nightTime)
                 {
-                    HandleNotifyTimeZoneChange();
                     CurrentTimeZone = Day.Noon;
+                    HandleNotifyTimeZoneChange();
                     GameTime = 0;                               //시간대 변경 후에는 GameTime을 초기화
                     GameWaveCount++;
                 }
