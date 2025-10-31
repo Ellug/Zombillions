@@ -212,4 +212,13 @@ public abstract class PlayerBase : MonoBehaviour
         if (index < 0 || index >= _skills.Length || !_isPlayerAlive) return;
         _skills[index]?.TryUse();
     }
+
+    void LateUpdate()
+    {
+        if (_rb != null)
+        {
+            _rb.velocity = Vector3.zero;
+            _rb.angularVelocity = Vector3.zero;
+        }
+    }
 }

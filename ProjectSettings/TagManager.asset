@@ -11,6 +11,7 @@ TagManager:
   - Tower
   - HQ
   - Enemy
+  - EnemyHPBar
   layers:
   - Default
   - TransparentFX
