@@ -32,14 +32,14 @@ public class EnemyWave : MonoBehaviour
 
     void Update()
     {
-        if (WaveTest)
-        {
-            StartWave();
-        }
+        // if (WaveTest)
+        // {
+        //     StartWave();
+        // }
     }
     IEnumerator RepeatFunctionEveryTenMinutes()
     {
-        float tenMinutes = 600.0f;
+        float tenMinutes = 60.0f;
         yield return new WaitForSeconds(tenMinutes);
 
         while (true)
