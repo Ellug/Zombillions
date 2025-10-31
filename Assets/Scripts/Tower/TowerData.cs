@@ -13,7 +13,7 @@ public class TowerData : ScriptableObject
     [SerializeField] public GameObject _towerPrefab;
     public TowerTag towerTag;
     public float maxHp;
-    public Vector3 size;
+    public float sizeZ;
     public float attackPower;
     public float attackRange;
     public float attackSpeed;

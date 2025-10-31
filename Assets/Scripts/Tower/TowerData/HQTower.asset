@@ -15,7 +15,7 @@ MonoBehaviour:
   _towerPrefab: {fileID: 8269140768254195822, guid: 800ca453d6742f4449caec6ec67a8edb, type: 3}
   towerTag: 0
   maxHp: 1000
-  size: {x: 2, y: 1, z: 2}
+  sizeX: 12
   attackPower: 10
   attackRange: 24
   attackSpeed: 5
