@@ -70,7 +70,7 @@ public class PlayerInputHandler : MonoBehaviour
         if (Input.GetMouseButton(0))
             _player.TryAttack();
     }
-    
+
     // 스킬 입력 1 2 3 4
     private void HandleSkillInput()
     {
