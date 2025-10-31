@@ -3831,6 +3831,39 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1499982127}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1416528745
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1416528746}
+  - component: {fileID: 1416528748}
+  - component: {fileID: 1416528747}
+  m_Layer: 0
+  m_Name: Terrain_(-2000.00, 0.00, 1000.00)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &1416528746
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416528745}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1869.0023, y: 142.09312, z: 1173.6945}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1499982127}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!154 &1416528747
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -3944,6 +3977,53 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1499982126
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1499982127}
+  m_Layer: 0
+  m_Name: Terrains
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1499982127
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499982126}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -130.9977, y: -142.09312, z: -173.69441}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1908324356}
+  - {fileID: 319191366}
+  - {fileID: 993348397}
+  - {fileID: 10344932}
+  - {fileID: 1574433200}
+  - {fileID: 2108339762}
+  - {fileID: 1348303310}
+  - {fileID: 1890952259}
+  - {fileID: 125101375}
+  - {fileID: 656494457}
+  - {fileID: 605063939}
+  - {fileID: 961138678}
+  - {fileID: 1416528746}
+  - {fileID: 849748619}
+  - {fileID: 1799282506}
+  - {fileID: 518939806}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1499982126
@@ -4433,6 +4513,9 @@ MonoBehaviour:
   - tag: HPBar
     prefab: {fileID: 5053647682748603406, guid: 8605767aaf1233e4ba8f30432f7b76e2, type: 3}
     size: 300
+  - tag: Boomer
+    prefab: {fileID: 2187141460396338947, guid: 98d298641e5cf664ea6e357c54e715e6, type: 3}
+    size: 100
   - tag: Boomer
     prefab: {fileID: 2187141460396338947, guid: 98d298641e5cf664ea6e357c54e715e6, type: 3}
     size: 100
