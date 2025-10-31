@@ -51,8 +51,14 @@ public class Tower : MonoBehaviour
         {
             Debug.LogError("BulletSpawner못찾음.");
         }
+
+        //타워 트리거에 데이터 전달하기..
+        if(_towerTracer != null)
+        {
+            _towerTracer.SetTowerData(_towerData);
+        }
     }
-    private void Update()
+    private void LateUpdate()
     {
         if (_towerTracer.GetCurrentEnemy() != null)
         {
