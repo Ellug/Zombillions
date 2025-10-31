@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField][Range(0, 30)] private float _PositionScope;
+    [SerializeField][Range(0, 300)] private float _PositionScope;
     [System.Serializable]
     public class WaveEnemyInfo
     {
@@ -69,7 +69,7 @@ public class EnemySpawner : MonoBehaviour
     IEnumerator SpawnSpecificEnemy(WaveEnemyInfo enemyInfo)
     {
         Vector3 SpawnPos = spawnPoint.position;
-        SpawnPos.y = 0;
+        SpawnPos.y = 1;
         
         for (int i = 0; i < enemyInfo.count; i++)
         {
