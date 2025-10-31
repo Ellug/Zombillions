@@ -46,12 +46,12 @@ public class TowerSpawner : MonoBehaviour
     }
     public void DestroyTower(Tower tower)
     {
-        if(tower != null)
+        if (tower != null)
         {
             Destroy(tower.gameObject);
             tower = null;
+            ResetBuilt();
         }
-        ResetBuilt();
     }
     public void ResetBuilt()
     {

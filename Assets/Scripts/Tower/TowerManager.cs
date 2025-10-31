@@ -100,9 +100,8 @@ public class TowerManager : MonoBehaviour
 
                 _selectedTower = hit.collider.GetComponent<Tower>();
                 _selectTowerSpawner = hit.collider.GetComponent<TowerSpawner>();
-
                 //Tower º±≈√∏∏
-                if (_selectedTower != null)
+                if (_selectedTower != null && _selectedTower.TowerData.towerTag != TowerData.TowerTag.HQTower)
                 {
                     _isTowerSelected = true;
                 }
