@@ -16,6 +16,8 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] public float _AttackDelay;
     [SerializeField] public string _poolTag = "Enemy";
     public bool _Chase = false;
+    private EnemyHPBar _myHealthBar;
+    private static Transform _mainCanvasTransform;
     protected virtual void Start()
     {
         _sphereCollider = GetComponent<SphereCollider>();
@@ -60,10 +62,47 @@ public class EnemyBase : MonoBehaviour
 
     public virtual void ResetForPooling()
     {
+        if (_mainCanvasTransform == null)
+        {
+            Canvas mainCanvas = FindObjectOfType<Canvas>();
+            if (mainCanvas != null)
+            {
+                _mainCanvasTransform = mainCanvas.transform;
+            }
+            else
+            {
+                Debug.LogError("씬에서 메인 Canvas 오브젝트를 찾을 수 없습니다!");
+            }
+        }
+
         _Chase = false;
         _targetTransform = null;
         _EnemyHP = _EnemyMAXHP;
         _targetTransform = null;
+
+        if (_mainCanvasTransform != null)
+        {
+            GameObject hpBarGO = ObjectManager.Instance.EnemyHPBarPool("HPBar", _mainCanvasTransform);
+            if (hpBarGO != null)
+            {
+                _myHealthBar = hpBarGO.GetComponent<EnemyHPBar>();
+                _myHealthBar.Setup(this);
+            }
+            if (hpBarGO != null)
+            {
+                _myHealthBar = hpBarGO.GetComponent<EnemyHPBar>();
+                _myHealthBar.Setup(this);
+
+                if (_myHealthBar.TargetEnemyBase == this)
+                {
+                    Debug.Log($"HP Bar 할당 성공: {gameObject.name} -> {_myHealthBar.gameObject.name}");
+                }
+                else
+                {
+                    Debug.LogError("HP Bar 할당 실패! TargetEnemyBase가 null이거나 다릅니다.");
+                }
+            }
+        }
     }
 
     public virtual void TakeDamage(float dmg) 
@@ -82,6 +121,11 @@ public class EnemyBase : MonoBehaviour
         if (ObjectManager.Instance != null && !string.IsNullOrEmpty(_poolTag))
         {
             ObjectManager.Instance.ReturnToPool(_poolTag, gameObject);
+            if (_myHealthBar != null)
+            {
+                ObjectManager.Instance.ReturnToPool("HPBar", _myHealthBar.gameObject);
+                _myHealthBar = null;
+            }
         }
         else
         {
