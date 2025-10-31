@@ -1,25 +1,30 @@
-
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class GlobalTimeUI : MonoBehaviour
 {
-    [SerializeField] private Text _timeText;
-    [SerializeField] private GameManager _gameManager;
+    [SerializeField] private TextMeshProUGUI _gameTime;
+
 
     private GlobalTime _globalTime;
 
-    private void Awake()
-    {
-        _globalTime = _gameManager.GetComponent<GlobalTime>();
-    }
-
     void Start()
     {
-        Debug.Log(_globalTime);
-        //_timeText.text = $"{_globalTime.CurrentTimeZone}  {_globalTime.GameTime}";
-        _timeText.text = "잘 작동해봐";
-        
+        _globalTime = GameManager.Instance.GetComponent<GlobalTime>();
+        if (_gameTime == null)
+        {
+            Debug.LogError("텍스트UI를 GlobarTimeUI에 넣어주세요");
+            return;
+        }
+    }
+
+    void Update()
+    {
+        if (_gameTime != null)
+        {
+            int min = _globalTime.GameTime / 60;
+            int sec = _globalTime.GameTime % 60;
+            _gameTime.text = $"{_globalTime.CurrentTimeZone}  " + string.Format("{0:D2}:{1:D2}", min, sec);
+        }
     }
 }

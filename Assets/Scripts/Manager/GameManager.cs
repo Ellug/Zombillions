@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public SceneChanger Scene { get; private set; }
 
     public LIghtChanger Light {  get; private set; }
+    public SoundManager Sound {  get; private set; }
 
     public GameState State { get; private set; }
 
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
             Score = GetComponent<GlobalScore>();
             Scene = GetComponent<SceneChanger>();
             Light = GetComponent<LIghtChanger>();
+            Sound = GetComponent<SoundManager>();
         }
         else
         {
@@ -62,18 +64,4 @@ public class GameManager : MonoBehaviour
     }
 
     public enum GameState { Playing , GameOver}
-
-
-
-
-    /// <summary>
-    /// 이거 반드시 지워야 합니다!(테스트용 키)
-    /// </summary>
-    //private void Update()
-    //{
-    //    if (Input.GetKeyUp(KeyCode.Space))
-    //    {
-    //        GetGameStateChange(GameState.GameOver);
-    //    }
-    //}
 }
