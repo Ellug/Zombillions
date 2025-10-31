@@ -8,7 +8,7 @@ public class TowerTrigger : MonoBehaviour
 {
     [SerializeField] private Transform _towerHead;
     [SerializeField] private float _rotationSpeed;
-    private List<Transform> _targetEnemies = new List<Transform>();
+    [SerializeField] private List<Transform> _targetEnemies = new List<Transform>();
     private Transform currentEnemy;
 
     private void Update()
