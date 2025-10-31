@@ -18,8 +18,9 @@ public class TowerManager : MonoBehaviour
     [SerializeField] private Button _defenceTowerButton;
     [SerializeField] private Button _triggerTowerButton;
     [SerializeField] private Button _deleteTowerButton;
+    [SerializeField] private TowerSpawner _SetHQTowerSpawner;
 
-
+    //Player의 gold 값 받아오기(int형).
     private TowerSpawner _selectTowerSpawner;
     private Tower _selectedTower;
 
@@ -51,6 +52,7 @@ public class TowerManager : MonoBehaviour
         InitButton();
         InitPanel();
 
+        BuildHQTower();
     }
 
     private void Update()
@@ -158,6 +160,7 @@ public class TowerManager : MonoBehaviour
     #endregion
 
     #region 스포너 각 메뉴 호출
+    //소지하고있는 골드 처리 완료 되어지면 인자값에 int형의 playerGold 추가하기.
     private void BuildAttackTower()
     {
         _selectTowerSpawner.BuildTower(TowerData.TowerTag.AttackTower);
@@ -176,14 +179,15 @@ public class TowerManager : MonoBehaviour
         _isTowerSpawnerSelected = false;
         _spawnTowerMenuPanel.SetActive(false);
     }
+    private void BuildHQTower()
+    {
+        _SetHQTowerSpawner.BuildTower(TowerData.TowerTag.HQTower);
+    }
     #endregion
 
     #region 타워 각 메뉴 호출
     private void DeleteTower()
     {
-        //내가 현재 선택한건 타워임 = Instance는 타워값만 가지고있는 상태
-        //해당 타워가 가지고있는 스포너의 DestroyTower()호출해야함. 여기서 인자값으로 타워?주면 될듯?
-        //그리고 나서 다 오프시키기.
         TowerSpawner spawner = _selectedTower.GetSpawner();
         spawner.DestroyTower(_selectedTower);
         _isTowerSelected = false;

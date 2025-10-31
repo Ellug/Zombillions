@@ -25,7 +25,7 @@ public class Tower : MonoBehaviour
     private void Awake()
     {
         Init();
-        
+
     }
 
     private void Init()
@@ -57,11 +57,6 @@ public class Tower : MonoBehaviour
         {
             Attack();
         }
-        ////////////////////////////////////////////////////////////테스트용
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            TakeDamage(5);
-        }
     }
 
     private void Attack()
@@ -77,16 +72,16 @@ public class Tower : MonoBehaviour
             {
                 _timer = 0f;
                 _bulletSpawner.Spawn(
-                    spawnPos: spawnPoint,
-                    dir: dir,
-                    speed: 50,
-                    dmg: _towerData.attackPower,
-                    pierce: 0,
-                    knockback: 0,
-                    range: _towerData.attackRange,
-                    color: _bulletColor,
-                    size: _bulletSize
-                );
+                        spawnPos: spawnPoint,
+                        dir: dir,
+                        speed: _towerData.bulletSpeed,
+                        dmg: _towerData.attackPower,
+                        pierce: _towerData.pierce,
+                        knockback: _towerData.knockback,
+                        range: _towerData.attackRange,
+                        color: _bulletColor,
+                        size: _bulletSize
+                    );
             }
         }
     }
