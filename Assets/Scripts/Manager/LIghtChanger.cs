@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LIghtChanger : MonoBehaviour , ITimeObserver
 {
@@ -13,6 +14,26 @@ public class LIghtChanger : MonoBehaviour , ITimeObserver
     {
         _globalTime = GameManager.Instance.Timer;
         _globalTime?.AddObserver(this);
+
+        // _gameLight 없으면 탐색
+        if (_gameLight == null)
+            _gameLight = FindAnyObjectByType<Light>();
+    }
+
+    // 씬 로드시 현재 씬의 Light로 교체
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene s, LoadSceneMode m)
+    {
+        _gameLight = FindAnyObjectByType<Light>();
     }
 
     //GlobarTime의 낮/밤 변화에 밝기를 조절하는 옵저버 패턴
@@ -23,14 +44,17 @@ public class LIghtChanger : MonoBehaviour , ITimeObserver
 
 
     //이거 재해석 필요함
+    // new WiathForSec 부분 변수로 빼면 루프안에서 생성 안하니 최적화 됨
     private IEnumerator SlowTimeZoneChange()
     {
+        WaitForSeconds delay = new WaitForSeconds(0.1f);
+
         while (true)
         {
             if (_gameLight == null)
             {
                 Debug.LogError("Light 오브젝트 참조하세요");
-                break;
+                yield break;
             }
 
             if (GameManager.Instance.Timer.CurrentTimeZone != Day.Noon && _gameLight.intensity > _gameDark)
@@ -44,7 +68,7 @@ public class LIghtChanger : MonoBehaviour , ITimeObserver
                 Debug.Log("낮으로 밝기 전환");
             }
 
-            yield return new WaitForSeconds(0.1f);
+            yield return delay;
         }
     }
 
