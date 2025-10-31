@@ -50,7 +50,7 @@ public class LIghtChanger : MonoBehaviour , ITimeObserver
 
     //이거 재해석 필요함
     // new WiathForSec 부분 변수로 빼면 루프안에서 생성 안하니 최적화 됨
-    private IEnumerator SlowTimeZoneChange()
+    private IEnumerator SlowLightChange()
     {
         WaitForSeconds delay = new WaitForSeconds(0.1f);
 
