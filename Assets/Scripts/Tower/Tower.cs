@@ -21,6 +21,7 @@ public class Tower : MonoBehaviour
     private float _towerCurrentHp;
     public float TowerMaxHp => _towerMaxHp;
     public float TowerCurrentHp => _towerCurrentHp;
+    public TowerData TowerData => _towerData;
 
     private void Awake()
     {
@@ -42,7 +43,7 @@ public class Tower : MonoBehaviour
         SphereCollider childCollider = GetComponentInChildren<SphereCollider>();
         if (childCollider != null)
         {
-            childCollider.radius = _towerData.attackRange;
+            childCollider.radius = _towerData.attackRange / _towerData.sizeZ;
         }
 
         _bulletSpawner = FindObjectOfType<BulletSpawner>();
@@ -83,7 +84,7 @@ public class Tower : MonoBehaviour
                         dmg: _towerData.attackPower,
                         pierce: _towerData.pierce,
                         knockback: _towerData.knockback,
-                        range: _towerData.attackRange,
+                        range: _towerData.attackRange + 5f,
                         color: _bulletColor,
                         size: _bulletSize
                     );
