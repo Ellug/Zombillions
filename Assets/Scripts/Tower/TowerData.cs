@@ -17,5 +17,8 @@ public class TowerData : ScriptableObject
     public float attackPower;
     public float attackRange;
     public float attackSpeed;
+    public float bulletSpeed;
+    public int pierce;
+    public float knockback;
     public int cost;
 }
