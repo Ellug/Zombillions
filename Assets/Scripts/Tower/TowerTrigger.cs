@@ -36,7 +36,7 @@ public class TowerTrigger : MonoBehaviour
             return;
         }
 
-        Collider[] hits = Physics.OverlapSphere(transform.position, _towerData.attackRange);
+        Collider[] hits = Physics.OverlapSphere(transform.position, _towerData.attackRange / _towerData.sizeZ);
         foreach (var hit in hits)
         {
             if (hit.CompareTag("Enemy") && hit.gameObject.activeSelf)
