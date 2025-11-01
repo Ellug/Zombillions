@@ -221,9 +221,6 @@ public abstract class PlayerBase : MonoBehaviour
     {
         if (index < 0 || index >= _skills.Length || !_isPlayerAlive) return;
         _skills[index]?.TryUse();
-
-        if (index >= _audioClip.Length) return;
-        GameManager.Instance.Sound.EffectSound.GetSoundEffect(_audioClip[index]);
     }
 
     void LateUpdate()
