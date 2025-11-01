@@ -12,6 +12,7 @@ public class GunQ : SkillBase
     {
         _skillName = "Shot Gun";
         _coolTime = 4f;
+        _soundIndex = 0;
         _icon = Resources.Load<Sprite>("Icons/Skill_GunQ");
     }
 

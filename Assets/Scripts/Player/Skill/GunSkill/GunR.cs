@@ -17,6 +17,7 @@ public class GunR : SkillBase
     {
         _skillName = "Gattling Gun";
         _coolTime = 20f;
+        _soundIndex = 3;
         _icon = Resources.Load<Sprite>("Icons/Skill_GunR");
     }
 
