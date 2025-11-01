@@ -13,7 +13,7 @@ public class GlobalTimeUI : MonoBehaviour
         _globalTime = GameManager.Instance.GetComponent<GlobalTime>();
         if (_gameTime == null)
         {
-            Debug.LogError("텍스트UI를 GlobarTimeUI에 넣어주세요");
+            // Debug.LogError("텍스트UI를 GlobarTimeUI에 넣어주세요");
             return;
         }
     }

@@ -14,6 +14,7 @@ public class CharacterCardUI : MonoBehaviour
         _cardImg.sprite = img;
 
         _selectButton.onClick.RemoveAllListeners();
+        _selectButton.onClick.AddListener(() => GameManager.Instance.Sound.GetBGMChage(1));
         _selectButton.onClick.AddListener(() => onSelect?.Invoke());
     }
 }

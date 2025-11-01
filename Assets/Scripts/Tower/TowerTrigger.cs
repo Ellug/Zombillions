@@ -8,64 +8,56 @@ public class TowerTrigger : MonoBehaviour
 {
     [SerializeField] private Transform _towerHead;
     [SerializeField] private float _rotationSpeed;
-    [SerializeField] private List<Transform> _targetEnemies = new List<Transform>();
-    private Transform currentEnemy;
+    private TowerData _towerData;
+    private Transform _currentEnemy;
+
 
     private void Update()
     {
+        SetCurrentEnemy();
         RotationUpdate();
     }
-    public void CheckEmpty()
-    {
-        _targetEnemies.RemoveAll(emptyEnemy => emptyEnemy == null);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            if (!_targetEnemies.Contains(other.transform))
-            {
-                _targetEnemies.Add(other.transform);
-            }
-        }
-    }
-
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if(other.transform == _currentEnemy)
         {
-            if (_targetEnemies.Contains(other.transform))
-            {
-                _targetEnemies.Remove(other.transform);
-            }
+            _currentEnemy = null;
         }
     }
-
-    public Transform GetCurrentEnemy()
+    public void SetTowerData(TowerData data)
     {
-        CheckEmpty();
+        _towerData = data;
+    }
 
-        if (_targetEnemies.Count > 0)
+    public void SetCurrentEnemy()
+    {
+        if (_currentEnemy != null && _currentEnemy.gameObject.activeSelf)
         {
-            return _targetEnemies[0];
+            return;
         }
-        else
+
+        Collider[] hits = Physics.OverlapSphere(transform.position, _towerData.attackRange);
+        foreach (var hit in hits)
         {
-            return null;
+            if (hit.CompareTag("Enemy") && hit.gameObject.activeSelf)
+            {
+                _currentEnemy = hit.transform;
+                return;
+            }
         }
+        _currentEnemy = null;
     }
 
     private void RotationUpdate()
     {
-        if(_towerHead == null)
+        if (_towerHead == null)
         {
             return;
         }
-        currentEnemy = GetCurrentEnemy();
-        if (currentEnemy != null)
+
+        if (_currentEnemy != null)
         {
-            Vector3 direction = currentEnemy.position - _towerHead.position;
+            Vector3 direction = _currentEnemy.position - _towerHead.position;
             direction.y = 0f;
 
             if (direction.sqrMagnitude > 0.01f)
@@ -86,5 +78,9 @@ public class TowerTrigger : MonoBehaviour
                     Time.deltaTime * _rotationSpeed
                     );
         }
+    }
+    public Transform GetCurrentEnemy()
+    {
+        return _currentEnemy;
     }
 }

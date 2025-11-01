@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Howler : EnemyBase
 {
-    [SerializeField] public string pooltag = "Howler";
     [SerializeField] private float _HowlingRange = 20f;
     protected override void Start()
     {

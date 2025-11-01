@@ -7,7 +7,6 @@ public class Pool
 {
     public string tag;
     public GameObject prefab;
-    public int size;
 }
 
 public class ObjectManager : MonoBehaviour
@@ -15,6 +14,7 @@ public class ObjectManager : MonoBehaviour
     public static ObjectManager Instance;
     public List<Pool> pools;
     private Dictionary<string, Queue<GameObject>> poolDictionary;
+    private Dictionary<string, Transform> _poolParentDictionary;
 
     void Awake()
     {
@@ -33,6 +33,7 @@ public class ObjectManager : MonoBehaviour
     private void InitializePools()
     {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
+        _poolParentDictionary = new Dictionary<string, Transform>();
 
         foreach (Pool pool in pools)
         {
@@ -40,12 +41,7 @@ public class ObjectManager : MonoBehaviour
             GameObject parent = new GameObject(pool.tag + " Pool Parent");
             parent.transform.SetParent(this.transform);
 
-            for (int i = 0; i < pool.size; i++)
-            {
-                GameObject obj = Instantiate(pool.prefab, parent.transform);
-                obj.SetActive(false);
-                objectPool.Enqueue(obj);
-            }
+            _poolParentDictionary.Add(pool.tag, parent.transform);
 
             poolDictionary.Add(pool.tag, objectPool);
         }
@@ -62,18 +58,35 @@ public class ObjectManager : MonoBehaviour
         }
 
         Queue<GameObject> objectPool = poolDictionary[tag];
+        GameObject objectToSpawn = null;
         if (objectPool.Count == 0)
         {
-            Debug.LogWarning($"Pool {tag} is empty. Cannot spawn.");
-            return null;
+            Pool poolConfig = pools.Find(p => p.tag == tag);
+            if (poolConfig == null)
+            {
+                Debug.LogError($"[POOL ERROR] Dynamic spawn failed. Pool config not found for tag: {tag}");
+                return null;
+            }
+            Transform parentTransform = _poolParentDictionary[tag];
+            objectToSpawn = Instantiate(poolConfig.prefab, parentTransform);
+        }
+        else
+        {
+            objectToSpawn = objectPool.Dequeue();
         }
 
-        GameObject objectToSpawn = objectPool.Dequeue();
+        if (objectToSpawn.transform.parent == null)
+        {
+            Transform parentTransform = _poolParentDictionary[tag];
+            objectToSpawn.transform.SetParent(parentTransform);
+        }
+
         EnemyBase enemyComponent = objectToSpawn.GetComponent<EnemyBase>();
         if (enemyComponent != null)
         {
             enemyComponent.ResetForPooling();
         }
+
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;
         objectToSpawn.SetActive(true);
@@ -100,17 +113,26 @@ public class ObjectManager : MonoBehaviour
         }
 
         Queue<GameObject> objectPool = poolDictionary[tag];
+        GameObject objectToSpawn = null;
+
         if (objectPool.Count == 0)
         {
-            Debug.LogWarning($"UI Pool {tag} is empty. Cannot spawn.");
-            return null;
+            Pool poolConfig = pools.Find(p => p.tag == tag);
+            if (poolConfig == null)
+            {
+                Debug.LogError($"[POOL ERROR] Dynamic spawn failed. Pool config not found for tag: {tag}");
+                return null;
+            }
+            objectToSpawn = Instantiate(poolConfig.prefab);
         }
-
-        GameObject objectToSpawn = objectPool.Dequeue();
+        else
+        {
+            objectToSpawn = objectPool.Dequeue();
+        }
         objectToSpawn.transform.SetParent(parent, false);
         objectToSpawn.transform.localPosition = Vector3.zero;
         objectToSpawn.transform.localRotation = Quaternion.identity;
-        objectToSpawn.transform.localScale = Vector3.one; 
+        objectToSpawn.transform.localScale = Vector3.one;
 
         objectToSpawn.SetActive(true);
 

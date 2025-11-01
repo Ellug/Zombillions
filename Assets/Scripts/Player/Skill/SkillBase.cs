@@ -5,6 +5,7 @@ public abstract class SkillBase
     protected string _skillName;
     protected float _coolTime;
     protected float _curCool;
+    protected int _soundIndex = -1;
     protected Sprite _icon;
 
     public Sprite Icon { get { return _icon; }}
@@ -32,6 +33,9 @@ public abstract class SkillBase
         {
             ActivateSkill();
             _curCool = _coolTime;
+
+            if (_soundIndex >= _player._audioClip.Length) return;
+            GameManager.Instance.Sound.EffectSound.GetSoundEffect(_player._audioClip[_soundIndex]);
         }
     }
 

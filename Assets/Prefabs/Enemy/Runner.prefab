@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7702551765875607134}
   - component: {fileID: 3415948039332931397}
   - component: {fileID: -1261636312598193473}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Runner
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -54,8 +54,8 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4488770537272071640}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -154,6 +154,8 @@ MonoBehaviour:
   _AttackDelay: 0
   _poolTag: Runner
   _Chase: 0
+  _enemyAttackSound: {fileID: 0}
+  _enemyDieSound: {fileID: 8300000, guid: 2a091ae680e70d143ba5ffd39355f600, type: 3}
 --- !u!54 &-1261636312598193473
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -192,7 +194,6 @@ GameObject:
   - component: {fileID: 648941794334643445}
   - component: {fileID: 603643499531855955}
   - component: {fileID: 981091098232175453}
-  - component: {fileID: 7932459153266667379}
   - component: {fileID: 609120497573585501}
   m_Layer: 0
   m_Name: Cylinder
@@ -232,8 +233,8 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7113497639775318613}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -266,29 +267,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &7932459153266667379
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7113497639775318613}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!114 &609120497573585501
 MonoBehaviour:
   m_ObjectHideFlags: 0

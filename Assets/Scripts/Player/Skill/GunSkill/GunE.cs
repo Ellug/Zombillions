@@ -10,6 +10,7 @@ public class GunE : SkillBase
     {
         _skillName = "Gravity Bullet";
         _coolTime = 10f;
+        _soundIndex = 2;
         _icon = Resources.Load<Sprite>("Icons/Skill_GunE");
         _gravityBulletPrefab = Resources.Load<GameObject>("Prefabs/GravityBullet");
     }

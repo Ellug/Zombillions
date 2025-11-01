@@ -11,6 +11,7 @@ public class GunW : SkillBase
     {
         _skillName = "Sniper Rifle";
         _coolTime = 6f;
+        _soundIndex = 1;
         _icon = Resources.Load<Sprite>("Icons/Skill_GunW");
     }
     
