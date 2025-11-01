@@ -43,7 +43,7 @@ public class Tower : MonoBehaviour
         SphereCollider childCollider = GetComponentInChildren<SphereCollider>();
         if (childCollider != null)
         {
-            childCollider.radius = _towerData.attackRange / _towerData.sizeZ;
+            childCollider.radius = _towerData.attackRange /childCollider.transform.lossyScale.z;
         }
 
         _bulletSpawner = FindObjectOfType<BulletSpawner>();
