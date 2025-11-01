@@ -3,11 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class EnemyWave : MonoBehaviour
+public class EnemyWave : MonoBehaviour, ITimeObserver
 {
     [SerializeField] public float _WaveRange = 30f;
     [SerializeField] GameObject targetObject;
     [SerializeField] public bool WaveTest = false;
+
+    private GlobalTime _globalTime;
+
+    private void OnEnable()
+    {
+        _globalTime = FindObjectOfType<GlobalTime>();
+        if (_globalTime != null)
+            _globalTime.AddObserver(this);
+    }
+
+        private void OnDisable()
+    {
+        if (_globalTime != null)
+            _globalTime.RemoveObserver(this);
+    }
+
+    public void OnTimeZoneChange(Day newTimeZone)
+    {
+        if (newTimeZone == Day.Night)
+        {
+            StartWave();
+        }
+    }
+
     private void StartWave()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, _WaveRange);
@@ -25,27 +49,28 @@ public class EnemyWave : MonoBehaviour
             }
         }
     }
-    void Start()
-    {
-        StartCoroutine(RepeatFunctionEveryTenMinutes());
-    }
+    // void Start()
+    // {
+    //     StartCoroutine(RepeatFunctionEveryTenMinutes());
+    // }
 
-    void Update()
-    {
+    // void Update()
+    // {
         // if (WaveTest)
         // {
         //     StartWave();
         // }
-    }
-    IEnumerator RepeatFunctionEveryTenMinutes()
-    {
-        float tenMinutes = 60.0f;
-        yield return new WaitForSeconds(tenMinutes);
+    // }
+    
+    // IEnumerator RepeatFunctionEveryTenMinutes()
+    // {
+    //     float tenMinutes = 60.0f;
+    //     yield return new WaitForSeconds(tenMinutes);
 
-        while (true)
-        {
-            StartWave();
-            yield return new WaitForSeconds(tenMinutes);
-        }
-    }
+    //     while (true)
+    //     {
+    //         StartWave();
+    //         yield return new WaitForSeconds(tenMinutes);
+    //     }
+    // }
 }

@@ -61,7 +61,7 @@ public class SoundManager : MonoBehaviour , ITimeObserver
     }
 
     //≥∑π„¿Ã πŸ≤Ó∏È BGM∆‰¿ÃµÂæ∆øÙ
-    public void OnTimeZoneChange()
+    public void OnTimeZoneChange(Day newTimeZone)
     {
         Day timeZone = GameManager.Instance.Timer.CurrentTimeZone;
 

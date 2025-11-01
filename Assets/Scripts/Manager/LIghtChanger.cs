@@ -37,7 +37,7 @@ public class LIghtChanger : MonoBehaviour , ITimeObserver
     }
 
     //GlobarTime의 낮/밤 변화에 밝기를 조절하는 옵저버 패턴
-    public void OnTimeZoneChange()
+    public void OnTimeZoneChange(Day newTimeZone)
     {
         if (_gameLight == null)
         {
