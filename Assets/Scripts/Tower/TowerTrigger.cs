@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class TowerTrigger : MonoBehaviour
 {
@@ -10,16 +12,33 @@ public class TowerTrigger : MonoBehaviour
     [SerializeField] private float _rotationSpeed;
     private TowerData _towerData;
     private Transform _currentEnemy;
-
+    private bool _OnTrigger = false;
 
     private void Update()
     {
-        SetCurrentEnemy();
+        //SetCurrentEnemy();
+        if (_OnTrigger == true)
+        {
+            Debug.Log("온트리거가 되서 업데이트 도는중.");
+            SetCurrentEnemy();
+        }
         RotationUpdate();
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform == _currentEnemy)
+        {
+            return;
+        }
+        else if (other.transform != _currentEnemy && other.CompareTag("Enemy"))
+        {
+            Debug.Log("적 들어와서 OnTrigger 트루됨");
+            _OnTrigger = true;
+        }
     }
     private void OnTriggerExit(Collider other)
     {
-        if(other.transform == _currentEnemy)
+        if (other.transform == _currentEnemy)
         {
             _currentEnemy = null;
         }
@@ -36,7 +55,7 @@ public class TowerTrigger : MonoBehaviour
             return;
         }
 
-        Collider[] hits = Physics.OverlapSphere(transform.position, _towerData.attackRange / _towerData.sizeZ);
+        Collider[] hits = Physics.OverlapSphere(transform.position, _towerData.attackRange);
         foreach (var hit in hits)
         {
             if (hit.CompareTag("Enemy") && hit.gameObject.activeSelf)
@@ -45,6 +64,7 @@ public class TowerTrigger : MonoBehaviour
                 return;
             }
         }
+        _OnTrigger = false;
         _currentEnemy = null;
     }
 
