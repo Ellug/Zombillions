@@ -61,6 +61,10 @@ public class EnemyAttack : MonoBehaviour
             PlayerBase player = target.GetComponent<PlayerBase>();
             if (player != null)
             {
+                // 에너미 플레이어 공격시 효과음
+                if(_enemyBase._enemyAttackSound != null)
+                    GameManager.Instance.Sound.EffectSound.GetSoundEffect(_enemyBase._enemyAttackSound);
+
                 player.TakeDamage(damage);
                 return;
             }

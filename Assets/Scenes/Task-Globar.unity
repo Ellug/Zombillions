@@ -122,51 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &89321176
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 89321178}
-  - component: {fileID: 89321177}
-  m_Layer: 0
-  m_Name: SoundPlayer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &89321177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 89321176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb1d080d9aafc194ea28fd874d6c0876, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _audioClip: {fileID: 8300000, guid: 33c982f41481d0f48a3cbd6c6f8be7e0, type: 3}
---- !u!4 &89321178
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 89321176}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1139.2816, y: 471.37494, z: 48.274994}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &207653272
 GameObject:
   m_ObjectHideFlags: 0
@@ -1027,7 +982,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9009128854551650190, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
       propertyPath: _soundClip.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9009128854551650190, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
       propertyPath: _soundClip.Array.data[0]
@@ -1036,11 +991,11 @@ PrefabInstance:
     - target: {fileID: 9009128854551650190, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
       propertyPath: _soundClip.Array.data[1]
       value: 
-      objectReference: {fileID: 8300000, guid: 4670947c95961c94b91d254e31027c66, type: 3}
+      objectReference: {fileID: 8300000, guid: 7c1a2a98a4cf34642be6a2354f5d87aa, type: 3}
     - target: {fileID: 9009128854551650190, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
       propertyPath: _soundClip.Array.data[2]
       value: 
-      objectReference: {fileID: 8300000, guid: 4670947c95961c94b91d254e31027c66, type: 3}
+      objectReference: {fileID: 8300000, guid: df4e79ee618944f42b33693379af1213, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1058,4 +1013,3 @@ SceneRoots:
   - {fileID: 1365273315}
   - {fileID: 1728281982}
   - {fileID: 1050559567}
-  - {fileID: 89321178}
