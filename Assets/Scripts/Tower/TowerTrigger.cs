@@ -19,7 +19,6 @@ public class TowerTrigger : MonoBehaviour
         //SetCurrentEnemy();
         if (_OnTrigger == true)
         {
-            Debug.Log("온트리거가 되서 업데이트 도는중.");
             SetCurrentEnemy();
         }
         RotationUpdate();
@@ -32,7 +31,6 @@ public class TowerTrigger : MonoBehaviour
         }
         else if (other.transform != _currentEnemy && other.CompareTag("Enemy"))
         {
-            Debug.Log("적 들어와서 OnTrigger 트루됨");
             _OnTrigger = true;
         }
     }
