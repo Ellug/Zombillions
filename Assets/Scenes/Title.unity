@@ -175,8 +175,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7718145874955055274, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7718145874955055274, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
       propertyPath: m_Volume
-      value: 0.03
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7770829631757645365, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
       propertyPath: _gameLight
@@ -197,7 +201,7 @@ PrefabInstance:
     - target: {fileID: 9009128854551650190, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
       propertyPath: _soundClip.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: 4670947c95961c94b91d254e31027c66, type: 3}
+      objectReference: {fileID: 8300000, guid: 6fa7766c995c3ef4a87be289d9b71a3b, type: 3}
     - target: {fileID: 9009128854551650190, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
       propertyPath: _soundClip.Array.data[1]
       value: 

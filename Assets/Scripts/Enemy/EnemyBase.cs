@@ -18,6 +18,12 @@ public class EnemyBase : MonoBehaviour
     public bool _Chase = false;
     private EnemyHPBar _myHealthBar;
     private static Transform _mainCanvasTransform;
+
+    // EnemyAttack클래스의 ApplyDamage() 메서드에서 플레이어 공격시에만 사운드 추가
+    public AudioClip _enemyAttackSound;
+    // EnemyBase클래스의 Die()에 죽는 사운드 추가
+    public AudioClip _enemyDieSound;
+
     protected virtual void Start()
     {
         _sphereCollider = GetComponent<SphereCollider>();
@@ -127,8 +133,13 @@ public class EnemyBase : MonoBehaviour
             ObjectManager.Instance.ReturnToPool(_poolTag, gameObject);
             if (_myHealthBar != null)
             {
+                // 에너미 플레이어 죽을 때, 효과음
+                if(_enemyDieSound != null)
+                    GameManager.Instance.Sound.EffectSound.GetSoundEffect(_enemyDieSound);
+
                 ObjectManager.Instance.ReturnToPool("HPBar", _myHealthBar.gameObject);
                 _myHealthBar = null;
+
             }
         }
         else

@@ -229,6 +229,8 @@ MonoBehaviour:
   _AttackDelay: 0
   _poolTag: Worker
   _Chase: 0
+  _enemyAttackSound: {fileID: 8300000, guid: 33c982f41481d0f48a3cbd6c6f8be7e0, type: 3}
+  _enemyDieSound: {fileID: 8300000, guid: 2a091ae680e70d143ba5ffd39355f600, type: 3}
 --- !u!135 &6078749131620074641
 SphereCollider:
   m_ObjectHideFlags: 0

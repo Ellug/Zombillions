@@ -133,6 +133,8 @@ MonoBehaviour:
   _AttackDelay: 0
   _poolTag: Boomer
   _Chase: 0
+  _enemyAttackSound: {fileID: 0}
+  _enemyDieSound: {fileID: 8300000, guid: 2a091ae680e70d143ba5ffd39355f600, type: 3}
 --- !u!54 &1324319291286329391
 Rigidbody:
   m_ObjectHideFlags: 0
