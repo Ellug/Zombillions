@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     public LIghtChanger Light {  get; private set; }
     public SoundManager Sound {  get; private set; }
-
+    public GoldManager Gold { get; private set; }
     public GameState State { get; private set; }
 
     public GameObject SelectedPlayerPrefab { get; private set; }
@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
             Scene = GetComponent<SceneChanger>();
             Light = GetComponent<LIghtChanger>();
             Sound = GetComponent<SoundManager>();
+            Gold = GetComponent<GoldManager>();
         }
         else
         {

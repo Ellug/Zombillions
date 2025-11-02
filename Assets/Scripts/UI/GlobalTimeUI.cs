@@ -32,7 +32,7 @@ public class GlobalTimeUI : MonoBehaviour
 
     void Start()
     {
-        if (_gameTime == null)
+        if (_globalTime != null)
             return;
 
         _globalTime = GameManager.Instance.GetComponent<GlobalTime>();
