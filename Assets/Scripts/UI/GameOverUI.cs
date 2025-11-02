@@ -32,5 +32,3 @@ public class GameOverUI : MonoBehaviour
         Instantiate(_gameOverPrefab, canvasTransform.position, Quaternion.identity, canvasTransform);
     }
 }
-
-

@@ -128,11 +128,4 @@ public class Tower : MonoBehaviour
     {
         return _mySpawner;
     }
-
-    // Die 동작 테스트 코드 - 게임오버 확인 완료시 제거
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
-            Die();
-    }
 }
