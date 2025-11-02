@@ -1364,7 +1364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90cca9ab729a76e4abd61a179ab7a231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _WaveRange: 50
+  _WaveRange: 100
   targetObject: {fileID: 172704737}
   WaveTest: 0
 --- !u!114 &356811330
@@ -1385,23 +1385,34 @@ MonoBehaviour:
     waveEnemies:
     - enemyPoolTag: Runner
       count: 100
-      spawnInterval: 3
-    - enemyPoolTag: Worker
-      count: 100
       spawnInterval: 2
+    - enemyPoolTag: Worker
+      count: 150
+      spawnInterval: 1
     - enemyPoolTag: Boomer
-      count: 100
-      spawnInterval: 3
+      count: 50
+      spawnInterval: 2
   - duration: 200
     waveEnemies:
     - enemyPoolTag: Runner
-      count: 200
+      count: 150
       spawnInterval: 2
     - enemyPoolTag: Worker
-      count: 200
+      count: 250
       spawnInterval: 1
     - enemyPoolTag: Boomer
-      count: 200
+      count: 100
+      spawnInterval: 2
+  - duration: 300
+    waveEnemies:
+    - enemyPoolTag: Runner
+      count: 250
+      spawnInterval: 1.5
+    - enemyPoolTag: Worker
+      count: 350
+      spawnInterval: 0.5
+    - enemyPoolTag: Boomer
+      count: 100
       spawnInterval: 2
   spawnPoint: {fileID: 356811331}
 --- !u!4 &356811331
@@ -4210,23 +4221,34 @@ MonoBehaviour:
     waveEnemies:
     - enemyPoolTag: Runner
       count: 100
-      spawnInterval: 3
-    - enemyPoolTag: Worker
-      count: 100
       spawnInterval: 2
+    - enemyPoolTag: Worker
+      count: 150
+      spawnInterval: 1
     - enemyPoolTag: Boomer
-      count: 100
-      spawnInterval: 3
+      count: 50
+      spawnInterval: 2
   - duration: 200
     waveEnemies:
     - enemyPoolTag: Runner
-      count: 200
+      count: 150
       spawnInterval: 2
     - enemyPoolTag: Worker
-      count: 200
+      count: 250
       spawnInterval: 1
     - enemyPoolTag: Boomer
-      count: 200
+      count: 100
+      spawnInterval: 2
+  - duration: 300
+    waveEnemies:
+    - enemyPoolTag: Runner
+      count: 250
+      spawnInterval: 1.5
+    - enemyPoolTag: Worker
+      count: 350
+      spawnInterval: 0.5
+    - enemyPoolTag: Boomer
+      count: 100
       spawnInterval: 2
   spawnPoint: {fileID: 1386075788}
 --- !u!4 &1386075788
@@ -4277,7 +4299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90cca9ab729a76e4abd61a179ab7a231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _WaveRange: 50
+  _WaveRange: 100
   targetObject: {fileID: 172704737}
   WaveTest: 0
 --- !u!1 &1462096480
@@ -4787,7 +4809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90cca9ab729a76e4abd61a179ab7a231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _WaveRange: 50
+  _WaveRange: 100
   targetObject: {fileID: 172704737}
   WaveTest: 0
 --- !u!114 &1636689250
@@ -4808,23 +4830,34 @@ MonoBehaviour:
     waveEnemies:
     - enemyPoolTag: Runner
       count: 100
-      spawnInterval: 3
-    - enemyPoolTag: Worker
-      count: 100
       spawnInterval: 2
+    - enemyPoolTag: Worker
+      count: 150
+      spawnInterval: 1
     - enemyPoolTag: Boomer
-      count: 100
-      spawnInterval: 3
+      count: 50
+      spawnInterval: 2
   - duration: 200
     waveEnemies:
     - enemyPoolTag: Runner
-      count: 200
+      count: 150
       spawnInterval: 2
     - enemyPoolTag: Worker
-      count: 200
+      count: 250
       spawnInterval: 1
     - enemyPoolTag: Boomer
-      count: 200
+      count: 100
+      spawnInterval: 2
+  - duration: 300
+    waveEnemies:
+    - enemyPoolTag: Runner
+      count: 250
+      spawnInterval: 1.5
+    - enemyPoolTag: Worker
+      count: 350
+      spawnInterval: 0.5
+    - enemyPoolTag: Boomer
+      count: 100
       spawnInterval: 2
   spawnPoint: {fileID: 1636689251}
 --- !u!4 &1636689251
@@ -6465,7 +6498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90cca9ab729a76e4abd61a179ab7a231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _WaveRange: 50
+  _WaveRange: 100
   targetObject: {fileID: 172704737}
   WaveTest: 0
 --- !u!114 &2116687262
@@ -6486,23 +6519,34 @@ MonoBehaviour:
     waveEnemies:
     - enemyPoolTag: Runner
       count: 100
-      spawnInterval: 3
-    - enemyPoolTag: Worker
-      count: 100
       spawnInterval: 2
+    - enemyPoolTag: Worker
+      count: 150
+      spawnInterval: 1
     - enemyPoolTag: Boomer
-      count: 100
-      spawnInterval: 3
+      count: 50
+      spawnInterval: 2
   - duration: 200
     waveEnemies:
     - enemyPoolTag: Runner
-      count: 200
+      count: 150
       spawnInterval: 2
     - enemyPoolTag: Worker
-      count: 200
+      count: 250
       spawnInterval: 1
     - enemyPoolTag: Boomer
-      count: 200
+      count: 100
+      spawnInterval: 2
+  - duration: 300
+    waveEnemies:
+    - enemyPoolTag: Runner
+      count: 250
+      spawnInterval: 1.5
+    - enemyPoolTag: Worker
+      count: 350
+      spawnInterval: 0.5
+    - enemyPoolTag: Boomer
+      count: 100
       spawnInterval: 2
   spawnPoint: {fileID: 2116687263}
 --- !u!4 &2116687263

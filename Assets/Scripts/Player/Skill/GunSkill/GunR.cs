@@ -30,7 +30,6 @@ public class GunR : SkillBase
     protected override void ActivateSkill()
     {
         if (_player == null) return;
-        Debug.Log($"4 스킬 {_skillName} 실행");
 
         _player.StartCoroutine(FireRoutine());
     }
