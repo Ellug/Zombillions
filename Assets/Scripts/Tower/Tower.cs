@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static Bullet;
 
-//Å¸¿ö µ¿ÀÛ Ã³¸®
+//Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 public class Tower : MonoBehaviour
 {
     [SerializeField] private TowerData _towerData;
@@ -39,17 +39,17 @@ public class Tower : MonoBehaviour
         _towerMaxHp = _towerData.maxHp;
         _towerCurrentHp = _towerData.maxHp;
 
-        //ÇØ´ç Å¸¿ö ÀÚ½Ä(Å¸¿ö Å¸ÀÔ)¿¡ °ø°İ¹üÀ§ ¼³Á¤
+        //ï¿½Ø´ï¿½ Å¸ï¿½ï¿½ ï¿½Ú½ï¿½(Å¸ï¿½ï¿½ Å¸ï¿½ï¿½)ï¿½ï¿½ ï¿½ï¿½ï¿½İ¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         SphereCollider childCollider = GetComponentInChildren<SphereCollider>();
         if (childCollider != null)
         {
-            childCollider.radius = _towerData.attackRange / _towerData.sizeZ;
+            childCollider.radius = _towerData.attackRange /childCollider.transform.lossyScale.z;
         }
 
         _bulletSpawner = FindObjectOfType<BulletSpawner>();
         if (_bulletSpawner == null)
         {
-            Debug.LogError("BulletSpawner¸øÃ£À½.");
+            Debug.LogError("BulletSpawnerï¿½ï¿½Ã£ï¿½ï¿½.");
         }
 
         //íƒ€ì›Œ íŠ¸ë¦¬ê±°ì— ë°ì´í„° ì „ë‹¬í•˜ê¸°..
@@ -100,11 +100,26 @@ public class Tower : MonoBehaviour
         if (_towerCurrentHp <= 0)
         {
             _mySpawner?.ResetBuilt();
-            Destroy(gameObject);
+            // Destroy(gameObject);
+            Die();
         }
     }
 
-    //½ºÆ÷³Ê ¿¬°á½ÃÅ°±â
+    private void Die()
+    {
+        Debug.Log($"[Tower] {name} íŒŒê´´ë¨. tag={_towerData.towerTag}");
+
+        Destroy(gameObject);
+
+        // if HQ Tower destroy = game over
+        if (_towerData.towerTag == TowerData.TowerTag.HQTower)
+        {
+            Debug.Log("HQ íŒŒê´´ ëìŒ");
+            GameManager.Instance.GetGameStateChange(GameManager.GameState.GameOver);
+        }
+    }
+
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½
     public void SetSpawner(TowerSpawner spawner)
     {
         _mySpawner = spawner;
@@ -112,5 +127,12 @@ public class Tower : MonoBehaviour
     public TowerSpawner GetSpawner()
     {
         return _mySpawner;
+    }
+
+    // Die ë™ì‘ í…ŒìŠ¤íŠ¸ ì½”ë“œ - ê²Œì„ì˜¤ë²„ í™•ì¸ ì™„ë£Œì‹œ ì œê±°
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+            Die();
     }
 }

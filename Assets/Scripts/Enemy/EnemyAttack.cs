@@ -55,26 +55,37 @@ public class EnemyAttack : MonoBehaviour
 
         Debug.Log($"{_enemyBase.gameObject.name}이(가) {targetTag} ({target.name})에게 {damage} 데미지를 입혔습니다!");
 
-        // 플레이어 공격 - 작동 확인
+        // 공격
         if (target.CompareTag("Player"))
         {
             PlayerBase player = target.GetComponent<PlayerBase>();
             if (player != null)
             {
                 // 에너미 플레이어 공격시 효과음
-                if(_enemyBase._enemyAttackSound != null)
+                if (_enemyBase._enemyAttackSound != null)
                     GameManager.Instance.Sound.EffectSound.GetSoundEffect(_enemyBase._enemyAttackSound);
 
                 player.TakeDamage(damage);
                 return;
             }
         }
+
         if (target.CompareTag("Tower"))
         {
             Tower tower = target.GetComponent<Tower>();
             if (tower != null)
             {
                 tower.TakeDamage(damage);
+                return;
+            }
+        }
+        
+        if (target.CompareTag("HQ"))
+        {
+            Tower hq = target.GetComponent<Tower>();
+            if (hq != null)
+            {
+                hq.TakeDamage(damage);
                 return;
             }
         }

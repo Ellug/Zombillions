@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class TowerTrigger : MonoBehaviour
 {
@@ -10,16 +12,31 @@ public class TowerTrigger : MonoBehaviour
     [SerializeField] private float _rotationSpeed;
     private TowerData _towerData;
     private Transform _currentEnemy;
-
+    private bool _OnTrigger = false;
 
     private void Update()
     {
-        SetCurrentEnemy();
+        //SetCurrentEnemy();
+        if (_OnTrigger == true)
+        {
+            SetCurrentEnemy();
+        }
         RotationUpdate();
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform == _currentEnemy)
+        {
+            return;
+        }
+        else if (other.transform != _currentEnemy && other.CompareTag("Enemy"))
+        {
+            _OnTrigger = true;
+        }
     }
     private void OnTriggerExit(Collider other)
     {
-        if(other.transform == _currentEnemy)
+        if (other.transform == _currentEnemy)
         {
             _currentEnemy = null;
         }
@@ -45,6 +62,7 @@ public class TowerTrigger : MonoBehaviour
                 return;
             }
         }
+        _OnTrigger = false;
         _currentEnemy = null;
     }
 
