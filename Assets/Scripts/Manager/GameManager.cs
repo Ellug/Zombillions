@@ -67,8 +67,6 @@ public class GameManager : MonoBehaviour
     // 지금은 일단 게입오브젝트 파괴해서 강제 초기화하는데, 이후 고도화 필요.
     public void ResetAll()
     {
-        Debug.Log("[GameManager] 게임 데이터 전체 초기화 실행");
-
         Destroy(Instance.gameObject);
 
         // 씬 0번 로드 (메인 메뉴)

@@ -48,19 +48,19 @@ public class EnemyBase : MonoBehaviour
     {
         if (other.CompareTag("Tower"))
         {
-            Debug.Log("Tower OnTriggerEnter");
+            // Debug.Log("Tower OnTriggerEnter");
             _targetTransform = other.transform;
             _Chase = true;
         }
         else if (other.CompareTag("Player"))
         {
-            Debug.Log("Player OnTriggerEnter");
+            // Debug.Log("Player OnTriggerEnter");
             _targetTransform = other.transform;
             _Chase = true;
         }
         else if (other.CompareTag("HQ")) 
         {
-            Debug.Log("HQ OnTriggerEnter");
+            // Debug.Log("HQ OnTriggerEnter");
             _targetTransform = other.transform;
             _Chase = true;
         }
@@ -99,14 +99,14 @@ public class EnemyBase : MonoBehaviour
                 _myHealthBar = hpBarGO.GetComponent<EnemyHPBar>();
                 _myHealthBar.Setup(this);
 
-                if (_myHealthBar.TargetEnemyBase == this)
-                {
-                    Debug.Log($"HP Bar 할당 성공: {gameObject.name} -> {_myHealthBar.gameObject.name}");
-                }
-                else
-                {
-                    Debug.LogError("HP Bar 할당 실패! TargetEnemyBase가 null이거나 다릅니다.");
-                }
+                // if (_myHealthBar.TargetEnemyBase == this)
+                // {
+                //     Debug.Log($"HP Bar 할당 성공: {gameObject.name} -> {_myHealthBar.gameObject.name}");
+                // }
+                // else
+                // {
+                //     Debug.LogError("HP Bar 할당 실패! TargetEnemyBase가 null이거나 다릅니다.");
+                // }
             }
         }
     }
