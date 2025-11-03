@@ -36,9 +36,8 @@ public class Howler : EnemyBase
         }
     }
 
-    protected override void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
-        base.OnTriggerEnter(other);
         if (_Chase) 
         {
             Howling();
