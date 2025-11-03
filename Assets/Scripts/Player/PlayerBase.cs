@@ -7,7 +7,6 @@ public abstract class PlayerBase : MonoBehaviour
     [SerializeField] protected float _maxHp = 100f;
     [SerializeField] protected float _curHp = 100f;
     [SerializeField] protected float _moveSpeed = 20f;
-    [SerializeField] protected float _rotSpeed = 100f;
     [SerializeField] protected float _atkDelay = 0.4f;
     [SerializeField] protected float _def = 0f;
     [SerializeField] protected float _atk = 10f;

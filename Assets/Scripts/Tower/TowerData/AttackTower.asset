@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _towerPrefab: {fileID: 1430577679983278425, guid: 69c9ee1b733d4ff4c948ec3dc3e08baa, type: 3}
   towerTag: 1
-  maxHp: 200
+  maxHp: 400
   sizeZ: 6
-  attackPower: 4
-  attackRange: 60
-  attackSpeed: 20
+  attackPower: 5
+  attackRange: 50
+  attackSpeed: 30
   bulletSpeed: 100
   pierce: 1
-  knockback: 2
-  cost: 100
+  knockback: 1
+  cost: 75

@@ -34,6 +34,7 @@ public class LIghtChanger : MonoBehaviour , ITimeObserver
     void OnSceneLoaded(Scene s, LoadSceneMode m)
     {
         _gameLight = FindAnyObjectByType<Light>();
+        GameManager.Instance.Timer.Init();
     }
 
     //GlobarTime의 낮/밤 변화에 밝기를 조절하는 옵저버 패턴
