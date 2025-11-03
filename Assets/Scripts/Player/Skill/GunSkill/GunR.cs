@@ -9,7 +9,7 @@ public class GunR : SkillBase
     private float _bulletSpeed = 180f;
     private float _bulletRange = 120f;
     private float _dmgMultiplier = 0.6f;
-    private float _knockback = 0.1f;
+    private float _knockback = 0.5f;
 
     private WaitForSeconds _wait;
 
@@ -61,12 +61,11 @@ public class GunR : SkillBase
                 _knockback,
                 _bulletRange,
                 Bullet.BulletColor.Red,
-                Bullet.BulletSize.Small
+                Bullet.BulletSize.Small,
+                _player.transform
             );
 
             yield return _wait;
         }
-
-        Debug.Log($"{_skillName} 종료");
     }
 }

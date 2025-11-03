@@ -12,6 +12,7 @@ TagManager:
   - HQ
   - Enemy
   - EnemyHPBar
+  - GoldMine
   layers:
   - Default
   - TransparentFX
@@ -22,9 +23,9 @@ TagManager:
   - Ground
   - TowerScaner
   - Enemy
-  - 
-  - 
-  - 
+  - Tower
+  - Player
+  - HQ
   - 
   - 
   - 

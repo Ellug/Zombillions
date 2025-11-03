@@ -15,9 +15,10 @@ public class Bullet : MonoBehaviour
     private BulletColor _color;
     private BulletSize _size;
     private BulletSpawner _spawner;
+    private Transform _AttackerTransform;
 
     // 파라미터 받아서 총알에 속성 부여 (방향, 속도, 대미지 등등 받아서 사용)
-    public void Init(Vector3 dir, float speed, float dmg, int pierce, float knockback, float range, BulletColor color, BulletSize size, BulletSpawner spawner)
+    public void Init(Vector3 dir, float speed, float dmg, int pierce, float knockback, float range, BulletColor color, BulletSize size, Transform AttackerTransform, BulletSpawner spawner)
     {
         _dir = dir.normalized;
         _speed = speed;
@@ -29,6 +30,7 @@ public class Bullet : MonoBehaviour
         _size = size;
         _spawner = spawner;
         _startPos = transform.position;
+        _AttackerTransform = AttackerTransform;
 
         SetupRender();
     }
@@ -44,14 +46,23 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             EnemyBase enemy = other.GetComponent<EnemyBase>();
-            enemy.TakeDamage(_dmg);
-            // 총알과 에네미 중심 사이 벡터 방향으로 넉백 부여. 넉백 메서드는 에네미에서 구현 필요
-            // enemy.Knockback((enemy.transform.position - transform.position).normalized * _knockback);
+            enemy.TakeDamage(_dmg, _AttackerTransform);
+
+            // 넉백 (Transform 이동)
+            Vector3 dir = (enemy.transform.position - _startPos).normalized;
+            Vector3 newPos = enemy.transform.position + dir * _knockback;
+            enemy.transform.position = newPos;
 
             _penetration--;
             
             if (_penetration <= 0)
                 _spawner.Despawn(this);
+        }
+
+        if (other.gameObject.CompareTag("GoldMine"))
+        {
+            GoldMine gold = other.GetComponent<GoldMine>();
+            gold.TakeDamage(_dmg);
         }
     }
 

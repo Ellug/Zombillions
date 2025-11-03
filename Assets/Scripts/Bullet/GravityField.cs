@@ -48,7 +48,7 @@ public class GravityField : MonoBehaviour
 
                 var enemy = hit.GetComponent<EnemyBase>();
                 if (enemy != null)
-                    enemy.TakeDamage(0.1f);
+                    enemy.TakeDamage(0.1f, null);
             }
 
             yield return _wait;

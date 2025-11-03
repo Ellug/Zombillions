@@ -39,20 +39,19 @@ public class Tower : MonoBehaviour
         _towerMaxHp = _towerData.maxHp;
         _towerCurrentHp = _towerData.maxHp;
 
-        //�ش� Ÿ�� �ڽ�(Ÿ�� Ÿ��)�� ���ݹ��� ����
+        //TowerCollider Size Setting
         SphereCollider childCollider = GetComponentInChildren<SphereCollider>();
         if (childCollider != null)
         {
-            childCollider.radius = _towerData.attackRange /childCollider.transform.lossyScale.z;
+            childCollider.radius = _towerData.attackRange / childCollider.transform.lossyScale.z;
         }
 
         _bulletSpawner = FindObjectOfType<BulletSpawner>();
         if (_bulletSpawner == null)
         {
-            Debug.LogError("BulletSpawner��ã��.");
+            Debug.LogError("Can`t Find BulletSpawner.");
         }
 
-        //타워 트리거에 데이터 전달하기..
         if(_towerTracer != null)
         {
             _towerTracer.SetTowerData(_towerData);
@@ -68,6 +67,12 @@ public class Tower : MonoBehaviour
 
     private void Attack()
     {
+        //DefenceTower Exception
+        if(_towerData.towerTag == TowerData.TowerTag.DefenceTower)
+        {
+            return;
+        }
+
         Vector3 spawnPoint = _bulletSpawnPoint.position + _bulletSpawnPoint.forward;
         Vector3 targetPoint = _towerTracer.GetCurrentEnemy().transform.position;
         Vector3 dir = targetPoint - spawnPoint;
@@ -87,7 +92,8 @@ public class Tower : MonoBehaviour
                         knockback: _towerData.knockback,
                         range: _towerData.attackRange + 5f,
                         color: _bulletColor,
-                        size: _bulletSize
+                        size: _bulletSize,
+                        AttackerTransform: this.transform
                     );
             }
         }
@@ -100,26 +106,24 @@ public class Tower : MonoBehaviour
         if (_towerCurrentHp <= 0)
         {
             _mySpawner?.ResetBuilt();
-            // Destroy(gameObject);
             Die();
         }
     }
 
     private void Die()
     {
-        Debug.Log($"[Tower] {name} 파괴됨. tag={_towerData.towerTag}");
+        Debug.Log($"[Tower] {name} Destroyed. tag={_towerData.towerTag}");
 
         Destroy(gameObject);
 
         // if HQ Tower destroy = game over
         if (_towerData.towerTag == TowerData.TowerTag.HQTower)
         {
-            Debug.Log("HQ 파괴 됐음");
+            Debug.Log("HQ Destroyed!");
             GameManager.Instance.GetGameStateChange(GameManager.GameState.GameOver);
         }
     }
 
-    //������ �����Ű��
     public void SetSpawner(TowerSpawner spawner)
     {
         _mySpawner = spawner;

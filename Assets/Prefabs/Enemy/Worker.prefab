@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 567282305caee7f49b030db5d2691a53, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1744be8433ea1a849bceb15a2cf51467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attackRange: 3
 --- !u!1 &8712343191371020518
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +110,6 @@ GameObject:
   - component: {fileID: 3375530165054233622}
   - component: {fileID: 8233794372836413939}
   - component: {fileID: 7414310697800712298}
-  - component: {fileID: 6078749131620074641}
   - component: {fileID: 360064084610573962}
   m_Layer: 8
   m_Name: Worker
@@ -162,7 +162,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 567282305caee7f49b030db5d2691a53, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -203,7 +203,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1.2
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -223,7 +223,7 @@ MonoBehaviour:
   _EnemyHP: 10
   _EnemyMoveSpeed: 10
   _EnemyDMG: 5
-  _ViewRange: 5
+  _ViewRange: 25
   _targetTransform: {fileID: 0}
   _sphereCollider: {fileID: 0}
   _AttackDelay: 0
@@ -231,27 +231,6 @@ MonoBehaviour:
   _Chase: 0
   _enemyAttackSound: {fileID: 8300000, guid: 33c982f41481d0f48a3cbd6c6f8be7e0, type: 3}
   _enemyDieSound: {fileID: 8300000, guid: 2a091ae680e70d143ba5ffd39355f600, type: 3}
---- !u!135 &6078749131620074641
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8712343191371020518}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &360064084610573962
 Rigidbody:
   m_ObjectHideFlags: 0

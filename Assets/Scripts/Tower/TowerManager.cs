@@ -20,7 +20,6 @@ public class TowerManager : MonoBehaviour
     [SerializeField] private Button _deleteTowerButton;
     [SerializeField] private TowerSpawner _SetHQTowerSpawner;
 
-    //Player�� gold �� �޾ƿ���(int��).
     private TowerSpawner _selectTowerSpawner;
     private Tower _selectedTower;
 
@@ -68,7 +67,7 @@ public class TowerManager : MonoBehaviour
             SelectTowerMenu();
         }
     }
-    #region ��ư/�г� �ʱ�ȭ
+    #region button UI Setting
     private void InitButton()
     {
         _attackTowerButton.onClick.AddListener(Instance.BuildAttackTower);
@@ -84,8 +83,8 @@ public class TowerManager : MonoBehaviour
     }
     #endregion
 
-    #region �ڵ鷯
-    //���� �ڵ鷯
+    #region Handlers
+    //Handlers
     private void HandleSelection()
     {
         if (Input.GetMouseButtonDown(0))
@@ -100,12 +99,12 @@ public class TowerManager : MonoBehaviour
 
                 _selectedTower = hit.collider.GetComponent<Tower>();
                 _selectTowerSpawner = hit.collider.GetComponent<TowerSpawner>();
-                //Tower ���ø�
+                //Tower Select
                 if (_selectedTower != null && _selectedTower.TowerData.towerTag != TowerData.TowerTag.HQTower)
                 {
                     _isTowerSelected = true;
                 }
-                //TowerSpawner ���ø�
+                //TowerSpawner Select
                 else if (_selectTowerSpawner != null)
                 {
                     _isTowerSpawnerSelected = true;
@@ -115,8 +114,7 @@ public class TowerManager : MonoBehaviour
     }
     #endregion
 
-    #region �޴� ȣ��
-    //������ Ÿ�� �޴�
+    #region Menus
     private void SelectTowerMenu()
     {
         if (_selectedTower != true)
@@ -131,7 +129,6 @@ public class TowerManager : MonoBehaviour
         }
     }
 
-    //������ �޴�
     private void SelectBuildMenu()
     {
         if (_selectTowerSpawner != true)
@@ -156,10 +153,16 @@ public class TowerManager : MonoBehaviour
             BuildTriggerTower();
         }
     }
+    private void CloseMenu()
+    {
+        _isTowerSpawnerSelected = false;
+        _isTowerSelected = false;
+        _spawnTowerMenuPanel.SetActive(false);
+        _towerMenuPanel.SetActive(false);
+    }
     #endregion
 
-    #region ������ �� �޴� ȣ��
-    //�����ϰ��ִ� ��� ó�� �Ϸ� �Ǿ����� ���ڰ��� int���� playerGold �߰��ϱ�.
+    #region call Tower Build
     private void BuildAttackTower()
     {
         _selectTowerSpawner.BuildTower(TowerData.TowerTag.AttackTower);
@@ -184,7 +187,6 @@ public class TowerManager : MonoBehaviour
     }
     #endregion
 
-    #region Ÿ�� �� �޴� ȣ��
     private void DeleteTower()
     {
         TowerSpawner spawner = _selectedTower.GetSpawner();
@@ -192,15 +194,4 @@ public class TowerManager : MonoBehaviour
         _isTowerSelected = false;
         _towerMenuPanel.SetActive(false);
     }
-    #endregion
-
-    //��� �޴� �ݱ�
-    private void CloseMenu()
-    {
-        _isTowerSpawnerSelected = false;
-        _isTowerSelected = false;
-        _spawnTowerMenuPanel.SetActive(false);
-        _towerMenuPanel.SetActive(false);
-    }
-
 }
