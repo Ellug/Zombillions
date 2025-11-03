@@ -100,11 +100,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHp: 100
   _curHp: 100
-  _moveSpeed: 7
-  _rotSpeed: 100
-  _atkDelay: 0.4
+  _moveSpeed: 8
+  _atkDelay: 0.3
   _def: 0
-  _atk: 2
+  _atk: 3
   _isPlayerAlive: 1
   _reviveTime: 20
   _reviveTimer: 20
