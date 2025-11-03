@@ -8,7 +8,12 @@ public class EnemyWave : MonoBehaviour, ITimeObserver
     [SerializeField] GameObject targetObject;
     [SerializeField] public bool WaveTest = false;
 
+    [Header("Wave Settings")]
+    [SerializeField] private int _repeatCount = 10;     // 웨이브 반복 횟수
+    [SerializeField] private float _interval = 5f;
+
     private GlobalTime _globalTime;
+    private Coroutine _waveRoutine;
 
     private void OnEnable()
     {
@@ -27,8 +32,22 @@ public class EnemyWave : MonoBehaviour, ITimeObserver
     {
         if (newTimeZone == Day.Night)
         {
-            StartWave();
+            if (_waveRoutine != null)
+                StopCoroutine(_waveRoutine);
+
+            _waveRoutine = StartCoroutine(WaveRoutine());
         }
+    }
+
+    private IEnumerator WaveRoutine()
+    {
+        for (int i = 0; i < _repeatCount; i++)
+        {
+            StartWave();
+            yield return new WaitForSeconds(_interval);
+        }
+
+        _waveRoutine = null; // 루틴 종료 후 null 처리
     }
 
     private void StartWave()

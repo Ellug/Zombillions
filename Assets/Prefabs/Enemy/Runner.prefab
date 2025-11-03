@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2431433114075351026}
   - component: {fileID: 3615621928113902795}
   - component: {fileID: 7729635214484725259}
-  - component: {fileID: 7702551765875607134}
   - component: {fileID: 3415948039332931397}
   - component: {fileID: -1261636312598193473}
   m_Layer: 8
@@ -66,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f30d6f3e0be5c0c47a9c1c6a54d66739, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -107,30 +106,9 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1.2
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &7702551765875607134
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4488770537272071640}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3415948039332931397
 MonoBehaviour:
@@ -148,7 +126,7 @@ MonoBehaviour:
   _EnemyHP: 10
   _EnemyMoveSpeed: 10
   _EnemyDMG: 5
-  _ViewRange: 5
+  _ViewRange: 40
   _targetTransform: {fileID: 0}
   _sphereCollider: {fileID: 0}
   _AttackDelay: 0
@@ -279,3 +257,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1744be8433ea1a849bceb15a2cf51467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attackRange: 3
