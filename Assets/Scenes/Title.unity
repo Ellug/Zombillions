@@ -196,7 +196,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7957887219018740604, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
       propertyPath: _nightTime
-      value: 40
+      value: 240
+      objectReference: {fileID: 0}
+    - target: {fileID: 7957887219018740604, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
+      propertyPath: _timeCountSpeed
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9009128854551650190, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
       propertyPath: _soundClip.Array.size
