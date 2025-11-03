@@ -1433,7 +1433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90cca9ab729a76e4abd61a179ab7a231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _WaveRange: 115
+  _WaveRange: 120
   targetObject: {fileID: 172704737}
   WaveTest: 0
   _repeatCount: 10
@@ -1455,8 +1455,8 @@ MonoBehaviour:
   - duration: 200
     waveEnemies:
     - enemyPoolTag: Runner
-      count: 100
-      spawnInterval: 2
+      count: 120
+      spawnInterval: 1.5
     - enemyPoolTag: Worker
       count: 150
       spawnInterval: 1
@@ -1470,13 +1470,13 @@ MonoBehaviour:
     waveEnemies:
     - enemyPoolTag: Runner
       count: 150
-      spawnInterval: 2
+      spawnInterval: 1
     - enemyPoolTag: Worker
       count: 250
       spawnInterval: 1
     - enemyPoolTag: Boomer
-      count: 100
-      spawnInterval: 2
+      count: 150
+      spawnInterval: 1
     - enemyPoolTag: Howler
       count: 10
       spawnInterval: 3
@@ -1489,7 +1489,7 @@ MonoBehaviour:
       count: 350
       spawnInterval: 0.5
     - enemyPoolTag: Boomer
-      count: 100
+      count: 200
       spawnInterval: 2
     - enemyPoolTag: Howler
       count: 10
@@ -5115,8 +5115,8 @@ MonoBehaviour:
   - duration: 200
     waveEnemies:
     - enemyPoolTag: Runner
-      count: 100
-      spawnInterval: 2
+      count: 120
+      spawnInterval: 1.5
     - enemyPoolTag: Worker
       count: 150
       spawnInterval: 1
@@ -5130,13 +5130,13 @@ MonoBehaviour:
     waveEnemies:
     - enemyPoolTag: Runner
       count: 150
-      spawnInterval: 2
+      spawnInterval: 1
     - enemyPoolTag: Worker
       count: 250
       spawnInterval: 1
     - enemyPoolTag: Boomer
-      count: 100
-      spawnInterval: 2
+      count: 150
+      spawnInterval: 1
     - enemyPoolTag: Howler
       count: 10
       spawnInterval: 3
@@ -5149,7 +5149,7 @@ MonoBehaviour:
       count: 350
       spawnInterval: 0.5
     - enemyPoolTag: Boomer
-      count: 100
+      count: 200
       spawnInterval: 2
     - enemyPoolTag: Howler
       count: 10
@@ -5203,7 +5203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90cca9ab729a76e4abd61a179ab7a231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _WaveRange: 115
+  _WaveRange: 120
   targetObject: {fileID: 172704737}
   WaveTest: 0
   _repeatCount: 10
@@ -5648,7 +5648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90cca9ab729a76e4abd61a179ab7a231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _WaveRange: 115
+  _WaveRange: 120
   targetObject: {fileID: 172704737}
   WaveTest: 0
   _repeatCount: 10
@@ -5670,8 +5670,8 @@ MonoBehaviour:
   - duration: 200
     waveEnemies:
     - enemyPoolTag: Runner
-      count: 100
-      spawnInterval: 2
+      count: 120
+      spawnInterval: 1.5
     - enemyPoolTag: Worker
       count: 150
       spawnInterval: 1
@@ -5685,13 +5685,13 @@ MonoBehaviour:
     waveEnemies:
     - enemyPoolTag: Runner
       count: 150
-      spawnInterval: 2
+      spawnInterval: 1
     - enemyPoolTag: Worker
       count: 250
       spawnInterval: 1
     - enemyPoolTag: Boomer
-      count: 100
-      spawnInterval: 2
+      count: 150
+      spawnInterval: 1
     - enemyPoolTag: Howler
       count: 10
       spawnInterval: 3
@@ -5704,7 +5704,7 @@ MonoBehaviour:
       count: 350
       spawnInterval: 0.5
     - enemyPoolTag: Boomer
-      count: 100
+      count: 200
       spawnInterval: 2
     - enemyPoolTag: Howler
       count: 10
@@ -7560,7 +7560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90cca9ab729a76e4abd61a179ab7a231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _WaveRange: 115
+  _WaveRange: 120
   targetObject: {fileID: 172704737}
   WaveTest: 0
   _repeatCount: 10
@@ -7582,8 +7582,8 @@ MonoBehaviour:
   - duration: 200
     waveEnemies:
     - enemyPoolTag: Runner
-      count: 100
-      spawnInterval: 2
+      count: 120
+      spawnInterval: 1.5
     - enemyPoolTag: Worker
       count: 150
       spawnInterval: 1
@@ -7597,13 +7597,13 @@ MonoBehaviour:
     waveEnemies:
     - enemyPoolTag: Runner
       count: 150
-      spawnInterval: 2
+      spawnInterval: 1
     - enemyPoolTag: Worker
       count: 250
       spawnInterval: 1
     - enemyPoolTag: Boomer
-      count: 100
-      spawnInterval: 2
+      count: 150
+      spawnInterval: 1
     - enemyPoolTag: Howler
       count: 10
       spawnInterval: 3
@@ -7616,7 +7616,7 @@ MonoBehaviour:
       count: 350
       spawnInterval: 0.5
     - enemyPoolTag: Boomer
-      count: 100
+      count: 200
       spawnInterval: 2
     - enemyPoolTag: Howler
       count: 10
