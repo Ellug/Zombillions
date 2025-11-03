@@ -8,7 +8,7 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] public float _EnemyHP = 10f;
     [SerializeField] public float _EnemyMoveSpeed = 10f;
     [SerializeField] public float _EnemyDMG = 5f;
-    [SerializeField] public float _ViewRange = 5f;
+    [SerializeField] public float _ViewRange = 25f;
     public Transform _targetTransform;
     public SphereCollider _sphereCollider;
     [SerializeField] public float _AttackDelay;
@@ -55,10 +55,16 @@ public class EnemyBase : MonoBehaviour
                 }
             }
 
+            // Detecting New Target
             if (bestTarget != _targetTransform)
             {
                 _targetTransform = bestTarget;
+                _Chase = _targetTransform != null;
             }
+
+            // if target is null, stop chase
+            if (_targetTransform == null)
+                _Chase = false;
 
             // 0.7~1.5초 랜덤 대기 (탐지 부하 분산)
             yield return new WaitForSeconds(Random.Range(0.7f, 1.5f));

@@ -47,8 +47,11 @@ public class Bullet : MonoBehaviour
         {
             EnemyBase enemy = other.GetComponent<EnemyBase>();
             enemy.TakeDamage(_dmg, _AttackerTransform);
-            // 총알과 에네미 중심 사이 벡터 방향으로 넉백 부여. 넉백 메서드는 에네미에서 구현 필요
-            // enemy.Knockback((enemy.transform.position - transform.position).normalized * _knockback);
+
+            // 넉백 (Transform 이동)
+            Vector3 dir = (enemy.transform.position - _startPos).normalized;
+            Vector3 newPos = enemy.transform.position + dir * _knockback;
+            enemy.transform.position = newPos;
 
             _penetration--;
             

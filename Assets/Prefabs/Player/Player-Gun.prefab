@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHp: 100
   _curHp: 100
-  _moveSpeed: 5
+  _moveSpeed: 7
   _rotSpeed: 100
   _atkDelay: 0.5
   _def: 0

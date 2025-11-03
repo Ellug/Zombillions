@@ -1367,6 +1367,8 @@ MonoBehaviour:
   _WaveRange: 120
   targetObject: {fileID: 172704737}
   WaveTest: 0
+  _repeatCount: 10
+  _interval: 5
 --- !u!114 &356811330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3020,7 +3022,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4302,6 +4304,8 @@ MonoBehaviour:
   _WaveRange: 100
   targetObject: {fileID: 172704737}
   WaveTest: 0
+  _repeatCount: 10
+  _interval: 5
 --- !u!1 &1462096480
 GameObject:
   m_ObjectHideFlags: 0
@@ -4812,6 +4816,8 @@ MonoBehaviour:
   _WaveRange: 120
   targetObject: {fileID: 172704737}
   WaveTest: 0
+  _repeatCount: 10
+  _interval: 5
 --- !u!114 &1636689250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5081,8 +5087,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5748,10 +5754,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -6737,6 +6743,8 @@ MonoBehaviour:
   _WaveRange: 120
   targetObject: {fileID: 172704737}
   WaveTest: 0
+  _repeatCount: 10
+  _interval: 5
 --- !u!114 &2116687262
 MonoBehaviour:
   m_ObjectHideFlags: 0
