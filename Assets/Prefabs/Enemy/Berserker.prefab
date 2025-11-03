@@ -104,7 +104,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1.2
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -124,7 +124,7 @@ MonoBehaviour:
   _EnemyHP: 10
   _EnemyMoveSpeed: 10
   _EnemyDMG: 5
-  _ViewRange: 5
+  _ViewRange: 30
   _targetTransform: {fileID: 0}
   _sphereCollider: {fileID: 0}
   _AttackDelay: 0

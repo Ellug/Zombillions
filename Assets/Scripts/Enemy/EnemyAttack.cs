@@ -1,9 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
+    [SerializeField] float _attackRange = 3f;
+
     private EnemyBase _enemyBase;
     private bool _canAttack = true;
 
@@ -16,29 +17,57 @@ public class EnemyAttack : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void Start()
     {
-        if (!_canAttack) return;
-        string targetTag = "";
+        StartCoroutine(CheckAttackRangeRoutine());
+    }
 
-        if (other.CompareTag("Tower"))
-        {
-            targetTag = "Tower";
-        }
-        else if (other.CompareTag("Player"))
-        {
-            targetTag = "Player";
-        }
-        else if (other.CompareTag("HQ"))
-        {
-            targetTag = "HQ";
-        }
+    private IEnumerator CheckAttackRangeRoutine()
+    {
+        float randomWait = Random.Range(0.7f, 1.5f);
+        WaitForSeconds wait = new WaitForSeconds(randomWait);
 
-        if (targetTag != "")
+        while (true)
         {
-            StartCoroutine(AttackRoutine(other.gameObject, targetTag));
+            if (_canAttack)
+            {
+                Collider[] hits = Physics.OverlapSphere(transform.position, _attackRange);
+                foreach (Collider hit in hits)
+                {
+                    if (hit.CompareTag("Player") || hit.CompareTag("Tower") || hit.CompareTag("HQ"))
+                    {
+                        StartCoroutine(AttackRoutine(hit.gameObject, hit.tag));
+                        break;
+                    }
+                }
+            }
+            yield return wait;
         }
     }
+
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     if (!_canAttack) return;
+    //     string targetTag = "";
+
+    //     if (other.CompareTag("Tower"))
+    //     {
+    //         targetTag = "Tower";
+    //     }
+    //     else if (other.CompareTag("Player"))
+    //     {
+    //         targetTag = "Player";
+    //     }
+    //     else if (other.CompareTag("HQ"))
+    //     {
+    //         targetTag = "HQ";
+    //     }
+
+    //     if (targetTag != "")
+    //     {
+    //         StartCoroutine(AttackRoutine(other.gameObject, targetTag));
+    //     }
+    // }
 
     private IEnumerator AttackRoutine(GameObject target, string targetTag)
     {

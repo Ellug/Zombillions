@@ -116,7 +116,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0b236721a51db3e4d8e08c53f576bba8, type: 3}
   - {fileID: 8300000, guid: 410d5c15e0ce2ce418c059801760fe05, type: 3}
   _bulletSpawner: {fileID: 0}
-  _bulletSpeed: 160
+  _bulletSpeed: 140
   _atkRange: 80
   _knockback: 0
   _pierce: 1
