@@ -365,6 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3f36df7380d7c044b0f5c59b5863676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHP: 20
   _minReward: 5
   _maxReward: 15
 --- !u!1 &4925844793258369852
@@ -587,7 +588,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2811503767430499966}
   - component: {fileID: 6516533748928122754}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GoldMine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -622,6 +623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3f36df7380d7c044b0f5c59b5863676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHP: 20
   _minReward: 11
   _maxReward: 15
 --- !u!1 &9027518358818898637

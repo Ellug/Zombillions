@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6822440718077018926}
   - component: {fileID: 6058192723326564848}
   - component: {fileID: -4186057195713969796}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Gold(Test)
   m_TagString: GoldMine
   m_Icon: {fileID: 0}

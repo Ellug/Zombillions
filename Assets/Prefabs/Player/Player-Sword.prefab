@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 73918948387738030}
   - component: {fileID: 3031770749100259491}
   - component: {fileID: -2253443695260003539}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player-Sword
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -113,18 +113,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 444f352e448a21b48b75a130ab3c0041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHp: 200
-  _curHp: 180
-  _moveSpeed: 8
-  _rotSpeed: 100
-  _atkDelay: 0.5
-  _def: 0
-  _atk: 6
+  _maxHp: 300
+  _curHp: 300
+  _moveSpeed: 13
+  _atkDelay: 0.2
+  _def: 1
+  _atk: 7
   _isPlayerAlive: 1
   _reviveTime: 20
   _reviveTimer: 20
   _player: {fileID: 2897609422604169835}
+  _audioClip: []
   _bulletSpawner: {fileID: 0}
+  _attackRange: 5
+  _attackAngle: 60
+  _attackKnockback: 3
+  _enemyMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &4973857267643957361
 GameObject:
   m_ObjectHideFlags: 0
