@@ -53,6 +53,12 @@ public class Bullet : MonoBehaviour
             if (_penetration <= 0)
                 _spawner.Despawn(this);
         }
+
+        if (other.gameObject.CompareTag("GoldMine"))
+        {
+            GoldMine gold = other.GetComponent<GoldMine>();
+            gold.TakeDamage(_dmg);
+        }
     }
 
     // ÃÑ¾Ë ÀÌµ¿
