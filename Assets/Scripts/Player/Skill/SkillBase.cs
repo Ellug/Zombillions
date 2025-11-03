@@ -34,8 +34,9 @@ public abstract class SkillBase
             ActivateSkill();
             _curCool = _coolTime;
 
-            if (_soundIndex >= _player._audioClip.Length) return;
-            GameManager.Instance.Sound.EffectSound.GetSoundEffect(_player._audioClip[_soundIndex]);
+            // 유효한 사운드 존재시만 재생
+            if (_player != null && _player._audioClip != null && _soundIndex >= 0 && _soundIndex < _player._audioClip.Length && _player._audioClip[_soundIndex] != null)
+                GameManager.Instance.Sound.EffectSound.GetSoundEffect(_player._audioClip[_soundIndex]);
         }
     }
 
