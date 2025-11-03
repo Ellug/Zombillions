@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using UnityEditor.UI;
 
 /// <summary>
 /// 게임 내 골드를 총괄로 관리하는 매니저
