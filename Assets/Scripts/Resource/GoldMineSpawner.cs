@@ -6,14 +6,14 @@ using UnityEngine;
 /// 금광을 생성 / 회수하는 스포너
 /// 오브젝트 풀 구현
 /// </summary>
-public class GoldMineSpawner : MonoBehaviour
+public class GoldMineSpawner : MonoBehaviour , ITimeObserver
 {
     [Header("Prefab & PoolSize")]
     [Tooltip("소환할 Gold Prefab")]
     [SerializeField] private GoldMine _goldMinePrefab;
 
     [Tooltip("초기 PoolSize")]
-    [SerializeField] private int _goldMinePool = 20;
+    [SerializeField] private int _poolSize = 50;
 
     [Tooltip("랜덤 스폰 범위")]
     [SerializeField] private Vector3 _randomAreaSize = new Vector3(10f, 0f, 10f);
@@ -21,7 +21,11 @@ public class GoldMineSpawner : MonoBehaviour
     [Tooltip("SpawnPoint 리스트")]
     [SerializeField] private Transform[] _spawnPoints;
 
-    private Queue<GoldMine> _pool = new Queue<GoldMine>();
+    [SerializeField] private float _spawnTime = 1f;
+
+    private GlobalTime _globalTime;
+    private Queue<GoldMine> _goldMinePool = new();
+    private List<GoldMine> _activeGoldMine = new();
 
     void Awake()
     {
@@ -31,12 +35,21 @@ public class GoldMineSpawner : MonoBehaviour
             return;
         }
 
-        for (int i = 0; i < _goldMinePool; i++)
+        for (int i = 0; i < _poolSize; i++)
         {
             GoldMine created = CreateNew();
-            _pool.Enqueue(created);
+            _goldMinePool.Enqueue(created);
         }
+        _globalTime = GameManager.Instance.Timer;
+        _globalTime.AddObserver(this);
     }
+
+
+    void Start()
+    {
+        StartCoroutine(SpawnTime(Day.Noon));
+    }
+
 
     // 초기 골드 생성 메서드
     private GoldMine CreateNew()
@@ -48,7 +61,7 @@ public class GoldMineSpawner : MonoBehaviour
 
     public void Spawn(Vector3? worldPosition = null, Quaternion? worldRotation = null)
     {
-        GoldMine instance = _pool.Dequeue();
+        GoldMine instance = _goldMinePool.Dequeue();
 
         Vector3 spawnPos;
         Quaternion spawnRot;
@@ -67,6 +80,7 @@ public class GoldMineSpawner : MonoBehaviour
 
         instance.transform.SetPositionAndRotation(spawnPos, spawnRot);
         instance.gameObject.SetActive(true);
+        _activeGoldMine.Add(instance);
     }
 
     public void Despawn(GoldMine gold)
@@ -76,7 +90,7 @@ public class GoldMineSpawner : MonoBehaviour
 
         gold.gameObject.SetActive(false);
         gold.Init();
-        _pool.Enqueue(gold);
+        _goldMinePool.Enqueue(gold);
     }
 
     // 스폰포인트 골라서 GoldMine 스폰
@@ -97,4 +111,34 @@ public class GoldMineSpawner : MonoBehaviour
             Vector3 world = _spawnPoints[index].TransformPoint(local);
             return world;
     }
+
+    // 낮/밤의 변화에 따른 변화
+    public void OnTimeZoneChange(Day newTimeZone)
+    {
+        if(newTimeZone == Day.Noon)
+            StartCoroutine(SpawnTime(newTimeZone));
+
+        // 밤이 될 경우, 모든 GoldMine 사라짐
+        if(newTimeZone == Day.Night)
+        {
+            StopAllCoroutines();
+            foreach (var gold in _activeGoldMine)
+            {
+                gold.Init();
+                gold.gameObject.SetActive(false);
+                _goldMinePool.Enqueue(gold);
+            }
+        }
+    }
+
+    // 낮 시간 랜덤 포인트 스폰
+    private IEnumerator SpawnTime(Day TimeZone)
+    {
+        while (TimeZone == Day.Noon)
+        {
+            Spawn();
+            yield return new WaitForSeconds(_spawnTime);
+        }
+    }
+
 }

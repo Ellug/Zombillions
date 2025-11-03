@@ -15,6 +15,7 @@ public class TowerSpawner : MonoBehaviour
     //public void BuildTower(TowerData.TowerTag tag, int playerGold)
     public void BuildTower(TowerData.TowerTag tag)
     {
+        GoldManager playerGold = GameManager.Instance.Gold;
         if(_isBuilt)
         {
             Debug.Log("Tower Built!.");
@@ -25,10 +26,14 @@ public class TowerSpawner : MonoBehaviour
         {
             if (tower.towerTag == tag)
             {
-                //if(tower.cost > playerGold)
+                if (tower.cost > playerGold.CurrentGold)
+                {
+                    Debug.Log("¼³Ä¡ ºÒ°¡ - Å¸¿ö ¼³Ä¡¿¡ ÇÊ¿äÇÑ °ñµå°¡ ºÎÁ·ÇÕ´Ï´Ù.");
+                    return;
+                }
+                //if (Å¸¿ö »ý¼º ¹üÀ§ ¾È¿¡ ÀûÀÌ ÀÖ´Â°¡ ?)
                 //{
-                //    Debug.Log("You don't have enough gold to build the tower.");
-                //    return;
+                //    Debug.Log("¼³Ä¡ ºÒ°¡ - ÁÖÀ§¿¡ ÀûÀÌ ÀÖ½À´Ï´Ù.");
                 //}
 
                 GameObject towerObj = Instantiate(tower._towerPrefab, transform.position, Quaternion.identity);
@@ -39,7 +44,9 @@ public class TowerSpawner : MonoBehaviour
                 }
                 GetComponent<BoxCollider>().enabled = false;
                 _isBuilt = true;
-                //Deduct the cost from the player��s gold.
+
+                //ÇÃ·¹ÀÌ¾î °ñµå cost¸¸Å­ ¼Ò¸ðÃ³¸®.
+                playerGold.TrySpend(tower.cost);
                 break;
             }
         }

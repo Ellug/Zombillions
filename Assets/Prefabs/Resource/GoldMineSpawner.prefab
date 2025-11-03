@@ -47,3 +47,4 @@ MonoBehaviour:
   _goldMinePrefab: {fileID: 6822440718077018926, guid: 5c5315826b630b9448a84714d76061a1, type: 3}
   _goldMinePool: 50
   _randomAreaSize: {x: 10, y: 0, z: 10}
+  _spawnPoints: []
