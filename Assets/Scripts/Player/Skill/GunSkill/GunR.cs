@@ -61,7 +61,8 @@ public class GunR : SkillBase
                 _knockback,
                 _bulletRange,
                 Bullet.BulletColor.Red,
-                Bullet.BulletSize.Small
+                Bullet.BulletSize.Small,
+                _player.transform
             );
 
             yield return _wait;

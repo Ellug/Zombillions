@@ -87,7 +87,8 @@ public class Tower : MonoBehaviour
                         knockback: _towerData.knockback,
                         range: _towerData.attackRange + 5f,
                         color: _bulletColor,
-                        size: _bulletSize
+                        size: _bulletSize,
+                        AttackerTransform: this.transform
                     );
             }
         }

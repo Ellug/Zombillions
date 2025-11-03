@@ -961,7 +961,7 @@ GameObject:
   - component: {fileID: 4725039165466127013}
   - component: {fileID: -8961178135256423867}
   - component: {fileID: 8680669287846967561}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: HQTowerPrefab
   m_TagString: HQ
   m_Icon: {fileID: 0}

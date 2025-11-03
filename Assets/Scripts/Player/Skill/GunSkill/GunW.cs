@@ -32,7 +32,8 @@ public class GunW : SkillBase
             _knockback,
             _skillRange,
             Bullet.BulletColor.Red,
-            Bullet.BulletSize.Large
+            Bullet.BulletSize.Large,
+            _player.transform
         );
 
         // 넉백
