@@ -111,7 +111,7 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
-    public virtual void TakeDamage(float dmg) 
+    public virtual void TakeDamage(float dmg, Transform AttackerTransform) 
     {
         if (dmg > 0)
             _EnemyHP -= dmg;
@@ -123,6 +123,12 @@ public class EnemyBase : MonoBehaviour
         if (_myHealthBar != null && !_myHealthBar.gameObject.activeSelf)
         {
             _myHealthBar.gameObject.SetActive(true);
+        }
+
+        if (AttackerTransform != null) 
+        {
+            _targetTransform = AttackerTransform;
+            _Chase = true;
         }
     }
 

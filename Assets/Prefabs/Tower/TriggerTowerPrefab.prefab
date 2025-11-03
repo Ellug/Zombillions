@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 3913445259776883916}
   - component: {fileID: 8972218831057767429}
   - component: {fileID: 4326491662311246831}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TriggerTowerPrefab
   m_TagString: Tower
   m_Icon: {fileID: 0}

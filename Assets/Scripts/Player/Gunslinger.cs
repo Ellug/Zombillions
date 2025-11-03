@@ -38,7 +38,8 @@ public class Gunslinger : PlayerBase
             knockback: _knockback,
             range: _atkRange,
             color: _bulletColor,
-            size: _bulletSize
+            size: _bulletSize,
+            AttackerTransform: this.transform
         );
     }
 }

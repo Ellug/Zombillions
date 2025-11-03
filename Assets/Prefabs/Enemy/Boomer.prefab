@@ -231,7 +231,7 @@ MonoBehaviour:
   _ExplosionRange: 5
   TargetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 3584
 --- !u!136 &6744369737518238518
 CapsuleCollider:
   m_ObjectHideFlags: 0

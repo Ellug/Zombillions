@@ -41,7 +41,8 @@ public class GunQ : SkillBase
                 _knockback,
                 _skillRange,
                 Bullet.BulletColor.Yellow,
-                Bullet.BulletSize.Small
+                Bullet.BulletSize.Small,
+                AttackerTransform: _player.transform
             );
         }
 
