@@ -365,13 +365,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3f36df7380d7c044b0f5c59b5863676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHP: 20
   _minReward: 5
   _maxReward: 15
-  _hitCollider: {fileID: 0}
-  _enableTestKeys: 1
-  _testKey: 120
-  _testDamage: 5
 --- !u!1 &4925844793258369852
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,13 +622,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3f36df7380d7c044b0f5c59b5863676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHP: 20
-  _minReward: 5
+  _minReward: 11
   _maxReward: 15
-  _hitCollider: {fileID: 0}
-  _enableTestKeys: 1
-  _testKey: 120
-  _testDamage: 5
 --- !u!1 &9027518358818898637
 GameObject:
   m_ObjectHideFlags: 0
