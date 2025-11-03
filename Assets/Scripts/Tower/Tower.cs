@@ -68,6 +68,10 @@ public class Tower : MonoBehaviour
 
     private void Attack()
     {
+        if(_towerData.towerTag == TowerData.TowerTag.DefenceTower)
+        {
+            return;
+        }
         Vector3 spawnPoint = _bulletSpawnPoint.position + _bulletSpawnPoint.forward;
         Vector3 targetPoint = _towerTracer.GetCurrentEnemy().transform.position;
         Vector3 dir = targetPoint - spawnPoint;
