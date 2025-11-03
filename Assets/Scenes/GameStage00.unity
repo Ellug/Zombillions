@@ -1494,6 +1494,20 @@ MonoBehaviour:
     - enemyPoolTag: Howler
       count: 10
       spawnInterval: 3
+  - duration: 300
+    waveEnemies:
+    - enemyPoolTag: Runner
+      count: 250
+      spawnInterval: 0.5
+    - enemyPoolTag: Worker
+      count: 350
+      spawnInterval: 0.3
+    - enemyPoolTag: Boomer
+      count: 200
+      spawnInterval: 0.5
+    - enemyPoolTag: Howler
+      count: 20
+      spawnInterval: 1
   spawnPoint: {fileID: 356811331}
 --- !u!4 &356811331
 Transform:
@@ -5154,6 +5168,20 @@ MonoBehaviour:
     - enemyPoolTag: Howler
       count: 10
       spawnInterval: 3
+  - duration: 300
+    waveEnemies:
+    - enemyPoolTag: Runner
+      count: 250
+      spawnInterval: 0.5
+    - enemyPoolTag: Worker
+      count: 350
+      spawnInterval: 0.3
+    - enemyPoolTag: Boomer
+      count: 200
+      spawnInterval: 0.5
+    - enemyPoolTag: Howler
+      count: 20
+      spawnInterval: 1
   spawnPoint: {fileID: 1386075788}
 --- !u!4 &1386075788
 Transform:
@@ -5709,6 +5737,20 @@ MonoBehaviour:
     - enemyPoolTag: Howler
       count: 10
       spawnInterval: 3
+  - duration: 300
+    waveEnemies:
+    - enemyPoolTag: Runner
+      count: 250
+      spawnInterval: 0.5
+    - enemyPoolTag: Worker
+      count: 350
+      spawnInterval: 0.3
+    - enemyPoolTag: Boomer
+      count: 200
+      spawnInterval: 0.5
+    - enemyPoolTag: Howler
+      count: 20
+      spawnInterval: 1
   spawnPoint: {fileID: 1636689251}
 --- !u!4 &1636689251
 Transform:
@@ -7621,6 +7663,20 @@ MonoBehaviour:
     - enemyPoolTag: Howler
       count: 10
       spawnInterval: 3
+  - duration: 300
+    waveEnemies:
+    - enemyPoolTag: Runner
+      count: 250
+      spawnInterval: 0.5
+    - enemyPoolTag: Worker
+      count: 350
+      spawnInterval: 0.3
+    - enemyPoolTag: Boomer
+      count: 200
+      spawnInterval: 0.5
+    - enemyPoolTag: Howler
+      count: 20
+      spawnInterval: 1
   spawnPoint: {fileID: 2116687263}
 --- !u!4 &2116687263
 Transform:
