@@ -27,9 +27,7 @@ public class GlobalTime : MonoBehaviour
         }
     }
 
-
-
-    void Awake()
+    public void Init()
     {
         CurrentTimeZone = Day.Noon;
         GameTime = 0;

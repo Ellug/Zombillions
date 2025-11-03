@@ -6,6 +6,7 @@ using UnityEngine;
 public class EffectSoundManager : MonoBehaviour
 {
     private AudioSource _effectSound;
+    private int _effectCount;
 
 
     void Start()
@@ -22,6 +23,17 @@ public class EffectSoundManager : MonoBehaviour
             Debug.LogError("효과음 사운드 트랙 추가하세요");
             return;
         }
+        StartCoroutine(SetNoOverlap(clip));
+    }
+
+
+    private IEnumerator SetNoOverlap(AudioClip clip)
+    {
+        _effectCount++;
+        if(_effectCount <= 5)
         _effectSound.PlayOneShot(clip);
+        yield return new WaitForSeconds(clip.length);
+        _effectCount--;
+
     }
 }
