@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class EnemyBase : MonoBehaviour
 {
@@ -10,12 +8,13 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] public float _EnemyHP = 10f;
     [SerializeField] public float _EnemyMoveSpeed = 10f;
     [SerializeField] public float _EnemyDMG = 5f;
-    [SerializeField] public float _ViewRange = 5f;
+    [SerializeField] public float _ViewRange = 25f;
     public Transform _targetTransform;
     public SphereCollider _sphereCollider;
     [SerializeField] public float _AttackDelay;
     [SerializeField] public string _poolTag = "Enemy";
     public bool _Chase = false;
+    private bool _isAlive = true;
     private EnemyHPBar _myHealthBar;
     private static Transform _mainCanvasTransform;
 
@@ -26,9 +25,62 @@ public class EnemyBase : MonoBehaviour
 
     protected virtual void Start()
     {
-        _sphereCollider = GetComponent<SphereCollider>();
-        _sphereCollider.radius = _ViewRange;
+        // _sphereCollider = GetComponent<SphereCollider>();
+        // _sphereCollider.radius = _ViewRange;
+        StartCoroutine(TargetDetectionRoutine());
     }
+
+    private IEnumerator TargetDetectionRoutine()
+    {
+        yield return new WaitForSeconds(Random.Range(0f, 0.5f));
+
+        while (_isAlive)
+        {
+            Collider[] hits = Physics.OverlapSphere(transform.position, _ViewRange);
+
+            Transform bestTarget = _targetTransform;
+            float bestPriority = GetPriority(_targetTransform);
+
+            foreach (Collider hit in hits)
+            {
+                if (hit.CompareTag("Player") || hit.CompareTag("Tower") || hit.CompareTag("HQ"))
+                {
+                    float priority = GetPriority(hit.transform);
+
+                    if (priority > bestPriority)
+                    {
+                        bestPriority = priority;
+                        bestTarget = hit.transform;
+                    }
+                }
+            }
+
+            // Detecting New Target
+            if (bestTarget != _targetTransform)
+            {
+                _targetTransform = bestTarget;
+                _Chase = _targetTransform != null;
+            }
+
+            // if target is null, stop chase
+            if (_targetTransform == null)
+                _Chase = false;
+
+            // 0.7~1.5초 랜덤 대기 (탐지 부하 분산)
+            yield return new WaitForSeconds(Random.Range(0.7f, 1.5f));
+        }
+    }
+
+    // chase 우선순위 계산
+    private float GetPriority(Transform target)
+    {
+        if (target == null) return 0f;
+        if (target.CompareTag("Tower")) return 3f;
+        if (target.CompareTag("Player")) return 2f;
+        if (target.CompareTag("HQ")) return 1f;
+        return 0f;
+    }
+
 
     protected virtual void Update()
     {
@@ -44,27 +96,28 @@ public class EnemyBase : MonoBehaviour
             }
         }
     }  
-    protected virtual void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Tower"))
-        {
-            // Debug.Log("Tower OnTriggerEnter");
-            _targetTransform = other.transform;
-            _Chase = true;
-        }
-        else if (other.CompareTag("Player"))
-        {
-            // Debug.Log("Player OnTriggerEnter");
-            _targetTransform = other.transform;
-            _Chase = true;
-        }
-        else if (other.CompareTag("HQ")) 
-        {
-            // Debug.Log("HQ OnTriggerEnter");
-            _targetTransform = other.transform;
-            _Chase = true;
-        }
-    }
+
+    // protected virtual void OnTriggerEnter(Collider other)
+    // {
+    //     if (other.CompareTag("Tower"))
+    //     {
+    //         // Debug.Log("Tower OnTriggerEnter");
+    //         _targetTransform = other.transform;
+    //         _Chase = true;
+    //     }
+    //     else if (other.CompareTag("Player"))
+    //     {
+    //         // Debug.Log("Player OnTriggerEnter");
+    //         _targetTransform = other.transform;
+    //         _Chase = true;
+    //     }
+    //     else if (other.CompareTag("HQ")) 
+    //     {
+    //         // Debug.Log("HQ OnTriggerEnter");
+    //         _targetTransform = other.transform;
+    //         _Chase = true;
+    //     }
+    // }
 
     public virtual void ResetForPooling()
     {

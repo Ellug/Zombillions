@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -34,7 +35,6 @@ public class GoldMine : MonoBehaviour
     }
 
 
-
     public void TakeDamage(float damage)
     {
         if(_isActive == false || damage <= 0f)
@@ -61,11 +61,5 @@ public class GoldMine : MonoBehaviour
         goldMineSpawner.Despawn(this);
     }
 
-    void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.K))
-        {
-            TakeDamage(1);
-        }
-    }
+
 }

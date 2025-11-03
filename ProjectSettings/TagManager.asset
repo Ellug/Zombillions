@@ -12,6 +12,7 @@ TagManager:
   - HQ
   - Enemy
   - EnemyHPBar
+  - GoldMine
   layers:
   - Default
   - TransparentFX

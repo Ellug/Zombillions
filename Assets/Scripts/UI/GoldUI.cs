@@ -32,7 +32,7 @@ public class GoldUI : MonoBehaviour
         if (_totalGoldUI == null)
             _totalGoldUI = GameObject.Find("TotalGold")?.GetComponent<TextMeshProUGUI>();
 
-        HandleGoldChanged(GameManager.Instance.Gold.CurrentGold);
+        //HandleGoldChanged(GameManager.Instance.Gold.CurrentGold);
     }
 
     void OnDisable()
@@ -45,6 +45,7 @@ public class GoldUI : MonoBehaviour
     private void OnSceneLoaded(Scene s, LoadSceneMode m)
     {
         _totalGoldUI = GameObject.Find("TotalGold")?.GetComponent<TextMeshProUGUI>();
+        HandleGoldChanged(GameManager.Instance.Gold.CurrentGold);
     }
 
     // 소지골드 출력UI

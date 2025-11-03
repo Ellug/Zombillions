@@ -50,20 +50,14 @@ public class GoldManager : MonoBehaviour
     }
 
     // 코스트만큼 지불 가능한지 판단 메서드
-    public bool TrySpend(int cost)
+    public void TrySpend(int cost)
     {
-        if (cost <= 0)
+        if (cost <= 0 || CurrentGold < cost)
         {
-            return true;
+            Debug.LogWarning("구매를 실패했습니다.");
+            return;
         }
-
-        if (CurrentGold < cost)
-        {
-            return false;
-        }
-
-        //CurrentGold = CurrentGold - cost;
+        CurrentGold = CurrentGold - cost;
         NotifyGoldChanged();
-        return true;
     }
 }
