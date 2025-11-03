@@ -61,6 +61,13 @@ public class GoldMineSpawner : MonoBehaviour , ITimeObserver
 
     public void Spawn(Vector3? worldPosition = null, Quaternion? worldRotation = null)
     {
+        if (_goldMinePool.Count == 0)
+        {
+            Debug.Log("±¤¸Æ »ý¼º °¹¼ö°¡ ÃÖ´ëÀÔ´Ï´Ù.");
+            StopAllCoroutines();
+            return;
+        }
+
         GoldMine instance = _goldMinePool.Dequeue();
 
         Vector3 spawnPos;

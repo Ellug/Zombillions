@@ -22,4 +22,4 @@ MonoBehaviour:
   bulletSpeed: 100
   pierce: 2
   knockback: 1
-  cost: 1000
+  cost: 0
