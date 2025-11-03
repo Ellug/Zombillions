@@ -23,7 +23,7 @@ public class GlobalTime : MonoBehaviour
     {
         foreach (ITimeObserver observer in _observer)
         {
-            observer.OnTimeZoneChange();
+            observer.OnTimeZoneChange(CurrentTimeZone);
         }
     }
 
