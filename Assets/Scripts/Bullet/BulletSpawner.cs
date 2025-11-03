@@ -23,7 +23,7 @@ public class BulletSpawner : MonoBehaviour
     }
 
     // 파라미터 받아서 스폰 위치 결정 및 Bullet Init에 데이터 전달
-    public void Spawn(Vector3 spawnPos, Vector3 dir, float speed, float dmg, int pierce, float knockback, float range, Bullet.BulletColor color, Bullet.BulletSize size)
+    public void Spawn(Vector3 spawnPos, Vector3 dir, float speed, float dmg, int pierce, float knockback, float range, Bullet.BulletColor color, Bullet.BulletSize size, Transform AttackerTransform)
     {
         Bullet bullet = GetBulletFromPool();
 
@@ -31,7 +31,7 @@ public class BulletSpawner : MonoBehaviour
         bullet.transform.rotation = Quaternion.LookRotation(dir);
         bullet.gameObject.SetActive(true);
 
-        bullet.Init(dir, speed, dmg, pierce, knockback, range, color, size, this);
+        bullet.Init(dir, speed, dmg, pierce, knockback, range, color, size, AttackerTransform, this);
     }
 
     private Bullet GetBulletFromPool()

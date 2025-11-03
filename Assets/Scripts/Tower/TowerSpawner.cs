@@ -18,7 +18,7 @@ public class TowerSpawner : MonoBehaviour
         GoldManager playerGold = GameManager.Instance.Gold;
         if(_isBuilt)
         {
-            Debug.Log("Å¸¿ö°¡ ¼³Ä¡µÇ¾î ÀÖ½À´Ï´Ù.");
+            Debug.Log("Tower Built!.");
             return;
         }
         
@@ -28,12 +28,12 @@ public class TowerSpawner : MonoBehaviour
             {
                 if (tower.cost > playerGold.CurrentGold)
                 {
-                    Debug.Log("¼³Ä¡ ºÒ°¡ - Å¸¿ö ¼³Ä¡¿¡ ÇÊ¿äÇÑ °ñµå°¡ ºÎÁ·ÇÕ´Ï´Ù.");
+                    Debug.Log("Â¼Â³Ã„Â¡ ÂºÃ’Â°Â¡ - Ã…Â¸Â¿Ã¶ Â¼Â³Ã„Â¡Â¿Â¡ Ã‡ÃŠÂ¿Ã¤Ã‡Ã‘ Â°Ã±ÂµÃ¥Â°Â¡ ÂºÃÃÂ·Ã‡Ã•Â´ÃÂ´Ã™.");
                     return;
                 }
-                //if (Å¸¿ö »ı¼º ¹üÀ§ ¾È¿¡ ÀûÀÌ ÀÖ´Â°¡ ?)
+                //if (Ã…Â¸Â¿Ã¶ Â»Ã½Â¼Âº Â¹Ã¼Ã€Â§ Â¾ÃˆÂ¿Â¡ Ã€Ã»Ã€ÃŒ Ã€Ã–Â´Ã‚Â°Â¡ ?)
                 //{
-                //    Debug.Log("¼³Ä¡ ºÒ°¡ - ÁÖÀ§¿¡ ÀûÀÌ ÀÖ½À´Ï´Ù.");
+                //    Debug.Log("Â¼Â³Ã„Â¡ ÂºÃ’Â°Â¡ - ÃÃ–Ã€Â§Â¿Â¡ Ã€Ã»Ã€ÃŒ Ã€Ã–Â½Ã€Â´ÃÂ´Ã™.");
                 //}
 
                 GameObject towerObj = Instantiate(tower._towerPrefab, transform.position, Quaternion.identity);
@@ -45,12 +45,13 @@ public class TowerSpawner : MonoBehaviour
                 GetComponent<BoxCollider>().enabled = false;
                 _isBuilt = true;
 
-                //ÇÃ·¹ÀÌ¾î °ñµå cost¸¸Å­ ¼Ò¸ğÃ³¸®.
+                //Ã‡ÃƒÂ·Â¹Ã€ÃŒÂ¾Ã® Â°Ã±ÂµÃ¥ costÂ¸Â¸Ã…Â­ Â¼Ã’Â¸Ã°ÃƒÂ³Â¸Â®.
                 playerGold.TrySpend(tower.cost);
                 break;
             }
         }
     }
+
     public void DestroyTower(Tower tower)
     {
         if (tower != null)
@@ -60,11 +61,10 @@ public class TowerSpawner : MonoBehaviour
             ResetBuilt();
         }
     }
+
     public void ResetBuilt()
     {
         _isBuilt = false;
         GetComponent<BoxCollider>().enabled = true;
     }
-    
-
 }

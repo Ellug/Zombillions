@@ -16,8 +16,6 @@ public class GameOverUI : MonoBehaviour
     // Awake가 아니라 GetGameOver 작동 시점에서 Canvas 탐색
     public void GetGameOver()
     {
-        Debug.Log("게임오버 UI 메서드 실행");
-
         GameManager.Instance.Light.GetLightChange(0f);
 
         GameObject canvasObj = GameObject.Find("GameOverCanvas");
@@ -32,5 +30,3 @@ public class GameOverUI : MonoBehaviour
         Instantiate(_gameOverPrefab, canvasTransform.position, Quaternion.identity, canvasTransform);
     }
 }
-
-

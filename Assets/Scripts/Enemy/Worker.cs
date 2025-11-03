@@ -15,8 +15,8 @@ public class Worker : EnemyBase
         base.Update();
     }
 
-    protected override void OnTriggerEnter(Collider other)
-    {
-        base.OnTriggerEnter(other);
-    }
+    // protected override void OnTriggerEnter(Collider other)
+    // {
+    //     base.OnTriggerEnter(other);
+    // }
 }

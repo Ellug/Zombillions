@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1744be8433ea1a849bceb15a2cf51467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attackRange: 3
 --- !u!1 &5704973636447219571
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,7 +204,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1.2
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -223,7 +224,7 @@ MonoBehaviour:
   _EnemyHP: 10
   _EnemyMoveSpeed: 10
   _EnemyDMG: 5
-  _ViewRange: 40
+  _ViewRange: 60
   _targetTransform: {fileID: 0}
   _sphereCollider: {fileID: 7188872285271400797}
   _AttackDelay: 0

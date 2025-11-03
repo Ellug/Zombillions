@@ -40,9 +40,9 @@ public class EnemySpawner : MonoBehaviour
     {
         if (spawnPoint == null || waves.Count == 0 || ObjectManager.Instance == null)
         {
-            if (spawnPoint == null) Debug.LogError("Spawn Point가 할당되지 않았습니다.");
-            if (waves.Count == 0) Debug.LogWarning("웨이브 정보가 없습니다.");
-            if (ObjectManager.Instance == null) Debug.LogError("ObjectManager가 씬에 없습니다.");
+            // if (spawnPoint == null) Debug.LogError("Spawn Point가 할당되지 않았습니다.");
+            // if (waves.Count == 0) Debug.LogWarning("웨이브 정보가 없습니다.");
+            // if (ObjectManager.Instance == null) Debug.LogError("ObjectManager가 씬에 없습니다.");
             return;
         }
         StartCoroutine(WaveManagerRoutine());

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 73918948387738030}
   - component: {fileID: 7656114380605971918}
   - component: {fileID: 3031770749100259491}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player-Gun
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHp: 100
   _curHp: 100
-  _moveSpeed: 5
+  _moveSpeed: 7
   _rotSpeed: 100
   _atkDelay: 0.5
   _def: 0
@@ -116,7 +116,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0b236721a51db3e4d8e08c53f576bba8, type: 3}
   - {fileID: 8300000, guid: 410d5c15e0ce2ce418c059801760fe05, type: 3}
   _bulletSpawner: {fileID: 0}
-  _bulletSpeed: 160
+  _bulletSpeed: 140
   _atkRange: 80
   _knockback: 0
   _pierce: 1

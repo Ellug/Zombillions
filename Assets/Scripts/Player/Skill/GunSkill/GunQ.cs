@@ -6,7 +6,7 @@ public class GunQ : SkillBase
     private float _spreadAngle = 30f;
     private float _bulletSpeed = 120f;
     private float _skillRange = 70f;
-    private float _knockback = 10f;
+    private float _knockback = 4f;
 
     public GunQ()
     {
@@ -41,7 +41,8 @@ public class GunQ : SkillBase
                 _knockback,
                 _skillRange,
                 Bullet.BulletColor.Yellow,
-                Bullet.BulletSize.Small
+                Bullet.BulletSize.Small,
+                AttackerTransform: _player.transform
             );
         }
 
