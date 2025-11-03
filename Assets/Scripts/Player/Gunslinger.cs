@@ -4,7 +4,7 @@ public class Gunslinger : PlayerBase
 {    
     [SerializeField] private float _bulletSpeed = 160f;
     [SerializeField] private float _atkRange = 60f;
-    [SerializeField] private float _knockback = 0f;
+    [SerializeField] private float _knockback = 2f;
     [SerializeField] private int _pierce = 1;
 
     [Header("Bullet Setting")]
