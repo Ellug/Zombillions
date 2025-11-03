@@ -1,8 +1,9 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 
 //Ÿ�� ��ġ(����) / ���� / ���� ����
@@ -19,6 +20,12 @@ public class TowerManager : MonoBehaviour
     [SerializeField] private Button _triggerTowerButton;
     [SerializeField] private Button _deleteTowerButton;
     [SerializeField] private TowerSpawner _SetHQTowerSpawner;
+    [SerializeField] private TextMeshProUGUI _attackCostText;
+    [SerializeField] private TextMeshProUGUI _defenceCostText;
+    [SerializeField] private TextMeshProUGUI _triggerCostText;
+    [SerializeField] private TowerData _AttackTowerData;
+    [SerializeField] private TowerData _DefenceTowerData;
+    [SerializeField] private TowerData _TriggerTowerData;
 
     private TowerSpawner _selectTowerSpawner;
     private Tower _selectedTower;
@@ -137,6 +144,10 @@ public class TowerManager : MonoBehaviour
         }
 
         _spawnTowerMenuPanel.SetActive(true);
+
+        _attackCostText.text = $"Cost: {_AttackTowerData.cost}";
+        _defenceCostText.text = $"Cost: {_DefenceTowerData.cost}";
+        _triggerCostText.text = $"Cost: {_TriggerTowerData.cost}";
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
