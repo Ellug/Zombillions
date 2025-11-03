@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField][Range(0, 30)] private float _PositionScope;
+    [SerializeField][Range(0, 300)] private float _PositionScope;
     [System.Serializable]
     public class WaveEnemyInfo
     {
@@ -40,9 +40,9 @@ public class EnemySpawner : MonoBehaviour
     {
         if (spawnPoint == null || waves.Count == 0 || ObjectManager.Instance == null)
         {
-            if (spawnPoint == null) Debug.LogError("Spawn Point가 할당되지 않았습니다.");
-            if (waves.Count == 0) Debug.LogWarning("웨이브 정보가 없습니다.");
-            if (ObjectManager.Instance == null) Debug.LogError("ObjectManager가 씬에 없습니다.");
+            // if (spawnPoint == null) Debug.LogError("Spawn Point가 할당되지 않았습니다.");
+            // if (waves.Count == 0) Debug.LogWarning("웨이브 정보가 없습니다.");
+            // if (ObjectManager.Instance == null) Debug.LogError("ObjectManager가 씬에 없습니다.");
             return;
         }
         StartCoroutine(WaveManagerRoutine());
@@ -69,7 +69,7 @@ public class EnemySpawner : MonoBehaviour
     IEnumerator SpawnSpecificEnemy(WaveEnemyInfo enemyInfo)
     {
         Vector3 SpawnPos = spawnPoint.position;
-        SpawnPos.y = 0;
+        SpawnPos.y = 1;
         
         for (int i = 0; i < enemyInfo.count; i++)
         {

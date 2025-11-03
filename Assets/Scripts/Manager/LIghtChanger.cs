@@ -10,7 +10,7 @@ public class LIghtChanger : MonoBehaviour , ITimeObserver
 
     private GlobalTime _globalTime;
 
-    private void Start()
+    void Start()
     {
         _globalTime = GameManager.Instance.Timer;
         _globalTime?.AddObserver(this);
@@ -21,23 +21,23 @@ public class LIghtChanger : MonoBehaviour , ITimeObserver
     }
 
     // 씬 로드시 현재 씬의 Light로 교체
-    private void OnEnable()
+    void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    private void OnSceneLoaded(Scene s, LoadSceneMode m)
+    void OnSceneLoaded(Scene s, LoadSceneMode m)
     {
         _gameLight = FindAnyObjectByType<Light>();
     }
 
     //GlobarTime의 낮/밤 변화에 밝기를 조절하는 옵저버 패턴
-    public void OnTimeZoneChange()
+    public void OnTimeZoneChange(Day newTimeZone)
     {
         if (_gameLight == null)
         {

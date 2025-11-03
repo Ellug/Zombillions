@@ -2,70 +2,80 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class TowerTrigger : MonoBehaviour
 {
     [SerializeField] private Transform _towerHead;
     [SerializeField] private float _rotationSpeed;
-    private List<Transform> _targetEnemies = new List<Transform>();
-    private Transform currentEnemy;
+    private TowerData _towerData;
+    private Transform _currentEnemy;
+    private bool _OnTrigger = false;
 
     private void Update()
     {
+        //SetCurrentEnemy();
+        if (_OnTrigger == true)
+        {
+            SetCurrentEnemy();
+        }
         RotationUpdate();
     }
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.transform == _currentEnemy)
         {
-            if (!_targetEnemies.Contains(other.transform))
-            {
-                _targetEnemies.Add(other.transform);
-            }
+            return;
+        }
+        else if (other.transform != _currentEnemy && other.CompareTag("Enemy"))
+        {
+            _OnTrigger = true;
         }
     }
-
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.transform == _currentEnemy)
         {
-            if (_targetEnemies.Contains(other.transform))
+            _currentEnemy = null;
+        }
+    }
+    public void SetTowerData(TowerData data)
+    {
+        _towerData = data;
+    }
+
+    public void SetCurrentEnemy()
+    {
+        if (_currentEnemy != null && _currentEnemy.gameObject.activeSelf)
+        {
+            return;
+        }
+
+        Collider[] hits = Physics.OverlapSphere(transform.position, _towerData.attackRange);
+        foreach (var hit in hits)
+        {
+            if (hit.CompareTag("Enemy") && hit.gameObject.activeSelf)
             {
-                _targetEnemies.Remove(other.transform);
+                _currentEnemy = hit.transform;
+                return;
             }
         }
-    }
-    public void CheckEmpty()
-    {
-        _targetEnemies.RemoveAll(emptyEnemy => emptyEnemy == null || !emptyEnemy.gameObject.activeSelf);
-    }
-
-    public Transform GetCurrentEnemy()
-    {
-        CheckEmpty();
-
-        if (_targetEnemies.Count > 0)
-        {
-            return _targetEnemies[0];
-        }
-        else
-        {
-            return null;
-        }
+        _OnTrigger = false;
+        _currentEnemy = null;
     }
 
     private void RotationUpdate()
     {
-        if(_towerHead == null)
+        if (_towerHead == null)
         {
             return;
         }
-        currentEnemy = GetCurrentEnemy();
-        if (currentEnemy != null)
+
+        if (_currentEnemy != null)
         {
-            Vector3 direction = currentEnemy.position - _towerHead.position;
+            Vector3 direction = _currentEnemy.position - _towerHead.position;
             direction.y = 0f;
 
             if (direction.sqrMagnitude > 0.01f)
@@ -86,5 +96,9 @@ public class TowerTrigger : MonoBehaviour
                     Time.deltaTime * _rotationSpeed
                     );
         }
+    }
+    public Transform GetCurrentEnemy()
+    {
+        return _currentEnemy;
     }
 }

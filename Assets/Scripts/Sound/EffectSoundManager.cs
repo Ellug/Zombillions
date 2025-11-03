@@ -10,6 +10,8 @@ public class EffectSoundManager : MonoBehaviour
 
     void Start()
     {
+        if (GetComponent<AudioSource>() == null)
+            Debug.LogError("효과음매니저에 AudioSorce 넣어라");
         _effectSound = GetComponent<AudioSource>();
     }
 

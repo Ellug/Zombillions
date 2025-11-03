@@ -3,5 +3,5 @@
 public interface ITimeObserver
 {
     // 낮/밤이 변할 때 동작하는 메서드 
-    public void OnTimeZoneChange();
+    public void OnTimeZoneChange(Day newTimeZone);
 }

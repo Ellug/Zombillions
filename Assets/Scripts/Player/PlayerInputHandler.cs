@@ -22,7 +22,7 @@ public class PlayerInputHandler : MonoBehaviour
         HandleMouseRotate(ray);
         HandleMouseMove(ray);
         HandleMovementInput();
-        HandleMouseLeftInput();
+        // HandleMouseLeftInput();
         HandleAttackInput();
         HandleSkillInput();
     }
@@ -65,11 +65,11 @@ public class PlayerInputHandler : MonoBehaviour
     }
 
     // 어택 (좌클릭) 입력
-    private void HandleMouseLeftInput()
-    {
-        if (Input.GetMouseButton(0))
-            _player.TryAttack();
-    }
+    // private void HandleMouseLeftInput()
+    // {
+    //     if (Input.GetMouseButton(0))
+    //         _player.TryAttack();
+    // }
 
     // 스킬 입력 1 2 3 4
     private void HandleSkillInput()

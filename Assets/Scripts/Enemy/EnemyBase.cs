@@ -18,6 +18,12 @@ public class EnemyBase : MonoBehaviour
     public bool _Chase = false;
     private EnemyHPBar _myHealthBar;
     private static Transform _mainCanvasTransform;
+
+    // EnemyAttack클래스의 ApplyDamage() 메서드에서 플레이어 공격시에만 사운드 추가
+    public AudioClip _enemyAttackSound;
+    // EnemyBase클래스의 Die()에 죽는 사운드 추가
+    public AudioClip _enemyDieSound;
+
     protected virtual void Start()
     {
         _sphereCollider = GetComponent<SphereCollider>();
@@ -42,19 +48,19 @@ public class EnemyBase : MonoBehaviour
     {
         if (other.CompareTag("Tower"))
         {
-            Debug.Log("Tower OnTriggerEnter");
+            // Debug.Log("Tower OnTriggerEnter");
             _targetTransform = other.transform;
             _Chase = true;
         }
         else if (other.CompareTag("Player"))
         {
-            Debug.Log("Player OnTriggerEnter");
+            // Debug.Log("Player OnTriggerEnter");
             _targetTransform = other.transform;
             _Chase = true;
         }
         else if (other.CompareTag("HQ")) 
         {
-            Debug.Log("HQ OnTriggerEnter");
+            // Debug.Log("HQ OnTriggerEnter");
             _targetTransform = other.transform;
             _Chase = true;
         }
@@ -93,14 +99,14 @@ public class EnemyBase : MonoBehaviour
                 _myHealthBar = hpBarGO.GetComponent<EnemyHPBar>();
                 _myHealthBar.Setup(this);
 
-                if (_myHealthBar.TargetEnemyBase == this)
-                {
-                    Debug.Log($"HP Bar 할당 성공: {gameObject.name} -> {_myHealthBar.gameObject.name}");
-                }
-                else
-                {
-                    Debug.LogError("HP Bar 할당 실패! TargetEnemyBase가 null이거나 다릅니다.");
-                }
+                // if (_myHealthBar.TargetEnemyBase == this)
+                // {
+                //     Debug.Log($"HP Bar 할당 성공: {gameObject.name} -> {_myHealthBar.gameObject.name}");
+                // }
+                // else
+                // {
+                //     Debug.LogError("HP Bar 할당 실패! TargetEnemyBase가 null이거나 다릅니다.");
+                // }
             }
         }
     }
@@ -127,8 +133,13 @@ public class EnemyBase : MonoBehaviour
             ObjectManager.Instance.ReturnToPool(_poolTag, gameObject);
             if (_myHealthBar != null)
             {
+                // 에너미 플레이어 죽을 때, 효과음
+                if(_enemyDieSound != null)
+                    GameManager.Instance.Sound.EffectSound.GetSoundEffect(_enemyDieSound);
+
                 ObjectManager.Instance.ReturnToPool("HPBar", _myHealthBar.gameObject);
                 _myHealthBar = null;
+
             }
         }
         else

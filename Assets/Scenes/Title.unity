@@ -174,9 +174,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6288902543347405899, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
+      propertyPath: _gameOverPrefab
+      value: 
+      objectReference: {fileID: 2856132727178736967, guid: b592273f79e735045a3b195b350ba310, type: 3}
+    - target: {fileID: 7718145874955055274, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7718145874955055274, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
       propertyPath: m_Volume
-      value: 0.03
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7770829631757645365, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
       propertyPath: _gameLight
@@ -184,24 +192,28 @@ PrefabInstance:
       objectReference: {fileID: 1845873104737737866}
     - target: {fileID: 7957887219018740604, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
       propertyPath: _noonTime
-      value: 60
+      value: 240
       objectReference: {fileID: 0}
     - target: {fileID: 7957887219018740604, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
       propertyPath: _nightTime
-      value: 60
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 9009128854551650190, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
       propertyPath: _soundClip.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9009128854551650190, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
       propertyPath: _soundClip.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: 4670947c95961c94b91d254e31027c66, type: 3}
+      objectReference: {fileID: 8300000, guid: 6fa7766c995c3ef4a87be289d9b71a3b, type: 3}
     - target: {fileID: 9009128854551650190, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
       propertyPath: _soundClip.Array.data[1]
       value: 
       objectReference: {fileID: 8300000, guid: 7c1a2a98a4cf34642be6a2354f5d87aa, type: 3}
+    - target: {fileID: 9009128854551650190, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
+      propertyPath: _soundClip.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: df4e79ee618944f42b33693379af1213, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

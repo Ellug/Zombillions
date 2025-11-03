@@ -17,6 +17,7 @@ public class GunR : SkillBase
     {
         _skillName = "Gattling Gun";
         _coolTime = 20f;
+        _soundIndex = 3;
         _icon = Resources.Load<Sprite>("Icons/Skill_GunR");
     }
 
@@ -29,7 +30,6 @@ public class GunR : SkillBase
     protected override void ActivateSkill()
     {
         if (_player == null) return;
-        Debug.Log($"4 스킬 {_skillName} 실행");
 
         _player.StartCoroutine(FireRoutine());
     }
