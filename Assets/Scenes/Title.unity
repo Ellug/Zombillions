@@ -184,7 +184,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7718145874955055274, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
       propertyPath: m_Volume
-      value: 1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7770829631757645365, guid: 86edaedca744362468779a0c01aa2eb4, type: 3}
       propertyPath: _gameLight
