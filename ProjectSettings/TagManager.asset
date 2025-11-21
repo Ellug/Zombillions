@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - HQTower
+  - AttackTower
+  - DefenceTower
+  - TriggerTower
+  - Tower
+  - HQ
+  - Enemy
+  - EnemyHPBar
+  - GoldMine
   layers:
   - Default
   - TransparentFX
@@ -11,13 +20,13 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - TowerScaner
+  - Enemy
+  - Tower
+  - Player
+  - HQ
+  - Gold
   - 
   - 
   - 

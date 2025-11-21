@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 679296a52de271940888e3aae1b7b564, type: 3}
+  m_Name: TriggerTower
+  m_EditorClassIdentifier: 
+  _towerPrefab: {fileID: 1430577679983278425, guid: d664acf318f61a647a26e97a84fa9593, type: 3}
+  towerTag: 3
+  maxHp: 10
+  sizeZ: 6
+  attackPower: 0
+  attackRange: 48
+  attackSpeed: 20
+  bulletSpeed: 100
+  pierce: 0
+  knockback: 5
+  cost: 150
